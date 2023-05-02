@@ -81,6 +81,8 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+ToDoList/ToDoList.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+ToDoList/ToDoList.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
 
 # Code Injection
 #
