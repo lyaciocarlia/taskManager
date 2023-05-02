@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainScreenViewController" customModule="ToDoList" customModuleProvider="target">
             <connections>
+                <outlet property="taskListTableView" destination="k9d-jV-RPC" id="4wK-v3-E9h"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,14 +25,22 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="55" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="k9d-jV-RPC">
+                    <rect key="frame" x="0.0" y="121" width="393" height="697"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="k9d-jV-RPC" secondAttribute="trailing" id="9ad-Vf-01Z"/>
+                <constraint firstItem="k9d-jV-RPC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="E9S-Sz-1HZ"/>
+                <constraint firstItem="k9d-jV-RPC" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="EhH-a8-6tg"/>
                 <constraint firstItem="qZY-kT-nOt" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="26" id="S5M-Jj-ijm"/>
+                <constraint firstItem="k9d-jV-RPC" firstAttribute="top" secondItem="qZY-kT-nOt" secondAttribute="bottom" id="ff8-dg-SWe"/>
                 <constraint firstItem="qZY-kT-nOt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="x6G-GV-qh3"/>
             </constraints>
-            <point key="canvasLocation" x="21" y="20"/>
+            <point key="canvasLocation" x="20.610687022900763" y="19.718309859154932"/>
         </view>
     </objects>
     <resources>
