@@ -26,12 +26,12 @@ class CompletedTaskListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(name: String, description: String) {
-        let attributedString = NSMutableAttributedString(string: name)
+    func configure(with task: Task) {
+        let attributedString = NSMutableAttributedString(string: task.name)
         attributedString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, attributedString.length))
         
         taskNameLabel.attributedText = attributedString
-        taskDescriptionLabel.text = description
+        taskDescriptionLabel.text = task.description
     }
     
 }
