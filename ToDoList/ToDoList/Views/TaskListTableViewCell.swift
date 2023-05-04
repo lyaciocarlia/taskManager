@@ -26,9 +26,9 @@ class TaskListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(name: String, description: String) {
-            taskNameLabel.text = name
-            taskDescriptionLabel.text = description
+    func configure(with task: Task) {
+        taskNameLabel.text = task.name
+        taskDescriptionLabel.text = task.description
         }
     
 }

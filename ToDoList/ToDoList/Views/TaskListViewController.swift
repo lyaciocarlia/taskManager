@@ -7,14 +7,16 @@
 
 import UIKit
 
-class MainScreenViewController: UIViewController {
+class TaskListViewController: UIViewController {
     @IBOutlet weak var taskListTableView: UITableView!
+    var presenter: TaskListPresenter!
 }
 
 // MARK: VIEWCONTROLLER LIFE - CYCLE
-extension MainScreenViewController {
+extension TaskListViewController {
     override func viewDidLoad() {
             super.viewDidLoad()
+        taskListTableView.backgroundColor = .white
         taskListTableView.register(UINib(nibName: String(describing: TaskListTableViewCell.self), bundle: nil), forCellReuseIdentifier: TaskListTableViewCell.identifier)
         taskListTableView.register(UINib(nibName: String(describing: CompletedTaskListTableViewCell.self), bundle: nil), forCellReuseIdentifier: CompletedTaskListTableViewCell.identifier)
         taskListTableView.dataSource = self
@@ -23,12 +25,12 @@ extension MainScreenViewController {
 }
 
 // MARK: TABLE VEIW FUNCTIONS
-extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
+extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 5
+            return 2
         } else {
-                return 5
+                return 2
             }
         
     }
@@ -43,7 +45,7 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
         let sectionHeaderLabel = UILabel()
         sectionHeaderLabel.text = headerTitle[section]
         sectionHeaderLabel.textColor = .black
-        sectionHeaderLabel.font = UIFont.boldSystemFont(ofSize: 25)
+        sectionHeaderLabel.font = UIFont.boldSystemFont(ofSize: 24)
         sectionHeaderLabelView.addSubview(sectionHeaderLabel)
         sectionHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -62,11 +64,16 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TaskListTableViewCell.self)) as? TaskListTableViewCell else {return UITableViewCell()}
-            cell.configure(name: "Name", description: "Description")
+            let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
+            print(indexPath.row)
+            cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false))
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CompletedTaskListTableViewCell.self)) as? CompletedTaskListTableViewCell else {return UITableViewCell()}
-            cell.configure(name: "Name", description: "Description")
+            print(indexPath.row)
+
+            let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
+            cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false))
             return cell
             }
     }
