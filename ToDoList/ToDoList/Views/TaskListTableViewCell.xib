@@ -17,10 +17,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2LI-lJ-EFp">
-                        <rect key="frame" x="10" y="9.6666666666666643" width="25" height="25"/>
+                        <rect key="frame" x="10" y="12" width="20" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="25" id="fES-iK-fMH"/>
-                            <constraint firstAttribute="height" constant="25" id="nxA-yO-l1z"/>
+                            <constraint firstAttribute="width" constant="20" id="fES-iK-fMH"/>
+                            <constraint firstAttribute="height" constant="20" id="nxA-yO-l1z"/>
                         </constraints>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" cornerStyle="dynamic" buttonSize="small">
@@ -30,13 +30,13 @@
                         </buttonConfiguration>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Descriere" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qJ-uA-bjT">
-                        <rect key="frame" x="43" y="22" width="267" height="20"/>
+                        <rect key="frame" x="38" y="22" width="272" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.56470588235294117" green="0.56470588235294117" blue="0.56470588235294117" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nume" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vd6-6k-wxW">
-                        <rect key="frame" x="43" y="2" width="267" height="20"/>
+                        <rect key="frame" x="38" y="2" width="272" height="20"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
