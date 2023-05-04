@@ -83,7 +83,7 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 ToDoList/ToDoList.xcodeproj/project.xcworkspace/contents.xcworkspacedata
 ToDoList/ToDoList.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
-ToDoList/ToDoList/.DS_Store
+ToDoList/.DS_Store
 
 # Code Injection
 #
