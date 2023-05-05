@@ -10,11 +10,8 @@ import Foundation
 struct Task {
     
     let id: String
-    
     var name: String
-    
     var description: String
-    
     var isCompleted: Bool
     
 }
