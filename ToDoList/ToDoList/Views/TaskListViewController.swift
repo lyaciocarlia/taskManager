@@ -11,7 +11,16 @@ class TaskListViewController: UIViewController {
     
     @IBOutlet weak var taskListTableView: UITableView!
     
+    @IBOutlet weak var emptyListImage: UIImageView!
+    
     var presenter: TaskListPresenter!
+    var numberOfSections: Int {
+        if presenter.activeTasks.count != 0 && presenter.completedTasks.count != 0 {
+            return Constants.twoSections
+        } else {
+            return Constants.oneSection
+        }
+    }
 }
 
 // MARK: - VIEWCONTROLLER LIFE - CYCLE
@@ -21,6 +30,13 @@ extension TaskListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTaskListTableView()
+        emptyListImage.isHidden = true
+        presenter.checkForEmtpyList()
+    }
+    
+    func displayEmptyImage() {
+        taskListTableView.isHidden = true
+        emptyListImage.isHidden = false
     }
 }
 
@@ -49,7 +65,16 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         let sectionHeaderLabelView = UIView()
         
         let sectionHeaderLabel = UILabel()
-        sectionHeaderLabel.text = headerTitle[section]
+        if numberOfSections == 2
+        {
+            sectionHeaderLabel.text = headerTitle[section]
+        } else {
+            if presenter.activeTasks.count != 0 {
+                sectionHeaderLabel.text = "Active"
+            } else {
+                sectionHeaderLabel.text = "Completed"
+            }
+        }
         sectionHeaderLabel.textColor = .black
         sectionHeaderLabel.font = UIFont.boldSystemFont(ofSize: Constants.headerLabelFontSize)
         sectionHeaderLabelView.addSubview(sectionHeaderLabel)
@@ -67,20 +92,23 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == Constants.firstSection {
+        if indexPath.section == Constants.firstSection && presenter.activeTasks.count != 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TaskListTableViewCell.self)) as? TaskListTableViewCell else {return UITableViewCell()}
             let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
             cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false))
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CompletedTaskListTableViewCell.self)) as? CompletedTaskListTableViewCell else {return UITableViewCell()}
-            let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
-            cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false))
-            return cell
+            if presenter.completedTasks.count != 0 {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CompletedTaskListTableViewCell.self)) as? CompletedTaskListTableViewCell else {return UITableViewCell()}
+                let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
+                cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false))
+                return cell
+            }
+            return UITableViewCell()
         }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Constants.numberOfSections
+        return numberOfSections
     }
 }
