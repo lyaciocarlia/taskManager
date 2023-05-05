@@ -28,8 +28,12 @@ class Constants{
         return CGFloat(250)
     }
     
-    static var numberOfSections: Int{
+    static var twoSections: Int{
         return 2
+    }
+    
+    static var oneSection: Int{
+        return 1
     }
     
     static var atributtedStringRange: Int{

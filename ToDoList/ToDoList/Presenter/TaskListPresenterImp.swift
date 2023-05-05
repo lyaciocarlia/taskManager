@@ -26,6 +26,10 @@ class TaskListPresenterImp: TaskListPresenter {
         Task(id: "5", name: "Merg la sala", description: "Antrenament la sala de 100 min", isCompleted: true)
     ]
     
+    func numberOfTasks() -> Int {
+        return activeTasks.count + completedTasks.count
+    }
+    
     func getTask(at index: Int, section: Int) -> Task? {
         if index < activeTasks.count && section == Constants.firstSection {
             return activeTasks[index]
@@ -34,8 +38,14 @@ class TaskListPresenterImp: TaskListPresenter {
         }
     }
     
+    func checkForEmtpyList() {
+        if self.numberOfTasks() == 0 {
+            view?.displayEmptyImage()
+        } 
+    }
+    
     func getTasksCount(in section: Int) -> Int {
-        if section == Constants.firstSection {
+        if section == Constants.firstSection && activeTasks.count != 0{
             return activeTasks.count
         } else {
             return completedTasks.count
