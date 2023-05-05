@@ -11,24 +11,15 @@ class CompletedTaskListTableViewCell: UITableViewCell {
     
     static let identifier = "CompletedTaskListTableViewCell"
     
-    @IBOutlet weak var isCompletedButton: UIButton!
+    @IBOutlet private weak var isCompletedButton: UIButton!
     
-    @IBOutlet weak var taskDescriptionLabel: UILabel!
-    @IBOutlet weak var taskNameLabel: UILabel!
+    @IBOutlet private weak var taskDescriptionLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
+    @IBOutlet private weak var taskNameLabel: UILabel!
     
     func configure(with task: Task) {
         let attributedString = NSMutableAttributedString(string: task.name)
-        attributedString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, attributedString.length))
+        attributedString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(Constants.atributtedStringRange, attributedString.length))
         
         taskNameLabel.attributedText = attributedString
         taskDescriptionLabel.text = task.description
