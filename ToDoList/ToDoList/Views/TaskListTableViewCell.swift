@@ -16,8 +16,13 @@ class TaskListTableViewCell: UITableViewCell {
     static let identifier = "TaskListTableViewCell"
     
     func configure(with task: Task) {
+        
         taskNameLabel.text = task.name
-        taskDescriptionLabel.text = task.description
+      
+        if task.description != "" {
+            taskDescriptionLabel.text = task.description
+        } else {
+            taskDescriptionLabel.isHidden = true
+        }
     }
-    
 }

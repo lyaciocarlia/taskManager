@@ -14,16 +14,20 @@ class TaskListViewController: UIViewController {
     var presenter: TaskListPresenter!
 }
 
-// MARK: VIEWCONTROLLER LIFE - CYCLE
+// MARK: - VIEWCONTROLLER LIFE - CYCLE
+
 extension TaskListViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTaskListTableView()
     }
 }
 
-// MARK: TABLE VEIW FUNCTIONS
+// MARK: - TABLE VEIW FUNCTIONS
+
 extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
+    
     private func setupTaskListTableView(){
         taskListTableView.backgroundColor = .white
         taskListTableView.register(UINib(nibName: String(describing: TaskListTableViewCell.self), bundle: nil), forCellReuseIdentifier: TaskListTableViewCell.identifier)
@@ -52,7 +56,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         sectionHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
         
         let sectionHeaderLabelConstraints = [
-            sectionHeaderLabel.centerYAnchor.constraint(equalTo: sectionHeaderLabelView.centerYAnchor),
+            sectionHeaderLabel.topAnchor.constraint(equalTo: sectionHeaderLabelView.topAnchor, constant: 24),
             sectionHeaderLabel.leftAnchor.constraint(equalTo: sectionHeaderLabelView.leftAnchor, constant: Constants.headerLabelLeftAnchor),
             sectionHeaderLabel.heightAnchor.constraint(equalToConstant: Constants.headerLabelHeightAnchor),
             sectionHeaderLabel.widthAnchor.constraint(equalToConstant: Constants.headerLabelWidthAnchor)
@@ -79,6 +83,4 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return Constants.numberOfSections
     }
-    
 }
-

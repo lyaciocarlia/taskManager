@@ -17,7 +17,11 @@ class Constants{
     }
     
     static var headerLabelHeightAnchor: CGFloat{
-        return CGFloat(35)
+        return CGFloat(29)
+    }
+    
+    static var headerLabelBottomAnchor: CGFloat{
+        return CGFloat(16)
     }
     
     static var headerLabelWidthAnchor: CGFloat{

@@ -13,7 +13,6 @@ class MainCoordinator {
     static func setupListOfTasks() -> TaskListViewController {
         
         let taskListViewController = TaskListViewController()
-        
         let taskListPresenterImp = TaskListPresenterImp(view: taskListViewController)
         
         taskListViewController.presenter = taskListPresenterImp
