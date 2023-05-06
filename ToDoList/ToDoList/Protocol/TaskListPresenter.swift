@@ -9,7 +9,7 @@ import Foundation
 
 protocol TaskListPresenter {
     
-    var view: TaskListViewController? {get set}
+    var view: TaskListView? {get set}
     var activeTasks: [Task] {get set}
     var completedTasks: [Task] {get set}
     
