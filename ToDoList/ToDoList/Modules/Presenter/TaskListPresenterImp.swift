@@ -9,7 +9,7 @@ import Foundation
 
 class TaskListPresenterImp: TaskListPresenter {
     
-    weak var view: TaskListViewController?
+    weak var view: TaskListView?
     
     init(view: TaskListViewController) {
         self.view = view

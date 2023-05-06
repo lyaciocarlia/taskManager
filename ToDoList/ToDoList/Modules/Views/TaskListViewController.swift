@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TaskListViewController: UIViewController {
+class TaskListViewController: UIViewController, TaskListView {
     
     @IBOutlet weak var taskListTableView: UITableView!
     
@@ -15,7 +15,7 @@ class TaskListViewController: UIViewController {
     
     var presenter: TaskListPresenter!
     var numberOfSections: Int {
-        if presenter.activeTasks.count != 0 && presenter.completedTasks.count != 0 {
+        if presenter.activeTasks.count != Constants.zeroTasks && presenter.completedTasks.count !=  Constants.zeroTasks {
             return Constants.twoSections
         } else {
             return Constants.oneSection
@@ -65,30 +65,34 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         let sectionHeaderLabelView = UIView()
         
         let sectionHeaderLabel = UILabel()
-        if numberOfSections == 2
+        if numberOfSections == Constants.twoSections
         {
             sectionHeaderLabel.text = headerTitle[section]
         } else {
-            if presenter.activeTasks.count != 0 {
+            if presenter.activeTasks.count != Constants.zeroTasks {
                 sectionHeaderLabel.text = "Active"
             } else {
                 sectionHeaderLabel.text = "Completed"
             }
         }
-        sectionHeaderLabel.textColor = .black
-        sectionHeaderLabel.font = UIFont.boldSystemFont(ofSize: Constants.headerLabelFontSize)
-        sectionHeaderLabelView.addSubview(sectionHeaderLabel)
-        sectionHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        let sectionHeaderLabelConstraints = [
-            sectionHeaderLabel.topAnchor.constraint(equalTo: sectionHeaderLabelView.topAnchor, constant: 24),
-            sectionHeaderLabel.leftAnchor.constraint(equalTo: sectionHeaderLabelView.leftAnchor, constant: Constants.headerLabelLeftAnchor),
-            sectionHeaderLabel.heightAnchor.constraint(equalToConstant: Constants.headerLabelHeightAnchor),
-            sectionHeaderLabel.widthAnchor.constraint(equalToConstant: Constants.headerLabelWidthAnchor)
-        ]
-        NSLayoutConstraint.activate(sectionHeaderLabelConstraints)
+        sectionHeaderLabelView.addSubview(sectionHeaderLabel)
+        headerLabelSetup(label: sectionHeaderLabel, view: sectionHeaderLabelView)
         
         return sectionHeaderLabelView
+    }
+    
+    func headerLabelSetup (label : UILabel, view: UIView) {
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: Constants.headerLabelFontSize)
+        let sectionHeaderLabelConstraints = [
+            label.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.headerLabelTopAnchor),
+            label.leftAnchor.constraint(equalTo: view.leftAnchor, constant: Constants.headerLabelLeftAnchor),
+            label.heightAnchor.constraint(equalToConstant: Constants.headerLabelHeightAnchor),
+            label.widthAnchor.constraint(equalToConstant: Constants.headerLabelWidthAnchor)
+        ]
+        NSLayoutConstraint.activate(sectionHeaderLabelConstraints)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,7 +102,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
             cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false))
             return cell
         } else {
-            if presenter.completedTasks.count != 0 {
+            if presenter.completedTasks.count != Constants.zeroTasks {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CompletedTaskListTableViewCell.self)) as? CompletedTaskListTableViewCell else {return UITableViewCell()}
                 let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
                 cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false))
