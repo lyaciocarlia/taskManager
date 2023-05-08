@@ -98,12 +98,14 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == Constants.firstSection && presenter.activeTasks.count != 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TaskListTableViewCell.self)) as? TaskListTableViewCell else {return UITableViewCell()}
+            cell.selectionStyle = .none
             let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
             cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false))
             return cell
         } else {
             if presenter.completedTasks.count != Constants.zeroTasks {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CompletedTaskListTableViewCell.self)) as? CompletedTaskListTableViewCell else {return UITableViewCell()}
+                cell.selectionStyle = .none
                 let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
                 cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false))
                 return cell
