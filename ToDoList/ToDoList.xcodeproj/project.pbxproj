@@ -7,21 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		198C53612A0639170073A346 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198C53602A0639170073A346 /* TaskListView.swift */; };
+		199A4E152A04DDA6001AA9AF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199A4E142A04DDA6001AA9AF /* Constants.swift */; };
+		199A4E182A04F0A2001AA9AF /* TaskListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 199A4E172A04F0A2001AA9AF /* TaskListTableViewCell.xib */; };
 		19FA762529FFE1470007D18E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FA762429FFE1470007D18E /* AppDelegate.swift */; };
 		19FA763129FFE14A0007D18E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19FA763029FFE14A0007D18E /* Assets.xcassets */; };
 		19FA763429FFE14A0007D18E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19FA763229FFE14A0007D18E /* LaunchScreen.storyboard */; };
-		19FA764029FFE1B40007D18E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FA763E29FFE1B40007D18E /* MainScreenViewController.swift */; };
-		19FA764129FFE1B40007D18E /* MainScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19FA763F29FFE1B40007D18E /* MainScreenViewController.xib */; };
+		19FA764029FFE1B40007D18E /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FA763E29FFE1B40007D18E /* TaskListViewController.swift */; };
+		19FA764129FFE1B40007D18E /* TaskListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19FA763F29FFE1B40007D18E /* TaskListViewController.xib */; };
+		19FA765C2A011A9F0007D18E /* TaskListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FA765A2A011A9F0007D18E /* TaskListTableViewCell.swift */; };
+		19FA76602A0389000007D18E /* CompletedTaskListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FA765E2A0389000007D18E /* CompletedTaskListTableViewCell.swift */; };
+		19FA76612A0389000007D18E /* CompletedTaskListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19FA765F2A0389000007D18E /* CompletedTaskListTableViewCell.xib */; };
+		19FA76642A039A270007D18E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FA76632A039A270007D18E /* Task.swift */; };
+		19FA76672A039AAE0007D18E /* TaskListPresenterImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FA76662A039AAE0007D18E /* TaskListPresenterImp.swift */; };
+		19FA766A2A03AC450007D18E /* TaskListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FA76692A03AC450007D18E /* TaskListPresenter.swift */; };
+		19FA766D2A03BF660007D18E /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FA766C2A03BF660007D18E /* MainCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		198C53602A0639170073A346 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		199A4E142A04DDA6001AA9AF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		199A4E172A04F0A2001AA9AF /* TaskListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskListTableViewCell.xib; sourceTree = "<group>"; };
 		19FA762129FFE1470007D18E /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19FA762429FFE1470007D18E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19FA763029FFE14A0007D18E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19FA763329FFE14A0007D18E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19FA763529FFE14A0007D18E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		19FA763E29FFE1B40007D18E /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
-		19FA763F29FFE1B40007D18E /* MainScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainScreenViewController.xib; sourceTree = "<group>"; };
+		19FA763E29FFE1B40007D18E /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
+		19FA763F29FFE1B40007D18E /* TaskListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskListViewController.xib; sourceTree = "<group>"; };
+		19FA765A2A011A9F0007D18E /* TaskListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListTableViewCell.swift; sourceTree = "<group>"; };
+		19FA765E2A0389000007D18E /* CompletedTaskListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTaskListTableViewCell.swift; sourceTree = "<group>"; };
+		19FA765F2A0389000007D18E /* CompletedTaskListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompletedTaskListTableViewCell.xib; sourceTree = "<group>"; };
+		19FA76632A039A270007D18E /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		19FA76662A039AAE0007D18E /* TaskListPresenterImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListPresenterImp.swift; sourceTree = "<group>"; };
+		19FA76692A03AC450007D18E /* TaskListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListPresenter.swift; sourceTree = "<group>"; };
+		19FA766C2A03BF660007D18E /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +55,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		198C535E2A06389A0073A346 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				19DF0D102A08F16D0044CC72 /* TaskList */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		198C535F2A0638AF0073A346 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				199A4E142A04DDA6001AA9AF /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		19DF0D102A08F16D0044CC72 /* TaskList */ = {
+			isa = PBXGroup;
+			children = (
+				19FA76622A039A1D0007D18E /* Model */,
+				19FA76652A039A9F0007D18E /* Presenter */,
+				19FA763D29FFE18D0007D18E /* Views */,
+			);
+			path = TaskList;
+			sourceTree = "<group>";
+		};
 		19FA761829FFE1470007D18E = {
 			isa = PBXGroup;
 			children = (
@@ -54,7 +100,10 @@
 		19FA762329FFE1470007D18E /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
-				19FA763D29FFE18D0007D18E /* Views */,
+				198C535F2A0638AF0073A346 /* Constants */,
+				198C535E2A06389A0073A346 /* Modules */,
+				19FA766B2A03BF590007D18E /* Coordinator */,
+				19FA76682A03AC240007D18E /* Protocol */,
 				19FA763C29FFE1850007D18E /* Assets */,
 				19FA763B29FFE1570007D18E /* AdditionalFiles */,
 				19FA763529FFE14A0007D18E /* Info.plist */,
@@ -65,6 +114,7 @@
 		19FA763B29FFE1570007D18E /* AdditionalFiles */ = {
 			isa = PBXGroup;
 			children = (
+				19FA763229FFE14A0007D18E /* LaunchScreen.storyboard */,
 				19FA762429FFE1470007D18E /* AppDelegate.swift */,
 			);
 			path = AdditionalFiles;
@@ -81,11 +131,47 @@
 		19FA763D29FFE18D0007D18E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				19FA763229FFE14A0007D18E /* LaunchScreen.storyboard */,
-				19FA763E29FFE1B40007D18E /* MainScreenViewController.swift */,
-				19FA763F29FFE1B40007D18E /* MainScreenViewController.xib */,
+				19FA763E29FFE1B40007D18E /* TaskListViewController.swift */,
+				19FA763F29FFE1B40007D18E /* TaskListViewController.xib */,
+				19FA765E2A0389000007D18E /* CompletedTaskListTableViewCell.swift */,
+				19FA765F2A0389000007D18E /* CompletedTaskListTableViewCell.xib */,
+				19FA765A2A011A9F0007D18E /* TaskListTableViewCell.swift */,
+				199A4E172A04F0A2001AA9AF /* TaskListTableViewCell.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		19FA76622A039A1D0007D18E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				19FA76632A039A270007D18E /* Task.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		19FA76652A039A9F0007D18E /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				19FA76662A039AAE0007D18E /* TaskListPresenterImp.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		19FA76682A03AC240007D18E /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				19FA76692A03AC450007D18E /* TaskListPresenter.swift */,
+				198C53602A0639170073A346 /* TaskListView.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		19FA766B2A03BF590007D18E /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				19FA766C2A03BF660007D18E /* MainCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,9 +232,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19FA76612A0389000007D18E /* CompletedTaskListTableViewCell.xib in Resources */,
+				199A4E182A04F0A2001AA9AF /* TaskListTableViewCell.xib in Resources */,
 				19FA763429FFE14A0007D18E /* LaunchScreen.storyboard in Resources */,
 				19FA763129FFE14A0007D18E /* Assets.xcassets in Resources */,
-				19FA764129FFE1B40007D18E /* MainScreenViewController.xib in Resources */,
+				19FA764129FFE1B40007D18E /* TaskListViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,8 +247,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19FA766D2A03BF660007D18E /* MainCoordinator.swift in Sources */,
+				19FA76672A039AAE0007D18E /* TaskListPresenterImp.swift in Sources */,
 				19FA762529FFE1470007D18E /* AppDelegate.swift in Sources */,
-				19FA764029FFE1B40007D18E /* MainScreenViewController.swift in Sources */,
+				19FA764029FFE1B40007D18E /* TaskListViewController.swift in Sources */,
+				19FA76642A039A270007D18E /* Task.swift in Sources */,
+				19FA766A2A03AC450007D18E /* TaskListPresenter.swift in Sources */,
+				19FA765C2A011A9F0007D18E /* TaskListTableViewCell.swift in Sources */,
+				198C53612A0639170073A346 /* TaskListView.swift in Sources */,
+				19FA76602A0389000007D18E /* CompletedTaskListTableViewCell.swift in Sources */,
+				199A4E152A04DDA6001AA9AF /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +403,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -335,6 +432,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
