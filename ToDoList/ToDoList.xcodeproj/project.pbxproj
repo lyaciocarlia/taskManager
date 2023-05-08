@@ -58,7 +58,6 @@
 		198C535E2A06389A0073A346 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				19DF0D112A08F1790044CC72 /* TaskDetail */,
 				19DF0D102A08F16D0044CC72 /* TaskList */,
 			);
 			path = Modules;
@@ -80,13 +79,6 @@
 				19FA763D29FFE18D0007D18E /* Views */,
 			);
 			path = TaskList;
-			sourceTree = "<group>";
-		};
-		19DF0D112A08F1790044CC72 /* TaskDetail */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TaskDetail;
 			sourceTree = "<group>";
 		};
 		19FA761829FFE1470007D18E = {
