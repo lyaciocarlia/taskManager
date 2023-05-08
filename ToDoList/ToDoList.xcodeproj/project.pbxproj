@@ -79,19 +79,19 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
-          198C53622A065D840073A346 /* Controllers */ = {
-            isa = PBXGroup;
-            children = (
-                19FA763E29FFE1B40007D18E /* TaskListViewController.swift */,
-                19FA763F29FFE1B40007D18E /* TaskListViewController.xib */,
-                198C53632A06615F0073A346 /* TaskDetailViewController.swift */,
-                198C53642A06615F0073A346 /* TaskDetailViewController.xib */,
-                19DF0D0C2A0791CD0044CC72 /* NavigationViewController.swift */,
-                19DF0D0D2A0791CD0044CC72 /* NavigationViewController.xib */,
-            );
-            path = Controllers;
-            sourceTree = "<group>";
-        };
+		198C53622A065D840073A346 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				19FA763E29FFE1B40007D18E /* TaskListViewController.swift */,
+				19FA763F29FFE1B40007D18E /* TaskListViewController.xib */,
+				198C53632A06615F0073A346 /* TaskDetailViewController.swift */,
+				198C53642A06615F0073A346 /* TaskDetailViewController.xib */,
+				19DF0D0C2A0791CD0044CC72 /* NavigationViewController.swift */,
+				19DF0D0D2A0791CD0044CC72 /* NavigationViewController.xib */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		19DF0D102A08F16D0044CC72 /* TaskList */ = {
 			isa = PBXGroup;
 			children = (
