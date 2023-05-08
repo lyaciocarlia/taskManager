@@ -81,6 +81,14 @@
 			path = TaskList;
 			sourceTree = "<group>";
 		};
+		19DF0D122A08F3A30044CC72 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				198C53602A0639170073A346 /* TaskListView.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		19FA761829FFE1470007D18E = {
 			isa = PBXGroup;
 			children = (
@@ -103,7 +111,6 @@
 				198C535F2A0638AF0073A346 /* Constants */,
 				198C535E2A06389A0073A346 /* Modules */,
 				19FA766B2A03BF590007D18E /* Coordinator */,
-				19FA76682A03AC240007D18E /* Protocol */,
 				19FA763C29FFE1850007D18E /* Assets */,
 				19FA763B29FFE1570007D18E /* AdditionalFiles */,
 				19FA763529FFE14A0007D18E /* Info.plist */,
@@ -131,6 +138,7 @@
 		19FA763D29FFE18D0007D18E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				19DF0D122A08F3A30044CC72 /* Protocol */,
 				19FA763E29FFE1B40007D18E /* TaskListViewController.swift */,
 				19FA763F29FFE1B40007D18E /* TaskListViewController.xib */,
 				19FA765E2A0389000007D18E /* CompletedTaskListTableViewCell.swift */,
@@ -152,6 +160,7 @@
 		19FA76652A039A9F0007D18E /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				19FA76682A03AC240007D18E /* Protocol */,
 				19FA76662A039AAE0007D18E /* TaskListPresenterImp.swift */,
 			);
 			path = Presenter;
@@ -161,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				19FA76692A03AC450007D18E /* TaskListPresenter.swift */,
-				198C53602A0639170073A346 /* TaskListView.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
