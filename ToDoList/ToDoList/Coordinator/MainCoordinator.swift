@@ -10,7 +10,7 @@ import UIKit
 
 class MainCoordinator {
     
-    static func setupListOfTasks() -> TaskListViewController {
+    static func setupTaskListVC() -> TaskListViewController {
         
         let taskListViewController = TaskListViewController()
         let taskListPresenterImp = TaskListPresenterImp(view: taskListViewController)
@@ -19,5 +19,17 @@ class MainCoordinator {
         
         return taskListViewController
         
+    }
+    
+    static func setupNavigationController() -> NavigationViewController{
+        
+        let taskListViewController = setupTaskListVC()
+        let taskDetailViewController = TaskDetailViewController()
+        let navigationController = NavigationViewController(rootViewController: taskListViewController)
+        
+        navigationController.viewControllers = [taskListViewController, taskDetailViewController]
+        navigationController.visibleViewController?.viewWillAppear(true)
+
+        return navigationController
     }
 }
