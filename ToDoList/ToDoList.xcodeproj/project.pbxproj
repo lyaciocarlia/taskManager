@@ -58,9 +58,8 @@
 		198C535E2A06389A0073A346 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				19FA76622A039A1D0007D18E /* Model */,
-				19FA763D29FFE18D0007D18E /* Views */,
-				19FA76652A039A9F0007D18E /* Presenter */,
+				19DF0D112A08F1790044CC72 /* TaskDetail */,
+				19DF0D102A08F16D0044CC72 /* TaskList */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -71,6 +70,23 @@
 				199A4E142A04DDA6001AA9AF /* Constants.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		19DF0D102A08F16D0044CC72 /* TaskList */ = {
+			isa = PBXGroup;
+			children = (
+				19FA76622A039A1D0007D18E /* Model */,
+				19FA76652A039A9F0007D18E /* Presenter */,
+				19FA763D29FFE18D0007D18E /* Views */,
+			);
+			path = TaskList;
+			sourceTree = "<group>";
+		};
+		19DF0D112A08F1790044CC72 /* TaskDetail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TaskDetail;
 			sourceTree = "<group>";
 		};
 		19FA761829FFE1470007D18E = {
