@@ -9,6 +9,5 @@ import Foundation
 
 protocol TaskDetailPresenter {
     var view: TaskDetailView? { get set }
-
-    func addTask()
+    var taskServiceImp: TaskService { get set }
 }

@@ -19,4 +19,24 @@ class TaskServiceImp: TaskService {
         Task(id: "5", name: "Merg la sala", description: "Antrenament la sala de 100 min", isCompleted: true)
     ]
     
+    func numberOfTasks() -> Int {
+        return activeTasks.count + completedTasks.count
+    }
+    
+    func getTask(at index: Int, section: Int) -> Task? {
+        if index < activeTasks.count && section == Constants.firstSection {
+            return activeTasks[index]
+        } else {
+            return completedTasks[index]
+        }
+    }
+    
+    func getTasksCount(in section: Int) -> Int {
+        if section == Constants.firstSection && activeTasks.count != 0{
+            return activeTasks.count
+        } else {
+            return completedTasks.count
+        }
+    }
+    
 }

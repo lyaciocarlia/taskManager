@@ -17,6 +17,16 @@ class TaskDetailViewController: UIViewController, TaskDetailView {
         taskNameTextField.resignFirstResponder()
     }
     var presenter: TaskDetailPresenter!
+    var coordinator: MainCoordinator
+    
+    init(coordinator: MainCoordinator){
+        self.coordinator = coordinator
+        super.init(nibName: String(describing: TaskDetailViewController.self), bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 }
 
@@ -76,7 +86,7 @@ extension TaskDetailViewController: UITextFieldDelegate {
 extension TaskDetailViewController {
     func saveChanges() {
         let task = Task(id: String(Int.random(in: 1...100)), name: taskNameTextField.text!, description: taskDescriptionTextField.text!, isCompleted: false)
-        presenter.addTask()
+        //presenter.addTask()
     }
 }
 

@@ -7,17 +7,18 @@
 
 import UIKit
 
-class NavigationViewController: UINavigationController {
+class TaskMgNavigationViewController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationBar.titleTextAttributes = [.font : Constants.navigationTitleFont, .strokeColor: UIColor.red]
+        self.setupNavigationController()
+    }
+    
+    func setupNavigationController() {
+        self.navigationBar.titleTextAttributes = [.font : Constants.navigationTitleFont]
         self.navigationBar.shadowImage = .none
         self.navigationBar.prefersLargeTitles = true
         self.navigationItem.largeTitleDisplayMode = .always
-    }
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
     }
   
     override init(rootViewController: UIViewController) {

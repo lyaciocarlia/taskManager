@@ -8,12 +8,13 @@
 import Foundation
 
 class TaskDetailPresenterImp: TaskDetailPresenter {
+    
     weak var view: TaskDetailView?
-
-    init(view: TaskDetailViewController) {
+    var taskServiceImp: TaskService
+    
+    init(view: TaskDetailViewController, taskServiceImp: TaskService) {
         self.view = view
+        self.taskServiceImp = taskServiceImp
     }
-    func addTask() {
-        
-    }
+    
 }
