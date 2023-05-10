@@ -148,4 +148,33 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return numberOfSections
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+            
+            let alertController = UIAlertController(title: "Confirmation", message: "Are you sure you want to proceed?", preferredStyle: .alert)
+                    
+            let yesAction = UIAlertAction(title: "Yes", style: .default) { (_) in
+                self.presenter.deleteTask(at: indexPath.row, in: indexPath.section)
+                completionHandler(true)
+                self.taskListTableView.deleteRows(at: [indexPath], with: .automatic)
+                
+            }
+            
+            let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+            }
+
+            alertController.addAction(yesAction)
+            alertController.addAction(noAction)
+
+            self.present(alertController, animated: true, completion: nil)
+
+
+        }
+        
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
+    }
+
 }
