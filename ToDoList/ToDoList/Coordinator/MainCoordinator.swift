@@ -12,41 +12,38 @@ class MainCoordinator {
     
     var taskService: TaskService
     
+    lazy var taskListBuilder = TaskListBuilder(taskListService: taskService, coordinator: self)
+    lazy var taskDetailBuilder = TaskDetailBuilder(taskListService: taskService, coordinator: self)
+    
     init(with taskService: TaskService) {
         self.taskService = taskService
     }
     
-    static func setupTaskListVC() -> TaskListViewController {
-        
-        let taskListViewController = TaskListViewController()
-        let taskListPresenterImp = TaskListPresenterImp(view: taskListViewController)
-        
-        taskListViewController.presenter = taskListPresenterImp
-        
-        return taskListViewController
-        
-    }
+//    static func setupTaskListVC() -> TaskListViewController {
+//
+//        let taskListViewController = TaskListViewController()
+//        let taskListPresenterImp = TaskListPresenterImp(view: taskListViewController)
+//
+//        taskListViewController.presenter = taskListPresenterImp
+//
+//        return taskListViewController
+//
+//    }
     
-    static func setupTaskDetailVC() -> TaskDetailViewController {
-        
-        let taskDetailViewController = TaskDetailViewController()
-        let taskDetailPresenterImp = TaskDetailPresenterImp(view: taskDetailViewController)
-        
-        taskDetailViewController.presenter = taskDetailPresenterImp
-        
-        return taskDetailViewController
-        
-    }
-    
-    static func setupNavigationController() -> NavigationViewController{
-        
-        let taskListViewController = setupTaskListVC()
-        let taskDetailViewController = setupTaskDetailVC()
-        let navigationController = NavigationViewController(rootViewController: taskListViewController)
-        
-        navigationController.viewControllers = [taskListViewController, taskDetailViewController]
-        navigationController.visibleViewController?.viewWillAppear(true)
-
+    func rootVC() -> UIViewController {
+        let navigationController = TaskMgNavigationViewController(rootViewController: taskListBuilder.buildTaskList())
         return navigationController
     }
+    
+//    static func setupTaskDetailVC() -> TaskDetailViewController {
+//
+//        let taskDetailViewController = TaskDetailViewController()
+//        let taskDetailPresenterImp = TaskDetailPresenterImp(view: taskDetailViewController)
+//
+//        taskDetailViewController.presenter = taskDetailPresenterImp
+//
+//        return taskDetailViewController
+//
+//    }
+    
 }
