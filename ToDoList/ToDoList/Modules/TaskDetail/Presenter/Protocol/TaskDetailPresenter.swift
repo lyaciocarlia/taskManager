@@ -10,4 +10,6 @@ import Foundation
 protocol TaskDetailPresenter {
     var view: TaskDetailView? { get set }
     var taskServiceImp: TaskService { get set }
+    
+    func addTask()
 }

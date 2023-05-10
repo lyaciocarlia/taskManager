@@ -41,10 +41,10 @@ class TaskListPresenterImp: TaskListPresenter {
 //        }
 //    }
 //    
-    func checkForEmtpyList() {
+    func checkForEmtpyList() -> Bool {
         if taskServiceImp.numberOfTasks() == 0 {
-            view?.displayEmptyImage()
-        }
+            return true
+        } else { return false }
     }
 //    
 //    func getTasksCount(in section: Int) -> Int {

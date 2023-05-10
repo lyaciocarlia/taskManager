@@ -77,14 +77,18 @@ extension TaskListViewController {
         super.viewDidLoad()
         setupTaskListTableView()
         emptyListImage.isHidden = true
-        presenter.checkForEmtpyList()
         setupAddTaskButton()
         self.title = "TaskManager"
     }
     
-    func displayEmptyImage() {
-        taskListTableView.isHidden = true
-        emptyListImage.isHidden = false
+    override func viewWillLayoutSubviews() {
+        if presenter.checkForEmtpyList() {
+            taskListTableView.isHidden = true
+            emptyListImage.isHidden = false
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        taskListTableView.reloadData()
     }
 }
 

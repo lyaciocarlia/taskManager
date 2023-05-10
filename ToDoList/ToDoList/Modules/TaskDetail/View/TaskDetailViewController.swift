@@ -15,6 +15,10 @@ class TaskDetailViewController: UIViewController, TaskDetailView {
     
     @IBAction func saveChanges(_ sender: Any) {
         taskNameTextField.resignFirstResponder()
+        presenter.addTask()
+        if let navigationController = self.navigationController {
+                navigationController.popToRootViewController(animated: true)
+            }
     }
     var presenter: TaskDetailPresenter!
     var coordinator: MainCoordinator
@@ -70,6 +74,10 @@ extension TaskDetailViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        presenter.addTask()
+        if let navigationController = self.navigationController {
+                navigationController.popToRootViewController(animated: true)
+            }
         return true
     }
     
@@ -80,13 +88,3 @@ extension TaskDetailViewController: UITextFieldDelegate {
         textField.becomeFirstResponder()
     }
 }
-
-// MARK: - SAVE CHANGES FUNC
-
-extension TaskDetailViewController {
-    func saveChanges() {
-        let task = Task(id: String(Int.random(in: 1...100)), name: taskNameTextField.text!, description: taskDescriptionTextField.text!, isCompleted: false)
-        //presenter.addTask()
-    }
-}
-
