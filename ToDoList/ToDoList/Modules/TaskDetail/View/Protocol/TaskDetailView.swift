@@ -6,7 +6,10 @@
 //
 
 import Foundation
+import UIKit
 
 protocol TaskDetailView: AnyObject {
-    
+    var taskDescriptionTextField: UITextField! { get set }
+    var taskNameTextField: UITextField! { get set }
+    var saveChangesButton: UIButton! { get set }
 }

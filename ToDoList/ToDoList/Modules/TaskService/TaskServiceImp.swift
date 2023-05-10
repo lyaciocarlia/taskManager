@@ -31,6 +31,10 @@ class TaskServiceImp: TaskService {
         }
     }
     
+    func addTask(task: Task) {
+        activeTasks.append(task)
+    }
+    
     func getTasksCount(in section: Int) -> Int {
         if section == Constants.firstSection && activeTasks.count != 0{
             return activeTasks.count
