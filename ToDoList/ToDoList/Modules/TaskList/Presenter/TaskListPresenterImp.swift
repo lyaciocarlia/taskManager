@@ -38,6 +38,12 @@ class TaskListPresenterImp: TaskListPresenter {
         }
     }
     
+    func openDetailScreen() {
+        let navigationController = MainCoordinator.setupNavigationController()
+        let taskDetailViewController = MainCoordinator.setupTaskDetailVC()
+        navigationController.pushViewController(taskDetailViewController, animated: true)
+    }
+    
     func checkForEmtpyList() {
         if self.numberOfTasks() == 0 {
             view?.displayEmptyImage()

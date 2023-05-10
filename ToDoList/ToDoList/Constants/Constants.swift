@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Constants{
     
@@ -31,4 +32,5 @@ class Constants{
     
     static var zeroTasks: Int = 0
     
+    static var navigationTitleFont: UIFont = UIFont.boldSystemFont(ofSize: 40)
 }

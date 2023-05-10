@@ -23,14 +23,8 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task Manager" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZY-kT-nOt">
-                    <rect key="frame" x="24" y="64" width="257" height="48"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="insetGrouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="53" estimatedSectionHeaderHeight="-1" sectionFooterHeight="10" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="k9d-jV-RPC">
-                    <rect key="frame" x="0.0" y="112" width="414" height="624"/>
+                    <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                 </tableView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emptyTaskList" translatesAutoresizingMaskIntoConstraints="NO" id="I9d-fp-7C7">
                     <rect key="frame" x="0.0" y="425" width="414" height="208"/>
@@ -68,22 +62,23 @@
                         </backgroundConfiguration>
                         <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
                     </buttonConfiguration>
+                    <connections>
+                        <action selector="OpenDetailScreen:" destination="-1" eventType="touchUpInside" id="vui-rF-CD9"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="k9d-jV-RPC" secondAttribute="trailing" id="9ad-Vf-01Z"/>
                 <constraint firstItem="I9d-fp-7C7" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="CMM-9M-pee"/>
                 <constraint firstItem="k9d-jV-RPC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="E9S-Sz-1HZ"/>
                 <constraint firstItem="k9d-jV-RPC" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="EhH-a8-6tg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="AuW-eT-aRz" secondAttribute="bottom" constant="32" id="cnB-7t-jck"/>
-                <constraint firstItem="k9d-jV-RPC" firstAttribute="top" secondItem="qZY-kT-nOt" secondAttribute="bottom" id="ff8-dg-SWe"/>
                 <constraint firstItem="I9d-fp-7C7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="425" id="hpq-3Y-9AV"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="AuW-eT-aRz" secondAttribute="trailing" constant="32" id="noi-Vi-HUb"/>
-                <constraint firstItem="qZY-kT-nOt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="u9b-fu-f9H"/>
+                <constraint firstItem="k9d-jV-RPC" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="oQn-eX-VOh"/>
                 <constraint firstItem="I9d-fp-7C7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wea-ql-1jq"/>
-                <constraint firstItem="qZY-kT-nOt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="x6G-GV-qh3"/>
             </constraints>
             <point key="canvasLocation" x="20.289855072463769" y="19.565217391304348"/>
         </view>
@@ -93,9 +88,6 @@
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
