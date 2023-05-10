@@ -18,6 +18,10 @@ class TaskListPresenterImp: TaskListPresenter {
         self.taskServiceImp = taskServiceImp
     }
     
+    func deleteTask(at index: Int, in section: Int) {
+        taskServiceImp.deleteTask(at: index, in: section )
+    }
+    
 //    var activeTasks: [Task] = [
 //        Task(id: "1", name:"Citit", description: "Sa citesc 30 pag", isCompleted: false),
 //        Task(id: "3", name: "Merg la sala", description: "", isCompleted: false),

@@ -15,6 +15,7 @@ protocol TaskListPresenter {
 //    var completedTasks: [Task] { get set }
     
     func checkForEmtpyList() -> Bool
+    func deleteTask(at index: Int, in section: Int)
 //    func numberOfTasks() -> Int
 //    func getTask(at index: Int, section: Int) -> Task?
 //    func getTasksCount(in section: Int) -> Int
