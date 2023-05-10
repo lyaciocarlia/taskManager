@@ -36,6 +36,14 @@ class TaskServiceImp: TaskService {
         activeTasks.append(task)
     }
     
+    func deleteTask(at index: Int, in section: Int) {
+        if section == 0 {
+            activeTasks.remove(at: index)
+        } else {
+            completedTasks.remove(at: index)
+        }
+    }
+    
     func getTasksCount(in section: Int) -> Int {
         if section == Constants.firstSection && activeTasks.count != 0 {
             return activeTasks.count

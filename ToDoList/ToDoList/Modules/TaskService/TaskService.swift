@@ -15,4 +15,5 @@ protocol TaskService {
     func getTask(at index: Int, section: Int) -> Task?
     func getTasksCount(in section: Int) -> Int
     func addTask(task: Task)
+    func deleteTask(at index: Int, in section: Int) 
 }
