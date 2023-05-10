@@ -18,6 +18,10 @@ class TaskListPresenterImp: TaskListPresenter {
         self.taskServiceImp = taskServiceImp
     }
     
+    func deleteTask(at index: Int, in section: Int) {
+        taskServiceImp.deleteTask(at: index, in: section )
+    }
+    
     func checkForEmtpyList() -> Bool {
         return taskServiceImp.numberOfTasks() == 0
     }

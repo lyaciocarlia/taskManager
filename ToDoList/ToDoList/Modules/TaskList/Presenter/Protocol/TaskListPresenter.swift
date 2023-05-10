@@ -15,5 +15,6 @@ protocol TaskListPresenter {
     func getTask(at index: Int, section: Int) -> Task?
     func getTasksCount(in section: Int) -> Int
     func viewWillApear()
+    func deleteTask(at index: Int, in section: Int)
     
 }
