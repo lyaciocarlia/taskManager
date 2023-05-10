@@ -10,6 +10,12 @@ import UIKit
 
 class MainCoordinator {
     
+    var taskService: TaskService
+    
+    init(with taskService: TaskService) {
+        self.taskService = taskService
+    }
+    
     static func setupTaskListVC() -> TaskListViewController {
         
         let taskListViewController = TaskListViewController()

@@ -13,7 +13,7 @@ class TaskListViewController: UIViewController, TaskListView {
     @IBOutlet weak var taskListTableView: UITableView!
     
     @IBAction func OpenDetailScreen(_ sender: UIButton) {
-        presenter.openDetailScreen()
+        self.navigationController?.pushViewController(MainCoordinator.setupTaskDetailVC(), animated: true)
     }
     @IBOutlet weak var emptyListImage: UIImageView!
     
@@ -36,7 +36,7 @@ extension TaskListViewController {
     }
     
     private func setupTaskListTableView(){
-        taskListTableView.backgroundColor = .white
+       // taskListTableView.backgroundColor = .white
         taskListTableView.register(UINib(nibName: String(describing: TaskListTableViewCell.self), bundle: nil), forCellReuseIdentifier: TaskListTableViewCell.identifier)
         taskListTableView.register(UINib(nibName: String(describing: CompletedTaskListTableViewCell.self), bundle: nil), forCellReuseIdentifier: CompletedTaskListTableViewCell.identifier)
         taskListTableView.dataSource = self
@@ -45,7 +45,7 @@ extension TaskListViewController {
     
     func headerLabelSetup (label : UILabel, view: UIView) {
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
+        label.textColor = .label
         label.font = UIFont.boldSystemFont(ofSize: Constants.headerLabelFontSize)
         let sectionHeaderLabelConstraints = [
             label.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.headerLabelTopAnchor),
