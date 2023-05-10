@@ -48,5 +48,6 @@ class TaskListPresenterImp: TaskListPresenter {
         } else {
             view?.updateEmptyListImage(isHidden: false)
         }
+
     }
 }
