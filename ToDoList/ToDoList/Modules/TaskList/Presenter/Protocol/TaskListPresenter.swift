@@ -13,6 +13,7 @@ protocol TaskListPresenter {
     var activeTasks: [Task] { get set }
     var completedTasks: [Task] { get set }
     
+    func openDetailScreen()
     func checkForEmtpyList()
     func numberOfTasks() -> Int
     func getTask(at index: Int, section: Int) -> Task?

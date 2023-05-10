@@ -12,6 +12,9 @@ class TaskListViewController: UIViewController, TaskListView {
     @IBOutlet weak var addTaskButton: UIButton!
     @IBOutlet weak var taskListTableView: UITableView!
     
+    @IBAction func OpenDetailScreen(_ sender: UIButton) {
+        presenter.openDetailScreen()
+    }
     @IBOutlet weak var emptyListImage: UIImageView!
     
     var presenter: TaskListPresenter!
@@ -64,7 +67,7 @@ extension TaskListViewController {
         emptyListImage.isHidden = true
         presenter.checkForEmtpyList()
         setupAddTaskButton()
-//        self.navigationController?.pushViewController(<#T##viewController: UIViewController##UIViewController#>, animated: <#T##Bool#>)
+        self.title = "TaskManager"
     }
     
     func displayEmptyImage() {
