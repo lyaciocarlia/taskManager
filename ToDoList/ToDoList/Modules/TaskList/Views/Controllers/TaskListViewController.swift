@@ -13,7 +13,7 @@ class TaskListViewController: UIViewController, TaskListView {
     @IBOutlet weak var taskListTableView: UITableView!
     @IBOutlet weak var emptyListImage: UIImageView!
     
-    @IBAction func OpenDetailScreen(_ sender: UIButton) {
+    @IBAction func openDetailScreen(_ sender: UIButton) {
         self.navigationController?.pushViewController(coordinator.taskDetailBuilder.buildTaskDetail(), animated: true)
     }
     
@@ -42,12 +42,11 @@ class TaskListViewController: UIViewController, TaskListView {
 
 extension TaskListViewController {
     private func setupAddTaskButton(){
-        addTaskButton.layer.cornerRadius = 32
+        addTaskButton.layer.cornerRadius = Constants.addTaskButtonCornerRadius
         addTaskButton.layer.masksToBounds = true
     }
     
     private func setupTaskListTableView(){
-        // taskListTableView.backgroundColor = .white
         taskListTableView.contentInsetAdjustmentBehavior = .never
         taskListTableView.register(UINib(nibName: String(describing: TaskListTableViewCell.self), bundle: nil), forCellReuseIdentifier: TaskListTableViewCell.identifier)
         taskListTableView.register(UINib(nibName: String(describing: CompletedTaskListTableViewCell.self), bundle: nil), forCellReuseIdentifier: CompletedTaskListTableViewCell.identifier)
@@ -55,7 +54,7 @@ extension TaskListViewController {
         taskListTableView.delegate = self
     }
     
-    func headerLabelSetup (label : UILabel, view: UIView) {
+    private func headerLabelSetup (label : UILabel, view: UIView) {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .label
         label.font = UIFont.boldSystemFont(ofSize: Constants.headerLabelFontSize)
