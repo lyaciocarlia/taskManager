@@ -13,13 +13,6 @@ class TaskDetailViewController: UIViewController, TaskDetailView {
     @IBOutlet weak var taskNameTextField: UITextField!
     @IBOutlet weak var saveChangesButton: UIButton!
     
-    @IBAction func saveChanges(_ sender: Any) {
-        taskNameTextField.resignFirstResponder()
-        presenter.addTask()
-        if let navigationController = self.navigationController {
-                navigationController.popToRootViewController(animated: true)
-            }
-    }
     var presenter: TaskDetailPresenter!
     var coordinator: MainCoordinator
     
@@ -32,6 +25,16 @@ class TaskDetailViewController: UIViewController, TaskDetailView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @IBAction func saveChanges(_ sender: Any) {
+        addTask()
+    }
+    
+    private func addTask() {
+        taskNameTextField.resignFirstResponder()
+        presenter.addTask(name: taskNameTextField.text ?? "", description: taskDescriptionTextField.text ?? "")
+                navigationController?.popToRootViewController(animated: true)
+            
+    }
 }
 
 // MARK: - VIEW CONTROLLER LIFE - CYCLE
@@ -58,26 +61,25 @@ extension TaskDetailViewController: UITextFieldDelegate {
         if textField == taskDescriptionTextField {
             return true
         } else {
-            
-            let currentText = textField.text ?? ""
-            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
-            
-            if newText.isEmpty {
-                saveChangesButton.isHidden = true
-            } else {
-                saveChangesButton.isHidden = false
-            }
+                        
+            updateSaveChangesButtonState(state: presenter.checkForEmptyName(currentText: textField.text ?? "", range: range, string: string))
             
             return true
         }
     }
     
+    func updateSaveChangesButtonState(state: Bool) {
+        if state == true {
+            saveChangesButton.isHidden = true
+        } else {
+            saveChangesButton.isHidden = false
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        presenter.addTask()
-        if let navigationController = self.navigationController {
-                navigationController.popToRootViewController(animated: true)
-            }
+        taskNameTextField.resignFirstResponder()
+        presenter.addTask(name: taskNameTextField.text ?? "", description: taskDescriptionTextField.text ?? "")
+                navigationController?.popToRootViewController(animated: true)
         return true
     }
     

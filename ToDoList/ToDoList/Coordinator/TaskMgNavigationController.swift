@@ -15,7 +15,7 @@ class TaskMgNavigationViewController: UINavigationController {
     }
     
     func setupNavigationController() {
-        self.navigationBar.titleTextAttributes = [.font : Constants.navigationTitleFont]
+        self.navigationBar.titleTextAttributes = [.font: Constants.navigationTitleFont]
         self.navigationBar.shadowImage = .none
         self.navigationBar.prefersLargeTitles = true
         self.navigationItem.largeTitleDisplayMode = .always
