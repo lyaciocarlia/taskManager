@@ -13,7 +13,7 @@ class TaskListViewController: UIViewController, TaskListView {
     @IBOutlet weak var taskListTableView: UITableView!
     @IBOutlet weak var emptyListImage: UIImageView!
     
-    @IBAction func openDetailScreen(_ sender: UIButton) {
+    @IBAction func openDetailScreen (_ sender: UIButton) {
         self.navigationController?.pushViewController(coordinator.taskDetailBuilder.buildTaskDetail(), animated: true)
     }
     
@@ -28,7 +28,7 @@ class TaskListViewController: UIViewController, TaskListView {
         }
     }
     
-    init(coordinator: MainCoordinator){
+    init(coordinator: MainCoordinator) {
         self.coordinator = coordinator
         super.init(nibName: String(describing: TaskListViewController.self), bundle: nil)
     }
@@ -41,12 +41,12 @@ class TaskListViewController: UIViewController, TaskListView {
 // MARK: - SETUP FUNC
 
 extension TaskListViewController {
-    private func setupAddTaskButton(){
+    private func setupAddTaskButton() {
         addTaskButton.layer.cornerRadius = Constants.addTaskButtonCornerRadius
         addTaskButton.layer.masksToBounds = true
     }
     
-    private func setupTaskListTableView(){
+    private func setupTaskListTableView() {
         taskListTableView.contentInsetAdjustmentBehavior = .never
         taskListTableView.register(UINib(nibName: String(describing: TaskListTableViewCell.self), bundle: nil), forCellReuseIdentifier: TaskListTableViewCell.identifier)
         taskListTableView.register(UINib(nibName: String(describing: CompletedTaskListTableViewCell.self), bundle: nil), forCellReuseIdentifier: CompletedTaskListTableViewCell.identifier)
@@ -54,7 +54,7 @@ extension TaskListViewController {
         taskListTableView.delegate = self
     }
     
-    private func headerLabelSetup (label : UILabel, view: UIView) {
+    private func headerLabelSetup (label: UILabel, view: UIView) {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .label
         label.font = UIFont.boldSystemFont(ofSize: Constants.headerLabelFontSize)
