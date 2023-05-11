@@ -18,10 +18,11 @@ class TaskDetailPresenterImp: TaskDetailPresenter {
     }
     
     func addTask() {
-        let task = Task(id: String(Int.random(in: 1...100)), name: view?.taskNameTextField.text ?? " " , description: view?.taskDescriptionTextField.text ?? " " , isCompleted: false)
+        let task = Task(id: String(Int.random(in: 1...100)),
+                        name: view?.taskNameTextField.text ?? " " ,
+                        description: view?.taskDescriptionTextField.text ?? " " ,
+                        isCompleted: false)
         taskServiceImp.addTask(task: task)
-        print("/////////////////////////////////")
-        print(taskServiceImp.activeTasks)
     }
     
 }

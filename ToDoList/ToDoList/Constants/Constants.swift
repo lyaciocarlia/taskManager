@@ -32,5 +32,7 @@ class Constants{
     
     static var zeroTasks: Int = 0
     
+    static var addTaskButtonCornerRadius: CGFloat = 32
+    
     static var navigationTitleFont: UIFont = UIFont.boldSystemFont(ofSize: 40)
 }

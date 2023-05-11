@@ -18,32 +18,9 @@ class MainCoordinator {
     init(with taskService: TaskService) {
         self.taskService = taskService
     }
-    
-//    static func setupTaskListVC() -> TaskListViewController {
-//
-//        let taskListViewController = TaskListViewController()
-//        let taskListPresenterImp = TaskListPresenterImp(view: taskListViewController)
-//
-//        taskListViewController.presenter = taskListPresenterImp
-//
-//        return taskListViewController
-//
-//    }
-    
+
     func rootVC() -> UIViewController {
         let navigationController = TaskMgNavigationViewController(rootViewController: taskListBuilder.buildTaskList())
         return navigationController
     }
-    
-//    static func setupTaskDetailVC() -> TaskDetailViewController {
-//
-//        let taskDetailViewController = TaskDetailViewController()
-//        let taskDetailPresenterImp = TaskDetailPresenterImp(view: taskDetailViewController)
-//
-//        taskDetailViewController.presenter = taskDetailPresenterImp
-//
-//        return taskDetailViewController
-//
-//    }
-    
 }
