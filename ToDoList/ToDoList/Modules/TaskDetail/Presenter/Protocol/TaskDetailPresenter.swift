@@ -8,8 +8,6 @@
 import Foundation
 
 protocol TaskDetailPresenter {
-    var view: TaskDetailView? { get set }
-    var taskServiceImp: TaskService { get set }
     
-    func addTask()
-}
+    func addTask(name: String, description: String)
+    func checkForEmptyName(currentText: String, range: NSRange, string: String) -> Bool}

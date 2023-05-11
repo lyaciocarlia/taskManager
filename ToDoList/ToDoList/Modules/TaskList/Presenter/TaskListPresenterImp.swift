@@ -19,9 +19,7 @@ class TaskListPresenterImp: TaskListPresenter {
     }
     
     func checkForEmtpyList() -> Bool {
-        if taskServiceImp.numberOfTasks() == 0 {
-            return true
-        } else { return false }
+            return taskServiceImp.numberOfTasks() == 0
     }
     
 }
