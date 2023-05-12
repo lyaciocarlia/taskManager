@@ -9,9 +9,11 @@ import Foundation
 
 protocol TaskListPresenter {
     
-    var view: TaskListView? { get set }
-    var taskServiceImp: TaskService { get set }
-    
     func checkForEmtpyList() -> Bool
+    func activeTasksCount() -> Int
+    func completedTasksCount() -> Int
+    func getTask(at index: Int, section: Int) -> Task?
+    func getTasksCount(in section: Int) -> Int
+    func viewWillLayoutSubviews()
     
 }

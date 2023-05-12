@@ -11,7 +11,7 @@ import UIKit
 class Constants{
     
     static var headerLabelFontSize: CGFloat = 24
-
+    
     static var headerLabelLeftAnchor: CGFloat = 10
     
     static var headerLabelTopAnchor: CGFloat = 24
@@ -35,4 +35,5 @@ class Constants{
     static var addTaskButtonCornerRadius: CGFloat = 32
     
     static var navigationTitleFont: UIFont = UIFont.boldSystemFont(ofSize: 40)
+    
 }

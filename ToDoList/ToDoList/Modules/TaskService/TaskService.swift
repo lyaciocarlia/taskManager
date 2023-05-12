@@ -8,8 +8,8 @@
 import Foundation
 
 protocol TaskService {
-    var activeTasks: [Task] {get set}
-    var completedTasks: [Task] {get set}
+    var activeTasks: [Task] { get set }
+    var completedTasks: [Task] { get set }
     
     func numberOfTasks() -> Int
     func getTask(at index: Int, section: Int) -> Task?

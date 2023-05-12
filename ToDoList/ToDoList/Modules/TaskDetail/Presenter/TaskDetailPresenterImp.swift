@@ -9,7 +9,7 @@ import Foundation
 
 class TaskDetailPresenterImp: TaskDetailPresenter {
     
-    private unowned let view: TaskDetailView?
+    private unowned let view: TaskDetailView
     private let taskServiceImp: TaskService
     
     init(view: TaskDetailViewController, taskServiceImp: TaskService) {
@@ -25,8 +25,8 @@ class TaskDetailPresenterImp: TaskDetailPresenter {
         taskServiceImp.addTask(task: task)
     }
     
-    func checkForEmptyName(currentText: String, range: NSRange, string: String) -> Bool {
+    func checkForEmptyName(currentText: String, range: NSRange, string: String) {
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
-        return newText.isEmpty
+        self.view.updateSaveChangesButtonState(state: newText.isEmpty)
     }
 }

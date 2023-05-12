@@ -13,15 +13,12 @@ class TaskListViewController: UIViewController, TaskListView {
     @IBOutlet weak var taskListTableView: UITableView!
     @IBOutlet weak var emptyListImage: UIImageView!
     
-    @IBAction func openDetailScreen (_ sender: UIButton) {
-        self.navigationController?.pushViewController(coordinator.taskDetailBuilder.buildTaskDetail(), animated: true)
-    }
-    
     var presenter: TaskListPresenter!
     var coordinator: MainCoordinator
+    let headerTitle = ["Active", "Completed"]
     
     var numberOfSections: Int {
-        if presenter.taskServiceImp.activeTasks.count != Constants.zeroTasks && presenter.taskServiceImp.completedTasks.count !=  Constants.zeroTasks {
+        if presenter.activeTasksCount() != Constants.zeroTasks && presenter.completedTasksCount() !=  Constants.zeroTasks {
             return Constants.twoSections
         } else {
             return Constants.oneSection
@@ -36,6 +33,10 @@ class TaskListViewController: UIViewController, TaskListView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    @IBAction func openDetailScreen (_ sender: UIButton) {
+        self.navigationController?.pushViewController(coordinator.taskDetailBuilder.buildTaskDetail(), animated: true)
+    }
 }
 
 // MARK: - SETUP FUNC
@@ -47,14 +48,19 @@ extension TaskListViewController {
     }
     
     private func setupTaskListTableView() {
+        
         taskListTableView.contentInsetAdjustmentBehavior = .never
-        taskListTableView.register(UINib(nibName: String(describing: TaskListTableViewCell.self), bundle: nil), forCellReuseIdentifier: TaskListTableViewCell.identifier)
-        taskListTableView.register(UINib(nibName: String(describing: CompletedTaskListTableViewCell.self), bundle: nil), forCellReuseIdentifier: CompletedTaskListTableViewCell.identifier)
+        taskListTableView.register(UINib(nibName: String(describing: TaskListTableViewCell.self), bundle: nil),
+                                   forCellReuseIdentifier: TaskListTableViewCell.identifier)
+        taskListTableView.register(UINib(nibName: String(describing: CompletedTaskListTableViewCell.self), bundle: nil),
+                                   forCellReuseIdentifier: CompletedTaskListTableViewCell.identifier)
         taskListTableView.dataSource = self
         taskListTableView.delegate = self
+        
     }
     
     private func headerLabelSetup (label: UILabel, view: UIView) {
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .label
         label.font = UIFont.boldSystemFont(ofSize: Constants.headerLabelFontSize)
@@ -65,6 +71,12 @@ extension TaskListViewController {
             label.widthAnchor.constraint(equalToConstant: Constants.headerLabelWidthAnchor)
         ]
         NSLayoutConstraint.activate(sectionHeaderLabelConstraints)
+        
+    }
+    
+    func updateEmptyListImage(isHidden: Bool) {
+        taskListTableView.isHidden = isHidden
+        emptyListImage.isHidden = !isHidden
     }
 }
 
@@ -77,17 +89,16 @@ extension TaskListViewController {
         setupTaskListTableView()
         emptyListImage.isHidden = true
         setupAddTaskButton()
-        self.title = "TaskManager"
+        title = "TaskManager"
     }
     
     override func viewWillLayoutSubviews() {
-        if presenter.checkForEmtpyList() {
-            taskListTableView.isHidden = true
-            emptyListImage.isHidden = false
-        }
+        presenter.viewWillLayoutSubviews()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         taskListTableView.reloadData()
+        presenter.viewWillLayoutSubviews()
     }
 }
 
@@ -96,11 +107,7 @@ extension TaskListViewController {
 extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.taskServiceImp.getTasksCount(in: section)
-    }
-    
-    var headerTitle: [String] {
-        return ["Active", "Completed"]
+        presenter.getTasksCount(in: section)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -108,11 +115,10 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         let sectionHeaderLabelView = UIView()
         
         let sectionHeaderLabel = UILabel()
-        if numberOfSections == Constants.twoSections
-        {
+        if numberOfSections == Constants.twoSections {
             sectionHeaderLabel.text = headerTitle[section]
         } else {
-            if presenter.taskServiceImp.activeTasks.count != Constants.zeroTasks {
+            if presenter.activeTasksCount() != Constants.zeroTasks {
                 sectionHeaderLabel.text = "Active"
             } else {
                 sectionHeaderLabel.text = "Completed"
@@ -126,17 +132,18 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == Constants.firstSection && presenter.taskServiceImp.activeTasks.count != 0 {
+        
+        if indexPath.section == Constants.firstSection && presenter.activeTasksCount() != 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TaskListTableViewCell.self)) as? TaskListTableViewCell else {return UITableViewCell()}
-            let task = presenter?.taskServiceImp.getTask(at: indexPath.row, section: indexPath.section)
+            let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
             cell.selectionStyle = .none
             cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false))
             return cell
         } else {
-            if presenter.taskServiceImp.completedTasks.count != Constants.zeroTasks {
+            if presenter.completedTasksCount() != Constants.zeroTasks {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CompletedTaskListTableViewCell.self)) as? CompletedTaskListTableViewCell else {return UITableViewCell()}
                 cell.selectionStyle = .none
-                let task = presenter?.taskServiceImp.getTask(at: indexPath.row, section: indexPath.section)
+                let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
                 cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false))
                 return cell
             }

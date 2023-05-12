@@ -8,6 +8,7 @@
 import Foundation
 
 class TaskServiceImp: TaskService {
+    
     var activeTasks: [Task] = [
         Task(id: "1", name:"Citit", description: "Sa citesc 30 pag", isCompleted: false),
         Task(id: "3", name: "Merg la sala", description: "", isCompleted: false),
@@ -36,11 +37,10 @@ class TaskServiceImp: TaskService {
     }
     
     func getTasksCount(in section: Int) -> Int {
-        if section == Constants.firstSection && activeTasks.count != 0{
+        if section == Constants.firstSection && activeTasks.count != 0 {
             return activeTasks.count
         } else {
             return completedTasks.count
         }
     }
-    
 }
