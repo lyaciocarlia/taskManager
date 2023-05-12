@@ -21,7 +21,7 @@ class CompletedTaskListTableViewCell: UITableViewCell {
         attributedString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(Constants.atributtedStringRange, attributedString.length))
         
         taskNameLabel.attributedText = attributedString
-       
+        
         if task.description != "" {
             taskDescriptionLabel.text = task.description
         } else {
