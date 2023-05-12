@@ -40,8 +40,10 @@ class Constants{
     
     static var deleteButtonColor = UIColor(named: "AccentColor")
     
-
-    
+    public enum EditAddTaskSetup: String {
+        case addTask = "AddTask"
+        case editTask = "EditTask"
+    }
 }
 
 

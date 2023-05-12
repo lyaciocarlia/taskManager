@@ -45,9 +45,14 @@ class TaskListPresenterImp: TaskListPresenter {
     func viewWillApear() {
         if taskServiceImp.numberOfTasks() == 0 {
             view?.updateEmptyListImage(isHidden: true)
-        } else {
-            view?.updateEmptyListImage(isHidden: false)
         }
-
+    }
+    
+    func returnTaskName(at index: Int, section: Int) -> String {
+        return getTask(at: index, section: section)?.name ?? ""
+    }
+    
+    func returnTaskDescription(at index: Int, section: Int) -> String {
+        return getTask(at: index, section: section)?.description ?? " "
     }
 }

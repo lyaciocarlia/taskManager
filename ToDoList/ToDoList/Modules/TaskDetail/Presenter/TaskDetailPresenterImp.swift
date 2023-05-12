@@ -29,4 +29,8 @@ class TaskDetailPresenterImp: TaskDetailPresenter {
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
         self.view.updateSaveChangesButtonState(state: newText.isEmpty)
     }
+    
+    func editTask(at index: Int, in section: Int, newName: String, newDescription: String) {
+        taskServiceImp.editTask(at: index, in: section, newName: newName, newDescription: newDescription)
+    }
 }

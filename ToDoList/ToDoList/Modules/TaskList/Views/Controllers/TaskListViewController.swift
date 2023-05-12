@@ -35,7 +35,8 @@ class TaskListViewController: UIViewController, TaskListView {
     }
     
     @IBAction func openDetailScreen (_ sender: UIButton) {
-        self.navigationController?.pushViewController(coordinator.taskDetailBuilder.buildTaskDetail(), animated: true)
+        let vc = coordinator.setupTaskDetailVC(situation: Constants.EditAddTaskSetup.addTask.rawValue, taskName: nil, taskDescription: nil, index: nil, section: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -90,10 +91,6 @@ extension TaskListViewController {
         emptyListImage.isHidden = true
         setupAddTaskButton()
         title = "TaskManager"
-    }
-    
-    func viewWillApear() {
-        presenter.viewWillApear()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -179,7 +176,13 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         let editAction = UIContextualAction(style: .normal, title: "") { (action, view, completionHandler) in
-            self.navigationController?.pushViewController(self.coordinator.taskDetailBuilder.buildTaskDetail(), animated: true)
+            self.navigationController?.pushViewController(
+                self.coordinator.setupTaskDetailVC(situation: Constants.EditAddTaskSetup.editTask.rawValue,
+                                                   taskName: self.presenter.returnTaskName(at: indexPath.row, section: indexPath.section),
+                                                   taskDescription: self.presenter.returnTaskDescription(at: indexPath.row, section: indexPath.section),
+                                                   index: indexPath.row,
+                                                   section: indexPath.section),
+                animated: true)
         }
        
         editAction.backgroundColor = Constants.editButtonColor
