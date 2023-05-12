@@ -15,9 +15,9 @@ class TaskDetailViewController: UIViewController, TaskDetailView {
     
     var presenter: TaskDetailPresenter!
     var coordinator: MainCoordinator
-    enum editAddTaskSetup {
-        case addTask
-        case editTask
+    public enum EditAddTaskSetup {
+        case addTask(String)
+        case editTask(String)
     }
     
     init(coordinator: MainCoordinator){
