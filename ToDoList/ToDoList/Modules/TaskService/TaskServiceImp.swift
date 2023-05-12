@@ -32,6 +32,17 @@ class TaskServiceImp: TaskService {
         }
     }
     
+    func editTask(at index: Int, in section: Int, newName: String, newDescription: String) {
+        if section == 0 {
+            activeTasks[index].name = newName
+            activeTasks[index].description = newDescription
+        } else {
+            completedTasks[index].name = newName
+            completedTasks[index].description = newDescription
+        }
+        
+    }
+    
     func addTask(task: Task) {
         activeTasks.append(task)
     }

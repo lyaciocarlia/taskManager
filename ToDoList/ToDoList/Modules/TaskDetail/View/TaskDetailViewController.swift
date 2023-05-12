@@ -15,13 +15,19 @@ class TaskDetailViewController: UIViewController, TaskDetailView {
     
     var presenter: TaskDetailPresenter!
     var coordinator: MainCoordinator
-    public enum EditAddTaskSetup {
-        case addTask(String)
-        case editTask(String)
-    }
+    var situation: String
+    var taskName: String?
+    var taskDescription: String?
+    var index: Int?
+    var section: Int?
     
-    init(coordinator: MainCoordinator){
+    init(coordinator: MainCoordinator, situation: String, taskName: String?, taskDescription: String?,index: Int?, section: Int?){
         self.coordinator = coordinator
+        self.situation = situation
+        self.taskDescription = taskDescription
+        self.taskName = taskName
+        self.index = index
+        self.section = section
         super.init(nibName: String(describing: TaskDetailViewController.self), bundle: nil)
     }
     
@@ -40,15 +46,30 @@ extension TaskDetailViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Add Task"
         
-        saveChangesButton.isHidden = true
+        if situation == Constants.EditAddTaskSetup.addTask.rawValue{
+            saveChangesButton.setTitle("Create Task", for: .normal)
+            title = Constants.EditAddTaskSetup.addTask.rawValue
+            taskNameTextField.placeholder = "Enter your title..."
+            taskDescriptionTextField.placeholder = "Enter an optinal subtitle..."
+            saveChangesButton.isHidden = true
+        } else {
+            saveChangesButton.setTitle("Update Task", for: .normal)
+            title = Constants.EditAddTaskSetup.editTask.rawValue
+            taskNameTextField.text = taskName
+            taskDescriptionTextField.text = taskDescription
+            saveChangesButton.isHidden = false
+        }
         
         setupTextField(textField: taskDescriptionTextField)
         setupTextField(textField: taskNameTextField)
         
         taskDescriptionTextField.delegate = self
         taskNameTextField.delegate = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        firstResponder(textField: taskNameTextField)
     }
 }
 
@@ -58,7 +79,11 @@ extension TaskDetailViewController: UITextFieldDelegate {
     
     private func addTask() {
         taskNameTextField.resignFirstResponder()
-        presenter.addTask(name: taskNameTextField.text ?? "", description: taskDescriptionTextField.text ?? "")
+        if situation == Constants.EditAddTaskSetup.addTask.rawValue {
+            presenter.addTask(name: taskNameTextField.text ?? "", description: taskDescriptionTextField.text ?? "")
+        } else {
+            presenter.editTask(at: index ?? -1, in: section ?? -1, newName: taskNameTextField.text ?? "", newDescription: taskDescriptionTextField.text ?? "")
+        }
         navigationController?.popToRootViewController(animated: true)
     }
     
@@ -80,8 +105,13 @@ extension TaskDetailViewController: UITextFieldDelegate {
     
     func setupTextField(textField: UITextField) {
         textField.returnKeyType = .done
+        textField.textColor = .label
         textField.autocapitalizationType = .sentences
         textField.autocorrectionType = .yes
+        textField.becomeFirstResponder()
+    }
+    
+    func firstResponder(textField: UITextField){
         textField.becomeFirstResponder()
     }
 }
