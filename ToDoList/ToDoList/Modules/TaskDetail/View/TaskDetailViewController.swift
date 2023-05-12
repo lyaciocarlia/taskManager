@@ -28,21 +28,16 @@ class TaskDetailViewController: UIViewController, TaskDetailView {
     @IBAction func saveChanges(_ sender: Any) {
         addTask()
     }
-    
-    private func addTask() {
-        taskNameTextField.resignFirstResponder()
-        presenter.addTask(name: taskNameTextField.text ?? "", description: taskDescriptionTextField.text ?? "")
-                navigationController?.popToRootViewController(animated: true)
-            
-    }
 }
 
 // MARK: - VIEW CONTROLLER LIFE - CYCLE
+
 extension TaskDetailViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Add Task"
-
+        title = "Add Task"
+        
         saveChangesButton.isHidden = true
         
         setupTextField(textField: taskDescriptionTextField)
@@ -57,29 +52,25 @@ extension TaskDetailViewController {
 
 extension TaskDetailViewController: UITextFieldDelegate {
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == taskDescriptionTextField {
-            return true
-        } else {
-                        
-            updateSaveChangesButtonState(state: presenter.checkForEmptyName(currentText: textField.text ?? "", range: range, string: string))
-            
-            return true
-        }
+    private func addTask() {
+        taskNameTextField.resignFirstResponder()
+        presenter.addTask(name: taskNameTextField.text ?? "", description: taskDescriptionTextField.text ?? "")
+        navigationController?.popToRootViewController(animated: true)
     }
     
-    func updateSaveChangesButtonState(state: Bool) {
-        if state == true {
-            saveChangesButton.isHidden = true
-        } else {
-            saveChangesButton.isHidden = false
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == taskNameTextField {
+            presenter.checkForEmptyName(currentText: textField.text ?? "",
+                                        range: range,
+                                        string: string)
         }
+        return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         taskNameTextField.resignFirstResponder()
         presenter.addTask(name: taskNameTextField.text ?? "", description: taskDescriptionTextField.text ?? "")
-                navigationController?.popToRootViewController(animated: true)
+        navigationController?.popToRootViewController(animated: true)
         return true
     }
     
@@ -88,5 +79,13 @@ extension TaskDetailViewController: UITextFieldDelegate {
         textField.autocapitalizationType = .sentences
         textField.autocorrectionType = .yes
         textField.becomeFirstResponder()
+    }
+}
+
+// MARK: - SAVE CHANGES BUTTON FUNC
+
+extension TaskDetailViewController {
+    func updateSaveChangesButtonState(state: Bool) {
+        saveChangesButton.isHidden = state
     }
 }

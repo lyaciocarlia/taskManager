@@ -8,6 +8,7 @@
 import Foundation
 
 class TaskDetailBuilder {
+    
     private let taskListService: TaskService
     private let coordinator: MainCoordinator
     

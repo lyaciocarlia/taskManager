@@ -19,7 +19,7 @@ class TaskListTableViewCell: UITableViewCell {
         taskDescriptionLabel.isHidden = false
         
         taskNameLabel.text = task.name
-      
+        
         if task.description != "" {
             taskDescriptionLabel.text = task.description
         } else {

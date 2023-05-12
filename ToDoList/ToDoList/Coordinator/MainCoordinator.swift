@@ -18,7 +18,7 @@ class MainCoordinator {
     init(with taskService: TaskService) {
         self.taskService = taskService
     }
-
+    
     func rootVC() -> UIViewController {
         let navigationController = TaskMgNavigationViewController(rootViewController: taskListBuilder.buildTaskList())
         return navigationController
