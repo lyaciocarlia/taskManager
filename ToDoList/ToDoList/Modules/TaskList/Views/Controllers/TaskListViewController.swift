@@ -9,9 +9,9 @@ import UIKit
 
 class TaskListViewController: UIViewController, TaskListView {
     
-    @IBOutlet weak var addTaskButton: UIButton!
-    @IBOutlet weak var taskListTableView: UITableView!
-    @IBOutlet weak var emptyListImage: UIImageView!
+    @IBOutlet private weak var addTaskButton: UIButton!
+    @IBOutlet private weak var taskListTableView: UITableView!
+    @IBOutlet private weak var emptyListImage: UIImageView!
     
     var presenter: TaskListPresenter!
     var coordinator: MainCoordinator
@@ -92,13 +92,13 @@ extension TaskListViewController {
         title = "TaskManager"
     }
     
-    override func viewWillLayoutSubviews() {
-        presenter.viewWillLayoutSubviews()
+    func viewWillApear() {
+        presenter.viewWillApear()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         taskListTableView.reloadData()
-        presenter.viewWillLayoutSubviews()
+        presenter.viewWillApear()
     }
 }
 

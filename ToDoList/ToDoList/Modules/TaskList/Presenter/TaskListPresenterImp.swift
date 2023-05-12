@@ -9,9 +9,9 @@ import Foundation
 
 class TaskListPresenterImp: TaskListPresenter {
     
-    weak var view: TaskListView?
+    unowned let view: TaskListView?
     
-    var taskServiceImp: TaskService
+    private let taskServiceImp: TaskService
     
     init(view: TaskListViewController, taskServiceImp: TaskService) {
         self.view = view
@@ -38,7 +38,7 @@ class TaskListPresenterImp: TaskListPresenter {
         return taskServiceImp.getTasksCount(in: section)
     }
     
-    func viewWillLayoutSubviews() {
+    func viewWillApear() {
         if taskServiceImp.numberOfTasks() == 0 {
             view?.updateEmptyListImage(isHidden: true)
         } else {

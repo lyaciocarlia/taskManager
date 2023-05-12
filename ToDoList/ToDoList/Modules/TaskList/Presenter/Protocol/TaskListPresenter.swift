@@ -14,6 +14,6 @@ protocol TaskListPresenter {
     func completedTasksCount() -> Int
     func getTask(at index: Int, section: Int) -> Task?
     func getTasksCount(in section: Int) -> Int
-    func viewWillLayoutSubviews()
+    func viewWillApear()
     
 }
