@@ -179,25 +179,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         let editAction = UIContextualAction(style: .normal, title: "") { (action, view, completionHandler) in
-            
-//            let alertController = UIAlertController(title: "Confirmation", message: "Are you sure you want to proceed?", preferredStyle: .alert)
-//
-//            let yesAction = UIAlertAction(title: "Yes", style: .default) { (_) in
-//                self.presenter.deleteTask(at: indexPath.row, in: indexPath.section)
-//                completionHandler(true)
-//                self.taskListTableView.deleteRows(at: [indexPath], with: .automatic)
-//
-//            }
-//
-//            let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in
-//            }
-//
-//            alertController.addAction(yesAction)
-//            alertController.addAction(noAction)
-//
-//            self.present(alertController, animated: true, completion: nil)
-
-
+            self.navigationController?.pushViewController(self.coordinator.taskDetailBuilder.buildTaskDetail(), animated: true)
         }
        
         editAction.backgroundColor = Constants.editButtonColor
