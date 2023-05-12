@@ -92,10 +92,6 @@ extension TaskListViewController {
         title = "TaskManager"
     }
     
-    func viewWillApear() {
-        presenter.viewWillApear()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         taskListTableView.reloadData()
         presenter.viewWillApear()
