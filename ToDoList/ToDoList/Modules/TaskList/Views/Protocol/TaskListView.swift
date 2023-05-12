@@ -8,5 +8,5 @@
 import Foundation
 
 protocol TaskListView: AnyObject {
-    func displayEmptyImage()
+    func updateEmptyListImage(isHidden: Bool)
 }

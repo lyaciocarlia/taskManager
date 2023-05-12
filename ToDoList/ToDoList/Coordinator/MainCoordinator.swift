@@ -10,14 +10,17 @@ import UIKit
 
 class MainCoordinator {
     
-    static func setupListOfTasks() -> TaskListViewController {
-        
-        let taskListViewController = TaskListViewController()
-        let taskListPresenterImp = TaskListPresenterImp(view: taskListViewController)
-        
-        taskListViewController.presenter = taskListPresenterImp
-        
-        return taskListViewController
-        
+    var taskService: TaskService
+    
+    lazy var taskListBuilder = TaskListBuilder(taskListService: taskService, coordinator: self)
+    lazy var taskDetailBuilder = TaskDetailBuilder(taskListService: taskService, coordinator: self)
+    
+    init(with taskService: TaskService) {
+        self.taskService = taskService
+    }
+    
+    func rootVC() -> UIViewController {
+        let navigationController = TaskMgNavigationViewController(rootViewController: taskListBuilder.buildTaskList())
+        return navigationController
     }
 }
