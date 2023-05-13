@@ -1,0 +1,14 @@
+"TaskManager" = "Manager de taskuri" ;
+"AddTask" = "Adaugă un task" ;
+"EditTask" = "Editează taskul";
+"Active" = "Taskuri active" ;
+"Completed" = "Taskuri completate" ;
+"Create Task" = "Crează un task";
+"Enter your title..." = "Introdu titlul...";
+"Enter an optinal subtitle..." = "Introdu o descriere a taskului...";
+"Update Task" = "Actualizaeză taskul";
+"Confirmation" = "Confirmare";
+"Are you sure you want to proceed?" = "Ești sigur că vrei să continui?";
+"Yes" = "Da";
+"No" = "Nu";
+"Edit" = "Editează";
