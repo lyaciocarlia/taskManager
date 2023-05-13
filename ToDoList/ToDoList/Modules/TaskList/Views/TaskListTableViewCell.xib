@@ -30,6 +30,9 @@
                                 <color key="strokeColor" red="0.83137254900000002" green="0.30980392159999998" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </backgroundConfiguration>
                         </buttonConfiguration>
+                        <connections>
+                            <action selector="markAsCompleteButton:" destination="-1" eventType="touchUpInside" id="RNq-iN-3FI"/>
+                        </connections>
                     </button>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="lQS-WJ-LH0">
                         <rect key="frame" x="42.000000000000007" y="16" width="69.666666666666686" height="35"/>

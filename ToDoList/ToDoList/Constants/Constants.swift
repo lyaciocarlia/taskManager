@@ -41,6 +41,8 @@ class Constants{
     static var deleteButtonColor = UIColor(named: "AccentColor")
     
     static var navBarButtonSize = CGSize(width: 70, height: 19)
+
+    static var markAsCompleteColor = UIColor(named: "MarkAsCompleteColor")
     
 }
 
