@@ -9,11 +9,14 @@ import UIKit
 
 class TaskListTableViewCell: UITableViewCell {
     
+    static let identifier = "TaskListTableViewCell"
     
     @IBOutlet private weak var taskDescriptionLabel: UILabel!
     @IBOutlet private weak var taskNameLabel: UILabel!
     @IBOutlet private weak var isCompletedButton: UIButton!
-    static let identifier = "TaskListTableViewCell"
+    @IBAction func markAsCompleteButton(_ sender: Any) {
+        
+    }
     
     func configure(with task: Task) {
         taskDescriptionLabel.isHidden = false

@@ -118,7 +118,22 @@ extension TaskListViewController {
 
 // MARK: - TABLE VEIW FUNCTIONS
 
-extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
+extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, CellDelegate {
+    func markTaskAsComplete() {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .normal, title: "") { (action, view, completionHandler) in
+            self.markTaskAsComplete()
+        }
+        
+        action.backgroundColor = Constants.markAsCompleteColor
+        action.image = UIImage(named: "doneSymbol")
+        
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        return configuration
+    }
     
     func getNrOfSections() -> Int {
         if presenter.activeTasksCount() != Constants.zeroTasks && presenter.completedTasksCount() !=  Constants.zeroTasks {
