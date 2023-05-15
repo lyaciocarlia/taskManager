@@ -36,7 +36,7 @@ extension TaskDetailViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         presenter.viewWasLoaded()
         
         setupTextField(textField: taskDescriptionTextField)
