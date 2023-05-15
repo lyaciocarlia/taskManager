@@ -15,17 +15,15 @@ class TaskDetailViewController: UIViewController, TaskDetailView {
     
     var presenter: TaskDetailPresenter!
     var coordinator: MainCoordinator
-    var situation: String
-    var taskName: String?
-    var taskDescription: String?
+    var mode: EditAddTaskSetup
+    var task: Task?
     var index: Int?
     var section: Int?
     
-    init(coordinator: MainCoordinator, situation: String, taskName: String?, taskDescription: String?,index: Int?, section: Int?){
+    init(coordinator: MainCoordinator, mode: EditAddTaskSetup, task: Task? ,index: Int?, section: Int?){
         self.coordinator = coordinator
-        self.situation = situation
-        self.taskDescription = taskDescription
-        self.taskName = taskName
+        self.mode = mode
+        self.task = task
         self.index = index
         self.section = section
         super.init(nibName: String(describing: TaskDetailViewController.self), bundle: nil)
@@ -47,25 +45,29 @@ extension TaskDetailViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if situation == Constants.EditAddTaskSetup.addTask.rawValue{
-            saveChangesButton.setTitle("Create Task", for: .normal)
-            title = Constants.EditAddTaskSetup.addTask.rawValue
-            taskNameTextField.placeholder = "Enter your title..."
-            taskDescriptionTextField.placeholder = "Enter an optinal subtitle..."
-            saveChangesButton.isHidden = true
-        } else {
-            saveChangesButton.setTitle("Update Task", for: .normal)
-            title = Constants.EditAddTaskSetup.editTask.rawValue
-            taskNameTextField.text = taskName
-            taskDescriptionTextField.text = taskDescription
-            saveChangesButton.isHidden = false
-        }
+        presenter.viewWasLoaded(mode: mode, task: task)
         
         setupTextField(textField: taskDescriptionTextField)
         setupTextField(textField: taskNameTextField)
         
         taskDescriptionTextField.delegate = self
         taskNameTextField.delegate = self
+    }
+    
+    func setupEditMode(task: Task?) {
+        saveChangesButton.setTitle("Update Task", for: .normal)
+        title = EditAddTaskSetup.editTask.rawValue
+        taskNameTextField.text = task?.name
+        taskDescriptionTextField.text = task?.description
+        saveChangesButton.isHidden = false
+    }
+    
+    func setupAddMode() {
+        saveChangesButton.setTitle("Create Task", for: .normal)
+        title = EditAddTaskSetup.addTask.rawValue
+        taskNameTextField.placeholder = "Enter your title..."
+        taskDescriptionTextField.placeholder = "Enter an optinal subtitle..."
+        saveChangesButton.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -79,7 +81,7 @@ extension TaskDetailViewController: UITextFieldDelegate {
     
     private func addTask() {
         taskNameTextField.resignFirstResponder()
-        if situation == Constants.EditAddTaskSetup.addTask.rawValue {
+        if mode == .addTask {
             presenter.addTask(name: taskNameTextField.text ?? "", description: taskDescriptionTextField.text ?? "")
         } else {
             presenter.editTask(at: index ?? -1, in: section ?? -1, newName: taskNameTextField.text ?? "", newDescription: taskDescriptionTextField.text ?? "")

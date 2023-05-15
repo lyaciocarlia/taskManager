@@ -17,8 +17,8 @@ class TaskDetailBuilder {
         self.coordinator = coordinator
     }
     
-    func buildTaskDetail(situation: String, taskName: String?, taskDescription: String?, index: Int?, section: Int?) -> TaskDetailViewController {
-        let taskDetailViewController = TaskDetailViewController(coordinator: coordinator, situation: situation, taskName: taskName, taskDescription: taskDescription, index: index, section: section )
+    func buildTaskDetail(mode: EditAddTaskSetup, task: Task?, index: Int?, section: Int?) -> TaskDetailViewController {
+        let taskDetailViewController = TaskDetailViewController(coordinator: coordinator, mode: mode, task: task, index: index, section: section )
         let taskDetailPresenterImp = TaskDetailPresenterImp(view: taskDetailViewController, taskServiceImp: taskListService)
         taskDetailViewController.presenter = taskDetailPresenterImp
         return taskDetailViewController
