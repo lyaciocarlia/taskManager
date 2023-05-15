@@ -11,7 +11,7 @@ import UIKit
 class Constants{
     
     static var headerLabelFontSize: CGFloat = 24
-
+    
     static var headerLabelLeftAnchor: CGFloat = 10
     
     static var headerLabelTopAnchor: CGFloat = 24
@@ -32,14 +32,18 @@ class Constants{
     
     static var zeroTasks: Int = 0
     
+    static var addTaskButtonCornerRadius: CGFloat = 32
+    
     static var navigationTitleFont: UIFont = UIFont.boldSystemFont(ofSize: 40)
     
     static var editButtonColor = UIColor(named: "EditButtonYellow")
     
     static var deleteButtonColor = UIColor(named: "AccentColor")
-    
 
-    
+    public enum EditAddTaskSetup: String {
+        case addTask = "AddTask"
+        case editTask = "EditTask"
+    }
 }
 
 

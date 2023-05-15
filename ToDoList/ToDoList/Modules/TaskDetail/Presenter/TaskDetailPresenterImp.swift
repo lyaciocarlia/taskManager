@@ -9,17 +9,28 @@ import Foundation
 
 class TaskDetailPresenterImp: TaskDetailPresenter {
     
-    weak var view: TaskDetailView?
-    var taskServiceImp: TaskService
+    private unowned let view: TaskDetailView
+    private let taskServiceImp: TaskService
     
     init(view: TaskDetailViewController, taskServiceImp: TaskService) {
         self.view = view
         self.taskServiceImp = taskServiceImp
     }
     
-    func addTask() {
-        let task = Task(id: String(Int.random(in: 1...100)), name: view?.taskNameTextField.text ?? " " , description: view?.taskDescriptionTextField.text ?? " " , isCompleted: false)
+    func addTask(name: String, description: String) {
+        let task = Task(id: UUID().uuidString,
+                        name: name ,
+                        description: description ,
+                        isCompleted: false)
         taskServiceImp.addTask(task: task)
     }
     
+    func checkForEmptyName(currentText: String, range: NSRange, string: String) {
+        let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        self.view.updateSaveChangesButtonState(state: newText.isEmpty)
+    }
+    
+    func editTask(at index: Int, in section: Int, newName: String, newDescription: String) {
+        taskServiceImp.editTask(at: index, in: section, newName: newName, newDescription: newDescription)
+    }
 }

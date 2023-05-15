@@ -9,26 +9,23 @@ import UIKit
 
 class TaskListViewController: UIViewController, TaskListView {
     
-    @IBOutlet weak var addTaskButton: UIButton!
-    @IBOutlet weak var taskListTableView: UITableView!
-    @IBOutlet weak var emptyListImage: UIImageView!
-    
-    @IBAction func OpenDetailScreen(_ sender: UIButton) {
-        self.navigationController?.pushViewController(coordinator.taskDetailBuilder.buildTaskDetail(), animated: true)
-    }
+    @IBOutlet private weak var addTaskButton: UIButton!
+    @IBOutlet private weak var taskListTableView: UITableView!
+    @IBOutlet private weak var emptyListImage: UIImageView!
     
     var presenter: TaskListPresenter!
     var coordinator: MainCoordinator
+    let headerTitle = ["Active", "Completed"]
     
     var numberOfSections: Int {
-        if presenter.taskServiceImp.activeTasks.count != Constants.zeroTasks && presenter.taskServiceImp.completedTasks.count !=  Constants.zeroTasks {
+        if presenter.activeTasksCount() != Constants.zeroTasks && presenter.completedTasksCount() !=  Constants.zeroTasks {
             return Constants.twoSections
         } else {
             return Constants.oneSection
         }
     }
     
-    init(coordinator: MainCoordinator){
+    init(coordinator: MainCoordinator) {
         self.coordinator = coordinator
         super.init(nibName: String(describing: TaskListViewController.self), bundle: nil)
     }
@@ -36,26 +33,35 @@ class TaskListViewController: UIViewController, TaskListView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    @IBAction func openDetailScreen (_ sender: UIButton) {
+        let vc = coordinator.setupTaskDetailVC(situation: Constants.EditAddTaskSetup.addTask.rawValue, taskName: nil, taskDescription: nil, index: nil, section: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 // MARK: - SETUP FUNC
 
 extension TaskListViewController {
-    private func setupAddTaskButton(){
-        addTaskButton.layer.cornerRadius = 32
+    private func setupAddTaskButton() {
+        addTaskButton.layer.cornerRadius = Constants.addTaskButtonCornerRadius
         addTaskButton.layer.masksToBounds = true
     }
     
-    private func setupTaskListTableView(){
-        // taskListTableView.backgroundColor = .white
+    private func setupTaskListTableView() {
+        
         taskListTableView.contentInsetAdjustmentBehavior = .never
-        taskListTableView.register(UINib(nibName: String(describing: TaskListTableViewCell.self), bundle: nil), forCellReuseIdentifier: TaskListTableViewCell.identifier)
-        taskListTableView.register(UINib(nibName: String(describing: CompletedTaskListTableViewCell.self), bundle: nil), forCellReuseIdentifier: CompletedTaskListTableViewCell.identifier)
+        taskListTableView.register(UINib(nibName: String(describing: TaskListTableViewCell.self), bundle: nil),
+                                   forCellReuseIdentifier: TaskListTableViewCell.identifier)
+        taskListTableView.register(UINib(nibName: String(describing: CompletedTaskListTableViewCell.self), bundle: nil),
+                                   forCellReuseIdentifier: CompletedTaskListTableViewCell.identifier)
         taskListTableView.dataSource = self
         taskListTableView.delegate = self
+        
     }
     
-    func headerLabelSetup (label : UILabel, view: UIView) {
+    private func headerLabelSetup (label: UILabel, view: UIView) {
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .label
         label.font = UIFont.boldSystemFont(ofSize: Constants.headerLabelFontSize)
@@ -66,6 +72,12 @@ extension TaskListViewController {
             label.widthAnchor.constraint(equalToConstant: Constants.headerLabelWidthAnchor)
         ]
         NSLayoutConstraint.activate(sectionHeaderLabelConstraints)
+        
+    }
+    
+    func updateEmptyListImage(isHidden: Bool) {
+        taskListTableView.isHidden = isHidden
+        emptyListImage.isHidden = !isHidden
     }
 }
 
@@ -78,17 +90,12 @@ extension TaskListViewController {
         setupTaskListTableView()
         emptyListImage.isHidden = true
         setupAddTaskButton()
-        self.title = "TaskManager"
+        title = "TaskManager"
     }
     
-    override func viewWillLayoutSubviews() {
-        if presenter.checkForEmtpyList() {
-            taskListTableView.isHidden = true
-            emptyListImage.isHidden = false
-        }
-    }
     override func viewWillAppear(_ animated: Bool) {
         taskListTableView.reloadData()
+        presenter.viewWillApear()
     }
 }
 
@@ -97,11 +104,7 @@ extension TaskListViewController {
 extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.taskServiceImp.getTasksCount(in: section)
-    }
-    
-    var headerTitle: [String] {
-        return ["Active", "Completed"]
+        presenter.getTasksCount(in: section)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -109,11 +112,10 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         let sectionHeaderLabelView = UIView()
         
         let sectionHeaderLabel = UILabel()
-        if numberOfSections == Constants.twoSections
-        {
+        if numberOfSections == Constants.twoSections {
             sectionHeaderLabel.text = headerTitle[section]
         } else {
-            if presenter.taskServiceImp.activeTasks.count != Constants.zeroTasks {
+            if presenter.activeTasksCount() != Constants.zeroTasks {
                 sectionHeaderLabel.text = "Active"
             } else {
                 sectionHeaderLabel.text = "Completed"
@@ -127,17 +129,18 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == Constants.firstSection && presenter.taskServiceImp.activeTasks.count != 0 {
+        
+        if indexPath.section == Constants.firstSection && presenter.activeTasksCount() != 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TaskListTableViewCell.self)) as? TaskListTableViewCell else {return UITableViewCell()}
-            let task = presenter?.taskServiceImp.getTask(at: indexPath.row, section: indexPath.section)
+            let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
             cell.selectionStyle = .none
             cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false))
             return cell
         } else {
-            if presenter.taskServiceImp.completedTasks.count != Constants.zeroTasks {
+            if presenter.completedTasksCount() != Constants.zeroTasks {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CompletedTaskListTableViewCell.self)) as? CompletedTaskListTableViewCell else {return UITableViewCell()}
                 cell.selectionStyle = .none
-                let task = presenter?.taskServiceImp.getTask(at: indexPath.row, section: indexPath.section)
+                let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
                 cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false))
                 return cell
             }
@@ -173,25 +176,13 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         let editAction = UIContextualAction(style: .normal, title: "") { (action, view, completionHandler) in
-            
-//            let alertController = UIAlertController(title: "Confirmation", message: "Are you sure you want to proceed?", preferredStyle: .alert)
-//
-//            let yesAction = UIAlertAction(title: "Yes", style: .default) { (_) in
-//                self.presenter.deleteTask(at: indexPath.row, in: indexPath.section)
-//                completionHandler(true)
-//                self.taskListTableView.deleteRows(at: [indexPath], with: .automatic)
-//
-//            }
-//
-//            let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in
-//            }
-//
-//            alertController.addAction(yesAction)
-//            alertController.addAction(noAction)
-//
-//            self.present(alertController, animated: true, completion: nil)
-
-
+            self.navigationController?.pushViewController(
+                self.coordinator.setupTaskDetailVC(situation: Constants.EditAddTaskSetup.editTask.rawValue,
+                                                   taskName: self.presenter.returnTaskName(at: indexPath.row, section: indexPath.section),
+                                                   taskDescription: self.presenter.returnTaskDescription(at: indexPath.row, section: indexPath.section),
+                                                   index: indexPath.row,
+                                                   section: indexPath.section),
+                animated: true)
         }
        
         editAction.backgroundColor = Constants.editButtonColor
