@@ -17,7 +17,7 @@ class TaskListViewController: UIViewController, TaskListView {
     var coordinator: MainCoordinator
     let headerTitle = ["Active", "Completed"]
     
-    var numberOfSections: Int {
+    func nrOfSections() -> Int {
         if presenter.activeTasksCount() != Constants.zeroTasks && presenter.completedTasksCount() !=  Constants.zeroTasks {
             return Constants.twoSections
         } else {
@@ -35,7 +35,7 @@ class TaskListViewController: UIViewController, TaskListView {
     }
     
     @IBAction func openDetailScreen (_ sender: UIButton) {
-        let vc = coordinator.setupTaskDetailVC(situation: Constants.EditAddTaskSetup.addTask.rawValue, taskName: nil, taskDescription: nil, index: nil, section: nil)
+        let vc = coordinator.setupTaskDetailVC(mode: .addTask, task: nil, index: nil, section: nil)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -95,14 +95,14 @@ extension TaskListViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         taskListTableView.reloadData()
-        presenter.viewWillApear()
+        presenter.viewWillAppear()
     }
 }
 
 // MARK: - TABLE VEIW FUNCTIONS
 
 extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
-    
+        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter.getTasksCount(in: section)
     }
@@ -112,7 +112,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         let sectionHeaderLabelView = UIView()
         
         let sectionHeaderLabel = UILabel()
-        if numberOfSections == Constants.twoSections {
+        if nrOfSections() == Constants.twoSections {
             sectionHeaderLabel.text = headerTitle[section]
         } else {
             if presenter.activeTasksCount() != Constants.zeroTasks {
@@ -149,7 +149,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return numberOfSections
+        return nrOfSections()
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -160,7 +160,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
             let yesAction = UIAlertAction(title: "Yes", style: .default) { (_) in
                 self.presenter.deleteTask(at: indexPath.row, in: indexPath.section)
                 completionHandler(true)
-                self.taskListTableView.deleteRows(at: [indexPath], with: .automatic)
+                self.taskListTableView.reloadData()
                 
             }
             
@@ -177,9 +177,8 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         
         let editAction = UIContextualAction(style: .normal, title: "") { (action, view, completionHandler) in
             self.navigationController?.pushViewController(
-                self.coordinator.setupTaskDetailVC(situation: Constants.EditAddTaskSetup.editTask.rawValue,
-                                                   taskName: self.presenter.returnTaskName(at: indexPath.row, section: indexPath.section),
-                                                   taskDescription: self.presenter.returnTaskDescription(at: indexPath.row, section: indexPath.section),
+                self.coordinator.setupTaskDetailVC(mode: .editTask,
+                                                   task: self.presenter.getTask(at: indexPath.row, section: indexPath.section),
                                                    index: indexPath.row,
                                                    section: indexPath.section),
                 animated: true)

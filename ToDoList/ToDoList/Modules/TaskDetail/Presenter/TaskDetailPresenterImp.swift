@@ -33,4 +33,13 @@ class TaskDetailPresenterImp: TaskDetailPresenter {
     func editTask(at index: Int, in section: Int, newName: String, newDescription: String) {
         taskServiceImp.editTask(at: index, in: section, newName: newName, newDescription: newDescription)
     }
+    
+    func viewWasLoaded(mode: EditAddTaskSetup, task: Task?) {
+        if mode == .addTask {
+            view.setupAddMode()
+        } else {
+            view.setupEditMode(task: task)
+        }
+    }
+    
 }

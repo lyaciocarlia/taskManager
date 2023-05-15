@@ -27,32 +27,25 @@ class TaskListPresenterImp: TaskListPresenter {
     }
     
     func activeTasksCount() -> Int {
-        return taskServiceImp.activeTasks.count
+        return taskServiceImp.nrOfActiveTasks()
     }
     
     func completedTasksCount() -> Int {
-        return taskServiceImp.completedTasks.count
+        return taskServiceImp.nrOfCompletedTasks()
     }
     
     func getTask(at index: Int, section: Int) -> Task? {
-        return taskServiceImp.getTask(at: index, section: section)
+        let tasks = taskServiceImp.parseTaskList(section: section)
+        return taskServiceImp.getTask(at: index, taskList: tasks)
     }
     
     func getTasksCount(in section: Int) -> Int {
         return taskServiceImp.getTasksCount(in: section)
     }
     
-    func viewWillApear() {
+    func viewWillAppear() {
         if taskServiceImp.numberOfTasks() == 0 {
             view?.updateEmptyListImage(isHidden: true)
         }
-    }
-    
-    func returnTaskName(at index: Int, section: Int) -> String {
-        return getTask(at: index, section: section)?.name ?? ""
-    }
-    
-    func returnTaskDescription(at index: Int, section: Int) -> String {
-        return getTask(at: index, section: section)?.description ?? " "
     }
 }

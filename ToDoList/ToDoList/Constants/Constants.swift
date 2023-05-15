@@ -40,12 +40,12 @@ class Constants{
     
     static var deleteButtonColor = UIColor(named: "AccentColor")
 
-    public enum EditAddTaskSetup: String {
-        case addTask = "AddTask"
-        case editTask = "EditTask"
-    }
 }
 
+public enum EditAddTaskSetup: String {
+    case addTask = "AddTask"
+    case editTask = "EditTask"
+}
 
 extension UIColor {
     public convenience init?(hex: String) {
