@@ -51,4 +51,13 @@ class TaskDetailPresenterImp: TaskDetailPresenter {
         case .editTask: editTask(task: task!, newName: name ?? "", newDescription: description ?? "")
         }
     }
+    
+    func viewWasLoaded(mode: EditAddTaskSetup, task: Task?) {
+        if mode == .addTask {
+            view.setupAddMode()
+        } else {
+            view.setupEditMode(task: task)
+        }
+    }
+    
 }

@@ -35,6 +35,7 @@ class TaskListViewController: UIViewController, TaskListView {
     }
     
     @IBAction func openDetailScreen (_ sender: UIButton) {
+
         let vc = coordinator.setupTaskDetailVC(mode: .addTask, task: nil)
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -237,7 +238,6 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         deleteAction.backgroundColor = Constants.deleteButtonColor
         deleteAction.image = UIImage(named: "deleteButton")
     
-        
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
         return configuration
     }
