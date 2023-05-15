@@ -9,9 +9,9 @@ import Foundation
 
 class TaskListPresenterImp: TaskListPresenter {
     
-    weak var view: TaskListView?
+    unowned let view: TaskListView?
     
-    var taskServiceImp: TaskService
+    private let taskServiceImp: TaskService
     
     init(view: TaskListViewController, taskServiceImp: TaskService) {
         self.view = view
@@ -21,41 +21,38 @@ class TaskListPresenterImp: TaskListPresenter {
     func deleteTask(at index: Int, in section: Int) {
         taskServiceImp.deleteTask(at: index, in: section )
     }
-    
-//    var activeTasks: [Task] = [
-//        Task(id: "1", name:"Citit", description: "Sa citesc 30 pag", isCompleted: false),
-//        Task(id: "3", name: "Merg la sala", description: "", isCompleted: false),
-//        Task(id: "2", name: "Merg la sala", description: "Antrenament la sala de 120 min", isCompleted: false)
-//    ]
-//
-//    var completedTasks: [Task] = [
-//        Task(id: "4", name:"Desenat", description: "Ajut sora la desenat", isCompleted: true),
-//        Task(id: "5", name: "Merg la sala", description: "Antrenament la sala de 100 min", isCompleted: true)
-//    ]
-    
-//    func numberOfTasks() -> Int {
-//        return activeTasks.count + completedTasks.count
-//    }
-//    
-//    func getTask(at index: Int, section: Int) -> Task? {
-//        if index < activeTasks.count && section == Constants.firstSection {
-//            return activeTasks[index]
-//        } else {
-//            return completedTasks[index]
-//        }
-//    }
-//    
+
     func checkForEmtpyList() -> Bool {
-        if taskServiceImp.numberOfTasks() == 0 {
-            return true
-        } else { return false }
+        return taskServiceImp.numberOfTasks() == 0
     }
-//    
-//    func getTasksCount(in section: Int) -> Int {
-//        if section == Constants.firstSection && activeTasks.count != 0{
-//            return activeTasks.count
-//        } else {
-//            return completedTasks.count
-//        }
-//    }
+    
+    func activeTasksCount() -> Int {
+        return taskServiceImp.activeTasks.count
+    }
+    
+    func completedTasksCount() -> Int {
+        return taskServiceImp.completedTasks.count
+    }
+    
+    func getTask(at index: Int, section: Int) -> Task? {
+        return taskServiceImp.getTask(at: index, section: section)
+    }
+    
+    func getTasksCount(in section: Int) -> Int {
+        return taskServiceImp.getTasksCount(in: section)
+    }
+    
+    func viewWillApear() {
+        if taskServiceImp.numberOfTasks() == 0 {
+            view?.updateEmptyListImage(isHidden: true)
+        }
+    }
+    
+    func returnTaskName(at index: Int, section: Int) -> String {
+        return getTask(at: index, section: section)?.name ?? ""
+    }
+    
+    func returnTaskDescription(at index: Int, section: Int) -> String {
+        return getTask(at: index, section: section)?.description ?? " "
+    }
 }

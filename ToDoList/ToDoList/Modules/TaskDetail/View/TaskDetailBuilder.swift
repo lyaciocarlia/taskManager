@@ -8,6 +8,7 @@
 import Foundation
 
 class TaskDetailBuilder {
+    
     private let taskListService: TaskService
     private let coordinator: MainCoordinator
     
@@ -16,8 +17,8 @@ class TaskDetailBuilder {
         self.coordinator = coordinator
     }
     
-    func buildTaskDetail() -> TaskDetailViewController {
-        let taskDetailViewController = TaskDetailViewController(coordinator: coordinator)
+    func buildTaskDetail(situation: String, taskName: String?, taskDescription: String?, index: Int?, section: Int?) -> TaskDetailViewController {
+        let taskDetailViewController = TaskDetailViewController(coordinator: coordinator, situation: situation, taskName: taskName, taskDescription: taskDescription, index: index, section: section )
         let taskDetailPresenterImp = TaskDetailPresenterImp(view: taskDetailViewController, taskServiceImp: taskListService)
         taskDetailViewController.presenter = taskDetailPresenterImp
         return taskDetailViewController

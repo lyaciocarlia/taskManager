@@ -65,7 +65,7 @@
                         <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
                     </buttonConfiguration>
                     <connections>
-                        <action selector="OpenDetailScreen:" destination="-1" eventType="touchUpInside" id="vui-rF-CD9"/>
+                        <action selector="openDetailScreen:" destination="-1" eventType="touchUpInside" id="vui-rF-CD9"/>
                     </connections>
                 </button>
             </subviews>

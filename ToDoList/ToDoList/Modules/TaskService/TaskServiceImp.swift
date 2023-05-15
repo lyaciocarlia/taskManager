@@ -8,6 +8,7 @@
 import Foundation
 
 class TaskServiceImp: TaskService {
+    
     var activeTasks: [Task] = [
         Task(id: "1", name:"Citit", description: "Sa citesc 30 pag", isCompleted: false),
         Task(id: "3", name: "Merg la sala", description: "", isCompleted: false),
@@ -31,6 +32,17 @@ class TaskServiceImp: TaskService {
         }
     }
     
+    func editTask(at index: Int, in section: Int, newName: String, newDescription: String) {
+        if section == 0 {
+            activeTasks[index].name = newName
+            activeTasks[index].description = newDescription
+        } else {
+            completedTasks[index].name = newName
+            completedTasks[index].description = newDescription
+        }
+        
+    }
+    
     func addTask(task: Task) {
         activeTasks.append(task)
     }
@@ -44,11 +56,10 @@ class TaskServiceImp: TaskService {
     }
     
     func getTasksCount(in section: Int) -> Int {
-        if section == Constants.firstSection && activeTasks.count != 0{
+        if section == Constants.firstSection && activeTasks.count != 0 {
             return activeTasks.count
         } else {
             return completedTasks.count
         }
     }
-    
 }
