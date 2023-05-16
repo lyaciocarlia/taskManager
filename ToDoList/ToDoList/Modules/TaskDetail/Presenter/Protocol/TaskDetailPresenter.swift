@@ -9,10 +9,10 @@ import Foundation
 
 protocol TaskDetailPresenter {
     
-    func saveChanges(mode: EditAddTaskSetup, name: String?, description: String?, task: Task?)
-    func viewWasLoaded(mode: EditAddTaskSetup, task: Task?)
-    func addTask(name: String, description: String)
-    func checkForEmptyName(currentText: String, range: NSRange, string: String)
-    func editTask(task: Task, newName: String, newDescription: String)
+    var mode: EditAddTaskSetup { get set }
+    var task: Task? { get set }
     
+    func saveChanges(name: String?, description: String?)
+    func viewWasLoaded()
+    func checkForEmptyName(currentText: String, range: NSRange, string: String)
 }

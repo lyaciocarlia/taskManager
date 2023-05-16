@@ -15,13 +15,9 @@ class TaskDetailViewController: UIViewController, TaskDetailView {
     
     var presenter: TaskDetailPresenter!
     var coordinator: MainCoordinator
-    var mode: EditAddTaskSetup
-    var task: Task?
     
-    init(coordinator: MainCoordinator, mode: EditAddTaskSetup, task: Task?) {
+    init(coordinator: MainCoordinator) {
         self.coordinator = coordinator
-        self.mode = mode
-        self.task = task
         super.init(nibName: String(describing: TaskDetailViewController.self), bundle: nil)
     }
     
@@ -41,7 +37,7 @@ extension TaskDetailViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter.viewWasLoaded(mode: mode, task: task)
+        presenter.viewWasLoaded()
         
         setupTextField(textField: taskDescriptionTextField)
         setupTextField(textField: taskNameTextField)
@@ -77,10 +73,8 @@ extension TaskDetailViewController: UITextFieldDelegate {
     
     private func saveChanges() {
         taskNameTextField.resignFirstResponder()
-        presenter.saveChanges(mode: mode,
-                                        name: taskNameTextField.text ?? "",
-                                        description: taskDescriptionTextField.text ?? "",
-                                        task: task)
+        presenter.saveChanges(name: taskNameTextField.text ?? "",
+                                        description: taskDescriptionTextField.text ?? "")
         navigationController?.popToRootViewController(animated: true)
     }
     
