@@ -48,6 +48,18 @@ class TaskServiceImp: TaskService {
         }
     }
     
+    func moveTask(from sourceIndex: Int, to destinationIndex: Int, section: Int) {
+        let taskToBeMoved = getTask(at: sourceIndex, section: section)
+        deleteTask(at: sourceIndex, in: section)
+        if section == 0 {
+            activeTasks.insert(taskToBeMoved ?? Task(id: "", name: "", description: "", isCompleted: false), at: destinationIndex)
+        } else {
+            completedTasks.insert(taskToBeMoved ?? Task(id: "", name: "", description: "", isCompleted: false), at: destinationIndex)
+        }
+        print(activeTasks)
+        print(completedTasks)
+            }
+    
     func addTask(task: Task) {
         tasks.append(task)
     }

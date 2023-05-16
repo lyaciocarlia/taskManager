@@ -60,6 +60,10 @@ extension TaskListViewController {
         
     }
     
+    @objc func editTaskList(){
+        taskListTableView.isEditing = !taskListTableView.isEditing
+    }
+    
     private func headerLabelSetup (label: UILabel, view: UIView) {
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -91,6 +95,8 @@ extension TaskListViewController {
         emptyListImage.isHidden = true
         setupAddTaskButton()
         title = "TaskManager"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Group 18"), style: .plain, target: self, action: #selector(editTaskList))
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,6 +152,29 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
             }
             return UITableViewCell()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+            return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        presenter.moveTask(from: sourceIndexPath.row, to: destinationIndexPath.row, section: sourceIndexPath.section)
+        tableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+
+        let sourceSection = sourceIndexPath.section
+        let destSection = proposedDestinationIndexPath.section
+
+        if destSection < sourceSection {
+            return IndexPath(row: 0, section: sourceSection)
+        } else if destSection > sourceSection {
+            return IndexPath(row: self.tableView(tableView, numberOfRowsInSection:sourceSection)-1, section: sourceSection)
+        }
+
+        return proposedDestinationIndexPath
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
