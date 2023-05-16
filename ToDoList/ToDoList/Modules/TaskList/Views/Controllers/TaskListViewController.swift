@@ -48,6 +48,19 @@ extension TaskListViewController {
         addTaskButton.layer.masksToBounds = true
     }
     
+    private func navBarButtonSetUp() -> UIBarButtonItem {
+        let buttonSize = Constants.navBarButtonSize 
+        let customView = UIView(frame: CGRect(origin: .zero, size: buttonSize))
+        let button = UIButton(type: .system)
+        button.frame = customView.bounds
+        button.setTitle("Edit", for: .normal)
+        button.setImage(UIImage(systemName: "list.bullet"), for: .normal)
+        button.addTarget(self, action: #selector(editTaskList), for: .touchUpInside)
+        customView.addSubview(button)
+        let barButtonItem = UIBarButtonItem(customView: customView)
+        return barButtonItem
+    }
+    
     private func setupTaskListTableView() {
         
         taskListTableView.contentInsetAdjustmentBehavior = .never
@@ -95,8 +108,10 @@ extension TaskListViewController {
         emptyListImage.isHidden = true
         setupAddTaskButton()
         title = "TaskManager"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Group 18"), style: .plain, target: self, action: #selector(editTaskList))
-
+        
+        let barButtonItem = navBarButtonSetUp()
+        navigationItem.rightBarButtonItem = barButtonItem
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
