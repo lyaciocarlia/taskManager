@@ -15,4 +15,5 @@ protocol TaskDetailPresenter {
     func saveChanges(name: String?, description: String?)
     func viewWasLoaded()
     func checkForEmptyName(currentText: String, range: NSRange, string: String)
+    func editTask(at index: Int, in section: Int, newName: String, newDescription: String)
 }
