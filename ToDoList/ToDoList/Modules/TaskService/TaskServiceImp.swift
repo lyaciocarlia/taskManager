@@ -63,7 +63,7 @@ class TaskServiceImp: TaskService {
             }
         }
     }
-    
+
     func moveTask(from sourceIndex: IndexPath, to destinationIndex: IndexPath) {
         let taskToBeMoved = getTask(at: sourceIndex.row, taskList: parseTaskList(section: sourceIndex.section))
         deleteTask(at: sourceIndex.row, in: sourceIndex.section)

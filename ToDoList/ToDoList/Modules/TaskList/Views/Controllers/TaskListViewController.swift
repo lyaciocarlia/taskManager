@@ -114,10 +114,9 @@ extension TaskListViewController {
         emptyListImage.isHidden = true
         setupAddTaskButton()
         title = "TaskManager"
-        
+
         let barButtonItem = navBarButtonSetup()
         navigationItem.rightBarButtonItem = barButtonItem
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
