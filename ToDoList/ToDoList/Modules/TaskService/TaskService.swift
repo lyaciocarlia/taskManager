@@ -20,5 +20,4 @@ protocol TaskService {
     func nrOfCompletedTasks() -> Int
     func parseTaskList(section: Int) -> [Task]
     func moveTask(from sourceIndex: IndexPath, to destinationIndex: IndexPath)
-
 }
