@@ -39,7 +39,9 @@ class Constants{
     static var editButtonColor = UIColor(named: "EditButtonYellow")
     
     static var deleteButtonColor = UIColor(named: "AccentColor")
-
+    
+    static var navBarButtonSize = CGSize(width: 70, height: 19)
+    
 }
 
 public enum EditAddTaskSetup: String {
