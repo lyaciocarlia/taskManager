@@ -35,7 +35,6 @@ class TaskListViewController: UIViewController, TaskListView {
     }
     
     @IBAction func openDetailScreen (_ sender: UIButton) {
-
         let vc = coordinator.setupTaskDetailVC(mode: .addTask, task: nil)
         self.navigationController?.pushViewController(vc, animated: true)
     }
