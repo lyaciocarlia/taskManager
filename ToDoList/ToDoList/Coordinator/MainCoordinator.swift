@@ -19,8 +19,8 @@ class MainCoordinator {
         self.taskService = taskService
     }
 
-    func setupTaskDetailVC(mode: EditAddTaskSetup, task: Task?, index: Int?, section: Int?) -> TaskDetailViewController{
-        let taskDetailVC = taskDetailBuilder.buildTaskDetail(mode: mode, task: task, index: index, section: section)
+    func setupTaskDetailVC(mode: EditAddTaskSetup, task: Task?) -> TaskDetailViewController {
+        let taskDetailVC = taskDetailBuilder.buildTaskDetail(mode: mode, task: task)
         return taskDetailVC
     }
     
