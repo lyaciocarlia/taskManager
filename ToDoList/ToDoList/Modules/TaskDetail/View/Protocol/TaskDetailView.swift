@@ -10,4 +10,6 @@ import UIKit
 
 protocol TaskDetailView: AnyObject {
     func updateSaveChangesButtonState(state: Bool)
+    func setupAddMode()
+    func setupEditMode(task: Task?)
 }

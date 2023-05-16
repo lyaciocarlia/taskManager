@@ -18,31 +18,34 @@ class TaskListPresenterImp: TaskListPresenter {
         self.taskServiceImp = taskServiceImp
     }
     
+    func deleteTask(at index: Int, in section: Int) {
+        taskServiceImp.deleteTask(at: index, in: section )
+    }
+
     func checkForEmtpyList() -> Bool {
         return taskServiceImp.numberOfTasks() == 0
     }
     
     func activeTasksCount() -> Int {
-        return taskServiceImp.activeTasks.count
+        return taskServiceImp.nrOfActiveTasks()
     }
     
     func completedTasksCount() -> Int {
-        return taskServiceImp.completedTasks.count
+        return taskServiceImp.nrOfCompletedTasks()
     }
     
     func getTask(at index: Int, section: Int) -> Task? {
-        return taskServiceImp.getTask(at: index, section: section)
+        let tasks = taskServiceImp.parseTaskList(section: section)
+        return taskServiceImp.getTask(at: index, taskList: tasks)
     }
     
     func getTasksCount(in section: Int) -> Int {
         return taskServiceImp.getTasksCount(in: section)
     }
     
-    func viewWillApear() {
+    func viewWillAppear() {
         if taskServiceImp.numberOfTasks() == 0 {
             view?.updateEmptyListImage(isHidden: true)
-        } else {
-            view?.updateEmptyListImage(isHidden: false)
         }
     }
 }
