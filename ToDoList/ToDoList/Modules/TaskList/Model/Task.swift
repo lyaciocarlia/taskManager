@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Task {
+struct Task: Equatable {
     
     let id: String
     var name: String

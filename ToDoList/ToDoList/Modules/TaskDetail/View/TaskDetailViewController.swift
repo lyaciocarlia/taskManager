@@ -16,7 +16,7 @@ class TaskDetailViewController: UIViewController, TaskDetailView {
     var presenter: TaskDetailPresenter!
     var coordinator: MainCoordinator
     
-    init(coordinator: MainCoordinator){
+    init(coordinator: MainCoordinator) {
         self.coordinator = coordinator
         super.init(nibName: String(describing: TaskDetailViewController.self), bundle: nil)
     }
@@ -26,7 +26,7 @@ class TaskDetailViewController: UIViewController, TaskDetailView {
     }
     
     @IBAction func saveChanges(_ sender: Any) {
-        addTask()
+        saveChanges()
     }
 }
 
@@ -36,9 +36,8 @@ extension TaskDetailViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Add Task"
         
-        saveChangesButton.isHidden = true
+        presenter.viewWasLoaded()
         
         setupTextField(textField: taskDescriptionTextField)
         setupTextField(textField: taskNameTextField)
@@ -46,38 +45,62 @@ extension TaskDetailViewController {
         taskDescriptionTextField.delegate = self
         taskNameTextField.delegate = self
     }
+    
+    func setupEditMode(task: Task?) {
+        saveChangesButton.setTitle("Update Task", for: .normal)
+        title = EditAddTaskSetup.editTask.rawValue
+        taskNameTextField.text = task?.name
+        taskDescriptionTextField.text = task?.description
+        saveChangesButton.isHidden = false
+    }
+    
+    func setupAddMode() {
+        saveChangesButton.setTitle("Create Task", for: .normal)
+        title = EditAddTaskSetup.addTask.rawValue
+        taskNameTextField.placeholder = "Enter your title..."
+        taskDescriptionTextField.placeholder = "Enter an optinal subtitle..."
+        saveChangesButton.isHidden = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        firstResponder(textField: taskNameTextField)
+    }
 }
 
 // MARK: - TEXT FIELD FUNC
 
 extension TaskDetailViewController: UITextFieldDelegate {
     
-    private func addTask() {
+    private func saveChanges() {
         taskNameTextField.resignFirstResponder()
-        presenter.addTask(name: taskNameTextField.text ?? "", description: taskDescriptionTextField.text ?? "")
+        presenter.saveChanges(name: taskNameTextField.text ?? "",
+                                        description: taskDescriptionTextField.text ?? "")
         navigationController?.popToRootViewController(animated: true)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == taskNameTextField {
-            presenter.checkForEmptyName(currentText: textField.text ?? "",
-                                        range: range,
-                                        string: string)
+            presenter.checkForEmptyName(currentText: textField.text ?? "", range: range, string: string)
         }
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         taskNameTextField.resignFirstResponder()
-        presenter.addTask(name: taskNameTextField.text ?? "", description: taskDescriptionTextField.text ?? "")
+        saveChanges()
         navigationController?.popToRootViewController(animated: true)
         return true
     }
     
     func setupTextField(textField: UITextField) {
         textField.returnKeyType = .done
+        textField.textColor = .label
         textField.autocapitalizationType = .sentences
         textField.autocorrectionType = .yes
+        textField.becomeFirstResponder()
+    }
+    
+    func firstResponder(textField: UITextField){
         textField.becomeFirstResponder()
     }
 }

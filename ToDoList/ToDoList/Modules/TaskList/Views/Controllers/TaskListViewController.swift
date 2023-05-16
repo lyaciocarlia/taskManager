@@ -17,7 +17,7 @@ class TaskListViewController: UIViewController, TaskListView {
     var coordinator: MainCoordinator
     let headerTitle = ["Active", "Completed"]
     
-    var numberOfSections: Int {
+    func getNrOfSections() -> Int {
         if presenter.activeTasksCount() != Constants.zeroTasks && presenter.completedTasksCount() !=  Constants.zeroTasks {
             return Constants.twoSections
         } else {
@@ -35,7 +35,8 @@ class TaskListViewController: UIViewController, TaskListView {
     }
     
     @IBAction func openDetailScreen (_ sender: UIButton) {
-        self.navigationController?.pushViewController(coordinator.taskDetailBuilder.buildTaskDetail(), animated: true)
+        let vc = coordinator.setupTaskDetailVC(mode: .addTask, task: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -92,20 +93,16 @@ extension TaskListViewController {
         title = "TaskManager"
     }
     
-    func viewWillApear() {
-        presenter.viewWillApear()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         taskListTableView.reloadData()
-        presenter.viewWillApear()
+        presenter.viewWillAppear()
     }
 }
 
 // MARK: - TABLE VEIW FUNCTIONS
 
 extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
-    
+        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter.getTasksCount(in: section)
     }
@@ -115,7 +112,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         let sectionHeaderLabelView = UIView()
         
         let sectionHeaderLabel = UILabel()
-        if numberOfSections == Constants.twoSections {
+        if getNrOfSections() == Constants.twoSections {
             sectionHeaderLabel.text = headerTitle[section]
         } else {
             if presenter.activeTasksCount() != Constants.zeroTasks {
@@ -152,6 +149,47 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return numberOfSections
+        return getNrOfSections()
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "") { (action, view, completionHandler) in
+            
+            let alertController = UIAlertController(title: "Confirmation", message: "Are you sure you want to proceed?", preferredStyle: .alert)
+                    
+            let yesAction = UIAlertAction(title: "Yes", style: .default) { (_) in
+                self.presenter.deleteTask(at: indexPath.row, in: indexPath.section)
+                completionHandler(true)
+                self.taskListTableView.reloadData()
+                
+            }
+            
+            let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+            }
+
+            alertController.addAction(yesAction)
+            alertController.addAction(noAction)
+
+            self.present(alertController, animated: true, completion: nil)
+
+
+        }
+        
+        let editAction = UIContextualAction(style: .normal, title: "") { (action, view, completionHandler) in
+            self.navigationController?.pushViewController(
+                self.coordinator.setupTaskDetailVC(mode: .editTask,
+                                                   task: self.presenter.getTask(at: indexPath.row, section: indexPath.section)),
+                animated: true)
+        }
+       
+        editAction.backgroundColor = Constants.editButtonColor
+        editAction.image = UIImage(systemName: "pencil")
+        deleteAction.backgroundColor = Constants.deleteButtonColor
+        deleteAction.image = UIImage(named: "deleteButton")
+    
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+        return configuration
+    }
+
 }
