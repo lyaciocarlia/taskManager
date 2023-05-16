@@ -17,15 +17,11 @@ class TaskDetailViewController: UIViewController, TaskDetailView {
     var coordinator: MainCoordinator
     var mode: EditAddTaskSetup
     var task: Task?
-    var index: Int?
-    var section: Int?
     
-    init(coordinator: MainCoordinator, mode: EditAddTaskSetup, task: Task? ,index: Int?, section: Int?){
+    init(coordinator: MainCoordinator, mode: EditAddTaskSetup, task: Task?) {
         self.coordinator = coordinator
         self.mode = mode
         self.task = task
-        self.index = index
-        self.section = section
         super.init(nibName: String(describing: TaskDetailViewController.self), bundle: nil)
     }
     
@@ -34,7 +30,7 @@ class TaskDetailViewController: UIViewController, TaskDetailView {
     }
     
     @IBAction func saveChanges(_ sender: Any) {
-        addTask()
+        saveChanges()
     }
 }
 
@@ -79,28 +75,25 @@ extension TaskDetailViewController {
 
 extension TaskDetailViewController: UITextFieldDelegate {
     
-    private func addTask() {
+    private func saveChanges() {
         taskNameTextField.resignFirstResponder()
-        if mode == .addTask {
-            presenter.addTask(name: taskNameTextField.text ?? "", description: taskDescriptionTextField.text ?? "")
-        } else {
-            presenter.editTask(at: index ?? -1, in: section ?? -1, newName: taskNameTextField.text ?? "", newDescription: taskDescriptionTextField.text ?? "")
-        }
+        presenter.saveChanges(mode: mode,
+                                        name: taskNameTextField.text ?? "",
+                                        description: taskDescriptionTextField.text ?? "",
+                                        task: task)
         navigationController?.popToRootViewController(animated: true)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == taskNameTextField {
-            presenter.checkForEmptyName(currentText: textField.text ?? "",
-                                        range: range,
-                                        string: string)
+            presenter.checkForEmptyName(currentText: textField.text ?? "", range: range, string: string)
         }
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         taskNameTextField.resignFirstResponder()
-        presenter.addTask(name: taskNameTextField.text ?? "", description: taskDescriptionTextField.text ?? "")
+        saveChanges()
         navigationController?.popToRootViewController(animated: true)
         return true
     }

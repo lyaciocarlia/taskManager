@@ -30,16 +30,21 @@ class TaskDetailPresenterImp: TaskDetailPresenter {
         self.view.updateSaveChangesButtonState(state: newText.isEmpty)
     }
     
-    func editTask(at index: Int, in section: Int, newName: String, newDescription: String) {
-        taskServiceImp.editTask(at: index, in: section, newName: newName, newDescription: newDescription)
+    func editTask(task: Task, newName: String, newDescription: String) {
+        taskServiceImp.editTask(task: task, newName: newName, newDescription: newDescription)
     }
     
     func viewWasLoaded(mode: EditAddTaskSetup, task: Task?) {
-        if mode == .addTask {
-            view.setupAddMode()
-        } else {
-            view.setupEditMode(task: task)
+        switch mode {
+        case .addTask :  view.setupAddMode()
+        case .editTask : view.setupEditMode(task: task)
         }
     }
     
+    func saveChanges(mode: EditAddTaskSetup, name: String?, description: String?, task: Task?) {
+        switch mode{
+        case .addTask: addTask(name: name ?? "", description: description ?? "")
+        case .editTask: editTask(task: task!, newName: name ?? "", newDescription: description ?? "")
+        }
+    }
 }

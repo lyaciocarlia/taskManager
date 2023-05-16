@@ -22,17 +22,11 @@ class TaskServiceImp: TaskService {
     }
     
     func nrOfActiveTasks() -> Int {
-        let nrOfActiveTasks = tasks.filter() {
-            $0.isCompleted == false
-        }
-        return nrOfActiveTasks.count
+        return tasks.filter { !$0.isCompleted }.count
     }
     
     func nrOfCompletedTasks() -> Int {
-        let nrOfCompletedTasks = tasks.filter() {
-            $0.isCompleted == true
-        }
-        return nrOfCompletedTasks.count
+        return tasks.filter { $0.isCompleted }.count
     }
     
     func getTask(at index: Int, taskList: [Task]) -> Task? {
@@ -41,26 +35,13 @@ class TaskServiceImp: TaskService {
     
     func parseTaskList(section: Int) -> [Task] {
         var tasks = tasks
-        
-        if section == 0 {
-            tasks = tasks.filter() {
-                $0.isCompleted == false
-            }
-        } else {
-            tasks = tasks.filter() {
-                $0.isCompleted == true
-            }
-        }
-        print(tasks)
+        tasks = tasks.filter { section == 0 ? !$0.isCompleted : $0.isCompleted }
         return tasks
-        
     }
     
-    func editTask(at index: Int, in section: Int, newName: String, newDescription: String) {
-        let tasks = parseTaskList(section: section)
-        let taskToEdit = tasks[index]
+    func editTask(task:Task, newName: String, newDescription: String) {
         for i in self.tasks.indices {
-            if self.tasks[i] == taskToEdit {
+            if self.tasks[i].id == task.id {
                 self.tasks[i].name = newName
                 self.tasks[i].description = newDescription
             }

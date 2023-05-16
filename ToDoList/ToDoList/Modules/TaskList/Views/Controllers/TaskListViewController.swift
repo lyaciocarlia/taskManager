@@ -17,7 +17,7 @@ class TaskListViewController: UIViewController, TaskListView {
     var coordinator: MainCoordinator
     let headerTitle = ["Active", "Completed"]
     
-    func nrOfSections() -> Int {
+    func getNrOfSections() -> Int {
         if presenter.activeTasksCount() != Constants.zeroTasks && presenter.completedTasksCount() !=  Constants.zeroTasks {
             return Constants.twoSections
         } else {
@@ -35,7 +35,7 @@ class TaskListViewController: UIViewController, TaskListView {
     }
     
     @IBAction func openDetailScreen (_ sender: UIButton) {
-        let vc = coordinator.setupTaskDetailVC(mode: .addTask, task: nil, index: nil, section: nil)
+        let vc = coordinator.setupTaskDetailVC(mode: .addTask, task: nil)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -112,7 +112,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         let sectionHeaderLabelView = UIView()
         
         let sectionHeaderLabel = UILabel()
-        if nrOfSections() == Constants.twoSections {
+        if getNrOfSections() == Constants.twoSections {
             sectionHeaderLabel.text = headerTitle[section]
         } else {
             if presenter.activeTasksCount() != Constants.zeroTasks {
@@ -149,7 +149,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return nrOfSections()
+        return getNrOfSections()
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -178,9 +178,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         let editAction = UIContextualAction(style: .normal, title: "") { (action, view, completionHandler) in
             self.navigationController?.pushViewController(
                 self.coordinator.setupTaskDetailVC(mode: .editTask,
-                                                   task: self.presenter.getTask(at: indexPath.row, section: indexPath.section),
-                                                   index: indexPath.row,
-                                                   section: indexPath.section),
+                                                   task: self.presenter.getTask(at: indexPath.row, section: indexPath.section)),
                 animated: true)
         }
        
