@@ -59,7 +59,7 @@ class TaskDetailPresenterImp: TaskDetailPresenter {
         }
     }
     
-    func saveChanges(mode: EditAddTaskSetup, name: String?, description: String?, task: Task?) {
+    func saveChanges(name: String?, description: String?) {
         switch mode{
         case .addTask: addTask(name: name ?? "", description: description ?? "")
         case .editTask: editTask(task: task!, newName: name ?? "", newDescription: description ?? "")
