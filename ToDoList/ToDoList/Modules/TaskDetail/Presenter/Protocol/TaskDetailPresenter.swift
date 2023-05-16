@@ -16,5 +16,4 @@ protocol TaskDetailPresenter {
     func addTask(name: String, description: String)
     func checkForEmptyName(currentText: String, range: NSRange, string: String)
     func editTask(task: Task, newName: String, newDescription: String)
-    func editTask(at index: Int, in section: Int, newName: String, newDescription: String)
 }
