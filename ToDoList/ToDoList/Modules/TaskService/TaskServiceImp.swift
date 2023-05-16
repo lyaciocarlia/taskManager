@@ -77,17 +77,6 @@ class TaskServiceImp: TaskService {
         }
     }
     
-    func editTask(at index: Int, in section: Int, newName: String, newDescription: String) {
-        let tasks = parseTaskList(section: section)
-        let taskToEdit = tasks[index]
-        for i in self.tasks.indices {
-            if self.tasks[i] == taskToEdit {
-                self.tasks[i].name = newName
-                self.tasks[i].description = newDescription
-            }
-        }
-    }
-    
     func addTask(task: Task) {
         tasks.append(task)
     }
