@@ -69,14 +69,14 @@ class TaskServiceImp: TaskService {
     }
     
     func moveTask(from sourceIndex: IndexPath, to destinationIndex: IndexPath) {
-        let taskToBeMoved = getTask(at: sourceIndex.row, taskList: parseTaskList(section: sourceIndex.section))
+        guard let taskToBeMoved = getTask(at: sourceIndex.row, taskList: parseTaskList(section: sourceIndex.section)) else { return }
         deleteTask(at: sourceIndex.row, in: sourceIndex.section)
         
         if sourceIndex.section == destinationIndex.section {
             if sourceIndex.section == Constants.firstSection {
-                activeTasks.insert(taskToBeMoved!, at: destinationIndex.row)
+                activeTasks.insert(taskToBeMoved, at: destinationIndex.row)
             } else {
-                completedTasks.insert(taskToBeMoved!, at: destinationIndex.row)
+                completedTasks.insert(taskToBeMoved, at: destinationIndex.row)
             }
         }
     }
