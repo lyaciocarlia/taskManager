@@ -28,7 +28,7 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <color key="separatorColor" systemColor="separatorColor"/>
                 </tableView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dele" translatesAutoresizingMaskIntoConstraints="NO" id="I9d-fp-7C7">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emptyTaskList" translatesAutoresizingMaskIntoConstraints="NO" id="I9d-fp-7C7">
                     <rect key="frame" x="0.0" y="425" width="414" height="208"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="208" id="vyn-TD-YB2"/>
@@ -86,7 +86,7 @@
         </view>
     </objects>
     <resources>
-        <image name="dele" width="128" height="128"/>
+        <image name="emptyTaskList" width="428" height="208.66667175292969"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
