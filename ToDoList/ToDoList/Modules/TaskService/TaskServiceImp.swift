@@ -18,14 +18,18 @@ class TaskServiceImp: TaskService {
     ]
     
     var activeTasks: [Task] {
-        get { tasks.filter { !$0.isCompleted }}
+        get {
+            tasks.filter { !$0.isCompleted }
+        }
         set {
             tasks = newValue + completedTasks
         }
     }
     
     var completedTasks: [Task] {
-        get { tasks.filter { $0.isCompleted }}
+        get {
+            tasks.filter { $0.isCompleted }
+        }
         set {
             tasks = newValue + activeTasks
         }
