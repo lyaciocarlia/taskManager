@@ -49,15 +49,7 @@ class TaskListPresenterImp: TaskListPresenter {
         }
     }
     
-    func returnTaskName(at index: Int, section: Int) -> String {
-        return getTask(at: index, section: section)?.name ?? ""
-    }
-    
-    func returnTaskDescription(at index: Int, section: Int) -> String {
-        return getTask(at: index, section: section)?.description ?? " "
-    }
-    
-    func moveTask(from sourceIndex: Int, to destinationIndex: Int, section: Int) {
-        taskServiceImp.moveTask(from: sourceIndex, to: destinationIndex, section: section)
+    func moveTask(from sourceIndex: IndexPath, to destinationIndex: IndexPath) {
+        taskServiceImp.moveTask(from: sourceIndex, to: destinationIndex)
     }
 }

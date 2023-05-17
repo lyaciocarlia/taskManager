@@ -17,16 +17,30 @@ class TaskServiceImp: TaskService {
         Task(id: "5", name: "Merg la sala", description: "Antrenament la sala de 100 min", isCompleted: true)
     ]
     
+    var activeTasks: [Task] {
+        get { tasks.filter { !$0.isCompleted }}
+        set {
+            tasks = newValue + completedTasks
+        }
+    }
+    
+    var completedTasks: [Task] {
+        get { tasks.filter { $0.isCompleted }}
+        set {
+            tasks = newValue + activeTasks
+        }
+    }
+    
     func numberOfTasks() -> Int {
         return tasks.count
     }
     
     func nrOfActiveTasks() -> Int {
-        return tasks.filter { !$0.isCompleted }.count
+        return activeTasks.count
     }
     
     func nrOfCompletedTasks() -> Int {
-        return tasks.filter { $0.isCompleted }.count
+        return completedTasks.count
     }
     
     func getTask(at index: Int, taskList: [Task]) -> Task? {
@@ -34,9 +48,11 @@ class TaskServiceImp: TaskService {
     }
     
     func parseTaskList(section: Int) -> [Task] {
-        var tasks = tasks
-        tasks = tasks.filter { section == 0 ? !$0.isCompleted : $0.isCompleted }
-        return tasks
+        if section == Constants.firstSection && nrOfActiveTasks() != 0 {
+            return activeTasks
+        } else {
+            return completedTasks
+        }
     }
     
     func editTask(task:Task, newName: String, newDescription: String) {
@@ -48,17 +64,18 @@ class TaskServiceImp: TaskService {
         }
     }
     
-    func moveTask(from sourceIndex: Int, to destinationIndex: Int, section: Int) {
-        let taskToBeMoved = getTask(at: sourceIndex, section: section)
-        deleteTask(at: sourceIndex, in: section)
-        if section == 0 {
-            activeTasks.insert(taskToBeMoved ?? Task(id: "", name: "", description: "", isCompleted: false), at: destinationIndex)
-        } else {
-            completedTasks.insert(taskToBeMoved ?? Task(id: "", name: "", description: "", isCompleted: false), at: destinationIndex)
-        }
-        print(activeTasks)
-        print(completedTasks)
+    func moveTask(from sourceIndex: IndexPath, to destinationIndex: IndexPath) {
+        let taskToBeMoved = getTask(at: sourceIndex.row, taskList: parseTaskList(section: sourceIndex.section))
+        deleteTask(at: sourceIndex.row, in: sourceIndex.section)
+        
+        if sourceIndex.section == destinationIndex.section {
+            if sourceIndex.section == Constants.firstSection {
+                activeTasks.insert(taskToBeMoved!, at: destinationIndex.row)
+            } else {
+                completedTasks.insert(taskToBeMoved!, at: destinationIndex.row)
             }
+        }
+    }
     
     func addTask(task: Task) {
         tasks.append(task)
