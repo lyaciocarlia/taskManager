@@ -114,7 +114,6 @@ extension TaskListViewController {
         emptyListImage.isHidden = true
         setupAddTaskButton()
         title = "TaskManager"
-
         let barButtonItem = navBarButtonSetup()
         navigationItem.rightBarButtonItem = barButtonItem
     }
