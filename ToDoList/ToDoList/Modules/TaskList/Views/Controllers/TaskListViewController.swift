@@ -48,12 +48,16 @@ extension TaskListViewController {
         addTaskButton.layer.masksToBounds = true
     }
     
-    private func navBarButtonSetUp() -> UIBarButtonItem {
+    private func navBarButtonSetup() -> UIBarButtonItem {
         let buttonSize = Constants.navBarButtonSize 
         let customView = UIView(frame: CGRect(origin: .zero, size: buttonSize))
         let button = UIButton(type: .system)
         button.frame = customView.bounds
-        button.setTitle("Edit", for: .normal)
+        if taskListTableView.isEditing {
+            button.setTitle("Done", for: .normal)
+        } else {
+            button.setTitle("Edit", for: .normal)
+        }
         button.setImage(UIImage(systemName: "list.bullet"), for: .normal)
         button.addTarget(self, action: #selector(editTaskList), for: .touchUpInside)
         customView.addSubview(button)
@@ -75,6 +79,8 @@ extension TaskListViewController {
     
     @objc func editTaskList(){
         taskListTableView.isEditing = !taskListTableView.isEditing
+        let barButtonItem = navBarButtonSetup()
+        navigationItem.rightBarButtonItem = barButtonItem
     }
     
     private func headerLabelSetup (label: UILabel, view: UIView) {
@@ -109,7 +115,7 @@ extension TaskListViewController {
         setupAddTaskButton()
         title = "TaskManager"
         
-        let barButtonItem = navBarButtonSetUp()
+        let barButtonItem = navBarButtonSetup()
         navigationItem.rightBarButtonItem = barButtonItem
         
     }
@@ -174,7 +180,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        presenter.moveTask(from: sourceIndexPath.row, to: destinationIndexPath.row, section: sourceIndexPath.section)
+        presenter.moveTask(from: sourceIndexPath, to: destinationIndexPath)
         tableView.reloadData()
     }
     

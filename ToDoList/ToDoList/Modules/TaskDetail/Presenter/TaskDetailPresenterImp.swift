@@ -8,7 +8,7 @@
 import Foundation
 
 class TaskDetailPresenterImp: TaskDetailPresenter {
-    
+  
     private unowned let view: TaskDetailView
     private let taskServiceImp: TaskService
     var mode: EditAddTaskSetup
