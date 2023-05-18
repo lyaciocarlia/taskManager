@@ -46,12 +46,13 @@ extension TaskListViewController {
         let button = UIButton(type: .system)
         button.frame = customView.bounds
         if taskListTableView.isEditing {
-            button.setTitle("Done", for: .normal)
+            button.setTitle("Done".localized(), for: .normal)
         } else {
-            button.setTitle("Edit", for: .normal)
+            button.setTitle("Edit".localized(), for: .normal)
         }
         button.setImage(UIImage(systemName: "list.bullet"), for: .normal)
         button.addTarget(self, action: #selector(editTaskList), for: .touchUpInside)
+        button.contentHorizontalAlignment = .right
         customView.addSubview(button)
         let barButtonItem = UIBarButtonItem(customView: customView)
         return barButtonItem
