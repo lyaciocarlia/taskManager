@@ -11,7 +11,7 @@ class CompletedTaskListTableViewCell: UITableViewCell {
     
     static let identifier = "CompletedTaskListTableViewCell"
     
-    @IBOutlet private weak var isCompletedButton: UIButton!
+    @IBOutlet weak var isCompletedButton: UIButton!
     @IBOutlet private weak var taskDescriptionLabel: UILabel!
     @IBOutlet private weak var taskNameLabel: UILabel!
     

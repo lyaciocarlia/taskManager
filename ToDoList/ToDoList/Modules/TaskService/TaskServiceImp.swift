@@ -68,6 +68,15 @@ class TaskServiceImp: TaskService {
         }
     }
     
+    func markAsComplete(at index: IndexPath) {
+        guard let task = getTask(at: index.row, taskList: parseTaskList(section: index.section)) else { return }
+        for i in self.tasks.indices {
+            if self.tasks[i].id == task.id {
+                self.tasks[i].isCompleted = true
+            }
+        }
+    }
+    
     func moveTask(from sourceIndex: IndexPath, to destinationIndex: IndexPath) {
         guard let taskToBeMoved = getTask(at: sourceIndex.row, taskList: parseTaskList(section: sourceIndex.section)) else { return }
         deleteTask(at: sourceIndex.row, in: sourceIndex.section)
