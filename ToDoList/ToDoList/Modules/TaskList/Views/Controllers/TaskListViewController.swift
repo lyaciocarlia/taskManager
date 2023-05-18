@@ -192,6 +192,13 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, Ce
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationController?.pushViewController(
+            self.coordinator.setupTaskDetailVC(mode: .editTask,
+                                               task: self.presenter.getTask(at: indexPath.row, section: indexPath.section)),
+            animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
