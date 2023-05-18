@@ -10,3 +10,7 @@ import Foundation
 protocol TaskListView: AnyObject {
     func updateEmptyListImage(isHidden: Bool)
 }
+
+protocol CellDelegate: AnyObject {
+    func changeTaskState(at: IndexPath)
+}

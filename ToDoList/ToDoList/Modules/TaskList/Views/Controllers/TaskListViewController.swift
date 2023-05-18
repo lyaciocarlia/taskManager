@@ -118,7 +118,23 @@ extension TaskListViewController {
 
 // MARK: - TABLE VEIW FUNCTIONS
 
-extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
+extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, CellDelegate {
+    func changeTaskState(at index: IndexPath) {
+        presenter.changeTaskState(at: index)
+        taskListTableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .normal, title: "") { (action, view, completionHandler) in
+            self.changeTaskState(at: indexPath)
+        }
+        
+        action.backgroundColor = Constants.markAsCompleteColor
+        action.image = UIImage(named: "doneSymbol")
+        
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        return configuration
+    }
     
     func getNrOfSections() -> Int {
         if presenter.activeTasksCount() != Constants.zeroTasks && presenter.completedTasksCount() !=  Constants.zeroTasks {
@@ -159,18 +175,32 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TaskListTableViewCell.self)) as? TaskListTableViewCell else {return UITableViewCell()}
             let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
             cell.selectionStyle = .none
-            cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false))
+            
+            cell.delegate = self
+            cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false), index: indexPath)
             return cell
         } else {
             if presenter.completedTasksCount() != Constants.zeroTasks {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CompletedTaskListTableViewCell.self)) as? CompletedTaskListTableViewCell else {return UITableViewCell()}
                 cell.selectionStyle = .none
                 let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
-                cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false))
+                cell.delegate = self
+                cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false), index: indexPath)
                 return cell
             }
             return UITableViewCell()
         }
+    }
+    
+    private func navigateToEditScreen(with index: IndexPath){
+        self.navigationController?.pushViewController(
+            self.coordinator.setupTaskDetailVC(mode: .editTask,
+                                               task: self.presenter.getTask(at: index.row, section: index.section)),
+            animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       navigateToEditScreen(with: indexPath)
     }
     
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -209,25 +239,18 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
                 self.presenter.deleteTask(at: indexPath.row, in: indexPath.section)
                 completionHandler(true)
                 self.taskListTableView.reloadData()
-                
             }
             
-            let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in
-            }
+            let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in }
             
             alertController.addAction(yesAction)
             alertController.addAction(noAction)
             
             self.present(alertController, animated: true, completion: nil)
-            
-            
         }
         
         let editAction = UIContextualAction(style: .normal, title: "") { (action, view, completionHandler) in
-            self.navigationController?.pushViewController(
-                self.coordinator.setupTaskDetailVC(mode: .editTask,
-                                                   task: self.presenter.getTask(at: indexPath.row, section: indexPath.section)),
-                animated: true)
+            self.navigateToEditScreen(with:  indexPath)
         }
         
         editAction.backgroundColor = Constants.editButtonColor

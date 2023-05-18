@@ -9,13 +9,22 @@ import UIKit
 
 class TaskListTableViewCell: UITableViewCell {
     
+    static let identifier = "TaskListTableViewCell"
     
     @IBOutlet private weak var taskDescriptionLabel: UILabel!
     @IBOutlet private weak var taskNameLabel: UILabel!
     @IBOutlet private weak var isCompletedButton: UIButton!
-    static let identifier = "TaskListTableViewCell"
     
-    func configure(with task: Task) {
+    private var index: IndexPath?
+    weak var delegate: CellDelegate?
+    
+    @IBAction func changeTaskState() {
+        guard let index = index else { return }
+        delegate?.changeTaskState(at: index)
+    }
+    
+    func configure(with task: Task, index: IndexPath) {
+        self.index = index
         taskDescriptionLabel.isHidden = false
         
         taskNameLabel.text = task.name
