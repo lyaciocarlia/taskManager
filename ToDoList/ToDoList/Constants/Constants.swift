@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class Constants{
+class Constants {
     
     static var headerLabelFontSize: CGFloat = 24
     
@@ -41,6 +41,8 @@ class Constants{
     static var deleteButtonColor = UIColor(named: "AccentColor")
     
     static var navBarButtonSize = CGSize(width: 70, height: 19)
+
+    static var markAsCompleteColor = UIColor(named: "MarkAsCompleteColor")
     
 }
 

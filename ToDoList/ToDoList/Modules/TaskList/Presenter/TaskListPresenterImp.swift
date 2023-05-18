@@ -52,4 +52,8 @@ class TaskListPresenterImp: TaskListPresenter {
     func moveTask(from sourceIndex: IndexPath, to destinationIndex: IndexPath) {
         taskServiceImp.moveTask(from: sourceIndex, to: destinationIndex)
     }
+    
+    func changeTaskState(at index: IndexPath) {
+        taskServiceImp.changeTaskState(at: index)
+    }
 }

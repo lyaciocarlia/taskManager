@@ -15,7 +15,16 @@ class CompletedTaskListTableViewCell: UITableViewCell {
     @IBOutlet private weak var taskDescriptionLabel: UILabel!
     @IBOutlet private weak var taskNameLabel: UILabel!
     
-    func configure(with task: Task) {
+    private var index: IndexPath?
+    weak var delegate: CellDelegate?
+    
+    @IBAction func changeTaskState() {
+        guard let index = index else { return }
+        delegate?.changeTaskState(at: index)
+    }
+    
+    func configure(with task: Task, index: IndexPath) {
+        self.index = index
         
         let attributedString = NSMutableAttributedString(string: task.name)
         attributedString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(Constants.atributtedStringRange, attributedString.length))
