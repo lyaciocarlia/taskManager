@@ -12,5 +12,5 @@ protocol TaskListView: AnyObject {
 }
 
 protocol CellDelegate: AnyObject {
-    func markTaskAsComplete()
+    func markTaskAsComplete(at: IndexPath)
 }

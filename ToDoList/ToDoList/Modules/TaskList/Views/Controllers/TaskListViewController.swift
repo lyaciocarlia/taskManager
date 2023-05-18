@@ -16,6 +16,8 @@ class TaskListViewController: UIViewController, TaskListView {
     var presenter: TaskListPresenter!
     var coordinator: MainCoordinator
     let headerTitle = ["Active", "Completed"]
+    var action = UIAction { _ in }
+    
     
     init(coordinator: MainCoordinator) {
         self.coordinator = coordinator
@@ -118,14 +120,15 @@ extension TaskListViewController {
 
 // MARK: - TABLE VEIW FUNCTIONS
 
-extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, CellDelegate {
-    func markTaskAsComplete() {
-        
+extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, CellDelegate{
+    func markTaskAsComplete(at index: IndexPath) {
+        presenter.markAsComplete(at: index)
+        taskListTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "") { (action, view, completionHandler) in
-            self.markTaskAsComplete()
+            self.markTaskAsComplete(at: indexPath)
         }
         
         action.backgroundColor = Constants.markAsCompleteColor
@@ -174,7 +177,9 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, Ce
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TaskListTableViewCell.self)) as? TaskListTableViewCell else {return UITableViewCell()}
             let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
             cell.selectionStyle = .none
-            cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false))
+
+            cell.delegate = self
+            cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false), index: indexPath)
             return cell
         } else {
             if presenter.completedTasksCount() != Constants.zeroTasks {

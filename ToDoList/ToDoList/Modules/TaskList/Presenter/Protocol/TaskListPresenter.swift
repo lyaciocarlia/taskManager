@@ -17,5 +17,5 @@ protocol TaskListPresenter {
     func viewWillAppear()
     func deleteTask(at index: Int, in section: Int)
     func moveTask(from sourceIndex: IndexPath, to destinationIndex: IndexPath)
-    
+    func markAsComplete(at index: IndexPath)
 }

@@ -31,7 +31,7 @@
                             </backgroundConfiguration>
                         </buttonConfiguration>
                         <connections>
-                            <action selector="markAsCompleteButton:" destination="-1" eventType="touchUpInside" id="RNq-iN-3FI"/>
+                            <action selector="markAsComplete" destination="-1" eventType="touchUpInside" id="PLl-GL-OXg"/>
                         </connections>
                     </button>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="lQS-WJ-LH0">
