@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class Constants{
+class Constants {
     
     static var headerLabelFontSize: CGFloat = 24
     
