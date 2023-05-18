@@ -17,16 +17,34 @@ class TaskServiceImp: TaskService {
         Task(id: "5", name: "Merg la sala", description: "Antrenament la sala de 100 min", isCompleted: true)
     ]
     
+    var activeTasks: [Task] {
+        get {
+            tasks.filter { !$0.isCompleted }
+        }
+        set {
+            tasks = newValue + completedTasks
+        }
+    }
+    
+    var completedTasks: [Task] {
+        get {
+            tasks.filter { $0.isCompleted }
+        }
+        set {
+            tasks = newValue + activeTasks
+        }
+    }
+    
     func numberOfTasks() -> Int {
         return tasks.count
     }
     
     func nrOfActiveTasks() -> Int {
-        return tasks.filter { !$0.isCompleted }.count
+        return activeTasks.count
     }
     
     func nrOfCompletedTasks() -> Int {
-        return tasks.filter { $0.isCompleted }.count
+        return completedTasks.count
     }
     
     func getTask(at index: Int, taskList: [Task]) -> Task? {
@@ -34,9 +52,11 @@ class TaskServiceImp: TaskService {
     }
     
     func parseTaskList(section: Int) -> [Task] {
-        var tasks = tasks
-        tasks = tasks.filter { section == 0 ? !$0.isCompleted : $0.isCompleted }
-        return tasks
+        if section == Constants.firstSection && nrOfActiveTasks() != 0 {
+            return activeTasks
+        } else {
+            return completedTasks
+        }
     }
     
     func editTask(task:Task, newName: String, newDescription: String) {
@@ -44,6 +64,19 @@ class TaskServiceImp: TaskService {
             if self.tasks[i].id == task.id {
                 self.tasks[i].name = newName
                 self.tasks[i].description = newDescription
+            }
+        }
+    }
+    
+    func moveTask(from sourceIndex: IndexPath, to destinationIndex: IndexPath) {
+        guard let taskToBeMoved = getTask(at: sourceIndex.row, taskList: parseTaskList(section: sourceIndex.section)) else { return }
+        deleteTask(at: sourceIndex.row, in: sourceIndex.section)
+        
+        if sourceIndex.section == destinationIndex.section {
+            if sourceIndex.section == Constants.firstSection {
+                activeTasks.insert(taskToBeMoved, at: destinationIndex.row)
+            } else {
+                completedTasks.insert(taskToBeMoved, at: destinationIndex.row)
             }
         }
     }

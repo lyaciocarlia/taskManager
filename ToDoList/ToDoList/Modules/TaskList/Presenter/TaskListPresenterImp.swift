@@ -21,7 +21,7 @@ class TaskListPresenterImp: TaskListPresenter {
     func deleteTask(at index: Int, in section: Int) {
         taskServiceImp.deleteTask(at: index, in: section )
     }
-
+    
     func checkForEmtpyList() -> Bool {
         return taskServiceImp.numberOfTasks() == 0
     }
@@ -47,5 +47,9 @@ class TaskListPresenterImp: TaskListPresenter {
         if taskServiceImp.numberOfTasks() == 0 {
             view?.updateEmptyListImage(isHidden: true)
         }
+    }
+    
+    func moveTask(from sourceIndex: IndexPath, to destinationIndex: IndexPath) {
+        taskServiceImp.moveTask(from: sourceIndex, to: destinationIndex)
     }
 }
