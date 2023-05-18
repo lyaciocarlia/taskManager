@@ -192,11 +192,15 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, Ce
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    private func navigateToEditScreen(with index: IndexPath){
         self.navigationController?.pushViewController(
             self.coordinator.setupTaskDetailVC(mode: .editTask,
-                                               task: self.presenter.getTask(at: indexPath.row, section: indexPath.section)),
+                                               task: self.presenter.getTask(at: index.row, section: index.section)),
             animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       navigateToEditScreen(with: indexPath)
     }
     
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -246,10 +250,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, Ce
         }
         
         let editAction = UIContextualAction(style: .normal, title: "") { (action, view, completionHandler) in
-            self.navigationController?.pushViewController(
-                self.coordinator.setupTaskDetailVC(mode: .editTask,
-                                                   task: self.presenter.getTask(at: indexPath.row, section: indexPath.section)),
-                animated: true)
+            self.navigateToEditScreen(with:  indexPath)
         }
         
         editAction.backgroundColor = Constants.editButtonColor
