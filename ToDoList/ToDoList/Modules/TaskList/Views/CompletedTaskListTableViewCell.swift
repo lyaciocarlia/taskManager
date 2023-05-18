@@ -11,16 +11,16 @@ class CompletedTaskListTableViewCell: UITableViewCell {
     
     static let identifier = "CompletedTaskListTableViewCell"
     
-    @IBOutlet weak var isCompletedButton: UIButton!
+    @IBOutlet private weak var isCompletedButton: UIButton!
     @IBOutlet private weak var taskDescriptionLabel: UILabel!
     @IBOutlet private weak var taskNameLabel: UILabel!
     
     private var index: IndexPath?
     weak var delegate: CellDelegate?
     
-    @IBAction func markAsComplete() {
+    @IBAction func changeTaskState() {
         guard let index = index else { return }
-        delegate?.markTaskAsComplete(at: index)
+        delegate?.changeTaskState(at: index)
     }
     
     func configure(with task: Task, index: IndexPath) {
