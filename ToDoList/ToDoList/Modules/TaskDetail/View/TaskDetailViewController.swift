@@ -46,7 +46,7 @@ extension TaskDetailViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        firstResponder(textField: taskNameTextField)
+        taskNameTextField.becomeFirstResponder()
     }
 }
 
@@ -75,9 +75,6 @@ extension TaskDetailViewController: UITextFieldDelegate {
         return true
     }
     
-    func firstResponder(textField: UITextField) {
-        textField.becomeFirstResponder()
-    }
 }
 
 // MARK: - SAVE CHANGES BUTTON FUNC

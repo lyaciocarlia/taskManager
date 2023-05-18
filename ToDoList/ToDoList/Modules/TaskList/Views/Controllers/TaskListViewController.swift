@@ -118,15 +118,15 @@ extension TaskListViewController {
 
 // MARK: - TABLE VEIW FUNCTIONS
 
-extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, CellDelegate{
-    func markTaskAsComplete(at index: IndexPath) {
-        presenter.markAsComplete(at: index)
+extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, CellDelegate {
+    func changeTaskState(at index: IndexPath) {
+        presenter.changeTaskState(at: index)
         taskListTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "") { (action, view, completionHandler) in
-            self.markTaskAsComplete(at: indexPath)
+            self.changeTaskState(at: indexPath)
         }
         
         action.backgroundColor = Constants.markAsCompleteColor
