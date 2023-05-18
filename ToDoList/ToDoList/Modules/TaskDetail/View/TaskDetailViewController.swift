@@ -75,7 +75,7 @@ extension TaskDetailViewController: UITextFieldDelegate {
         return true
     }
     
-    func firstResponder(textField: UITextField){
+    func firstResponder(textField: UITextField) {
         textField.becomeFirstResponder()
     }
 }

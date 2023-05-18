@@ -16,8 +16,6 @@ class TaskListViewController: UIViewController, TaskListView {
     var presenter: TaskListPresenter!
     var coordinator: MainCoordinator
     let headerTitle = ["Active", "Completed"]
-    var action = UIAction { _ in }
-    
     
     init(coordinator: MainCoordinator) {
         self.coordinator = coordinator
@@ -177,7 +175,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, Ce
             guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TaskListTableViewCell.self)) as? TaskListTableViewCell else {return UITableViewCell()}
             let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
             cell.selectionStyle = .none
-
+            
             cell.delegate = self
             cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false), index: indexPath)
             return cell
@@ -186,7 +184,8 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, Ce
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CompletedTaskListTableViewCell.self)) as? CompletedTaskListTableViewCell else {return UITableViewCell()}
                 cell.selectionStyle = .none
                 let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
-                cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false))
+                cell.delegate = self
+                cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false), index: indexPath)
                 return cell
             }
             return UITableViewCell()
@@ -229,18 +228,14 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, Ce
                 self.presenter.deleteTask(at: indexPath.row, in: indexPath.section)
                 completionHandler(true)
                 self.taskListTableView.reloadData()
-                
             }
             
-            let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in
-            }
+            let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in }
             
             alertController.addAction(yesAction)
             alertController.addAction(noAction)
             
             self.present(alertController, animated: true, completion: nil)
-            
-            
         }
         
         let editAction = UIContextualAction(style: .normal, title: "") { (action, view, completionHandler) in

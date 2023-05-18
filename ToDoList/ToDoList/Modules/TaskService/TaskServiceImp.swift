@@ -72,7 +72,7 @@ class TaskServiceImp: TaskService {
         guard let task = getTask(at: index.row, taskList: parseTaskList(section: index.section)) else { return }
         for i in self.tasks.indices {
             if self.tasks[i].id == task.id {
-                self.tasks[i].isCompleted = true
+                self.tasks[i].isCompleted = !self.tasks[i].isCompleted
             }
         }
     }
@@ -82,7 +82,7 @@ class TaskServiceImp: TaskService {
         deleteTask(at: sourceIndex.row, in: sourceIndex.section)
         
         if sourceIndex.section == destinationIndex.section {
-            if sourceIndex.section == Constants.firstSection {
+            if sourceIndex.section == Constants.firstSection && nrOfActiveTasks() != 0 {
                 activeTasks.insert(taskToBeMoved, at: destinationIndex.row)
             } else {
                 completedTasks.insert(taskToBeMoved, at: destinationIndex.row)
