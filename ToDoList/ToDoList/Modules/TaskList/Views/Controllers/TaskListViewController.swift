@@ -17,14 +17,6 @@ class TaskListViewController: UIViewController, TaskListView {
     var coordinator: MainCoordinator
     let headerTitle = ["Active", "Completed"]
     
-    func getNrOfSections() -> Int {
-        if presenter.activeTasksCount() != Constants.zeroTasks && presenter.completedTasksCount() !=  Constants.zeroTasks {
-            return Constants.twoSections
-        } else {
-            return Constants.oneSection
-        }
-    }
-    
     init(coordinator: MainCoordinator) {
         self.coordinator = coordinator
         super.init(nibName: String(describing: TaskListViewController.self), bundle: nil)
@@ -48,6 +40,23 @@ extension TaskListViewController {
         addTaskButton.layer.masksToBounds = true
     }
     
+    private func navBarButtonSetup() -> UIBarButtonItem {
+        let buttonSize = Constants.navBarButtonSize 
+        let customView = UIView(frame: CGRect(origin: .zero, size: buttonSize))
+        let button = UIButton(type: .system)
+        button.frame = customView.bounds
+        if taskListTableView.isEditing {
+            button.setTitle("Done", for: .normal)
+        } else {
+            button.setTitle("Edit", for: .normal)
+        }
+        button.setImage(UIImage(systemName: "list.bullet"), for: .normal)
+        button.addTarget(self, action: #selector(editTaskList), for: .touchUpInside)
+        customView.addSubview(button)
+        let barButtonItem = UIBarButtonItem(customView: customView)
+        return barButtonItem
+    }
+    
     private func setupTaskListTableView() {
         
         taskListTableView.contentInsetAdjustmentBehavior = .never
@@ -58,6 +67,12 @@ extension TaskListViewController {
         taskListTableView.dataSource = self
         taskListTableView.delegate = self
         
+    }
+    
+    @objc func editTaskList(){
+        taskListTableView.isEditing = !taskListTableView.isEditing
+        let barButtonItem = navBarButtonSetup()
+        navigationItem.rightBarButtonItem = barButtonItem
     }
     
     private func headerLabelSetup (label: UILabel, view: UIView) {
@@ -91,6 +106,8 @@ extension TaskListViewController {
         emptyListImage.isHidden = true
         setupAddTaskButton()
         title = "TaskManager"
+        let barButtonItem = navBarButtonSetup()
+        navigationItem.rightBarButtonItem = barButtonItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,7 +119,15 @@ extension TaskListViewController {
 // MARK: - TABLE VEIW FUNCTIONS
 
 extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
-        
+    
+    func getNrOfSections() -> Int {
+        if presenter.activeTasksCount() != Constants.zeroTasks && presenter.completedTasksCount() !=  Constants.zeroTasks {
+            return Constants.twoSections
+        } else {
+            return Constants.oneSection
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter.getTasksCount(in: section)
     }
@@ -148,6 +173,29 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        presenter.moveTask(from: sourceIndexPath, to: destinationIndexPath)
+        tableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        
+        let sourceSection = sourceIndexPath.section
+        let destSection = proposedDestinationIndexPath.section
+        
+        if destSection < sourceSection {
+            return IndexPath(row: 0, section: sourceSection)
+        } else if destSection > sourceSection {
+            return IndexPath(row: self.tableView(tableView, numberOfRowsInSection:sourceSection)-1, section: sourceSection)
+        }
+        
+        return proposedDestinationIndexPath
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return getNrOfSections()
     }
@@ -156,7 +204,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive, title: "") { (action, view, completionHandler) in
             
             let alertController = UIAlertController(title: "Confirmation", message: "Are you sure you want to proceed?", preferredStyle: .alert)
-                    
+            
             let yesAction = UIAlertAction(title: "Yes", style: .default) { (_) in
                 self.presenter.deleteTask(at: indexPath.row, in: indexPath.section)
                 completionHandler(true)
@@ -166,13 +214,13 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
             
             let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in
             }
-
+            
             alertController.addAction(yesAction)
             alertController.addAction(noAction)
-
+            
             self.present(alertController, animated: true, completion: nil)
-
-
+            
+            
         }
         
         let editAction = UIContextualAction(style: .normal, title: "") { (action, view, completionHandler) in
@@ -181,15 +229,14 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
                                                    task: self.presenter.getTask(at: indexPath.row, section: indexPath.section)),
                 animated: true)
         }
-       
+        
         editAction.backgroundColor = Constants.editButtonColor
         editAction.image = UIImage(systemName: "pencil")
         deleteAction.backgroundColor = Constants.deleteButtonColor
         deleteAction.image = UIImage(named: "deleteButton")
-    
         
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
         return configuration
     }
-
+    
 }

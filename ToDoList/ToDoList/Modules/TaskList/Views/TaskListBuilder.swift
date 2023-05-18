@@ -20,6 +20,7 @@ class TaskListBuilder {
         let taskListViewController = TaskListViewController(coordinator: coordinator)
         let taskListPresenterImp = TaskListPresenterImp(view: taskListViewController, taskServiceImp: taskListService)
         taskListViewController.presenter = taskListPresenterImp
+        
         return taskListViewController
     }
 }

@@ -36,7 +36,6 @@ extension TaskDetailViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         presenter.viewWasLoaded()
         
         setupTextField(textField: taskDescriptionTextField)
@@ -44,22 +43,6 @@ extension TaskDetailViewController {
         
         taskDescriptionTextField.delegate = self
         taskNameTextField.delegate = self
-    }
-    
-    func setupEditMode(task: Task?) {
-        saveChangesButton.setTitle("Update Task", for: .normal)
-        title = EditAddTaskSetup.editTask.rawValue
-        taskNameTextField.text = task?.name
-        taskDescriptionTextField.text = task?.description
-        saveChangesButton.isHidden = false
-    }
-    
-    func setupAddMode() {
-        saveChangesButton.setTitle("Create Task", for: .normal)
-        title = EditAddTaskSetup.addTask.rawValue
-        taskNameTextField.placeholder = "Enter your title..."
-        taskDescriptionTextField.placeholder = "Enter an optinal subtitle..."
-        saveChangesButton.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -74,7 +57,7 @@ extension TaskDetailViewController: UITextFieldDelegate {
     private func saveChanges() {
         taskNameTextField.resignFirstResponder()
         presenter.saveChanges(name: taskNameTextField.text ?? "",
-                                        description: taskDescriptionTextField.text ?? "")
+                              description: taskDescriptionTextField.text ?? "")
         navigationController?.popToRootViewController(animated: true)
     }
     
@@ -92,14 +75,6 @@ extension TaskDetailViewController: UITextFieldDelegate {
         return true
     }
     
-    func setupTextField(textField: UITextField) {
-        textField.returnKeyType = .done
-        textField.textColor = .label
-        textField.autocapitalizationType = .sentences
-        textField.autocorrectionType = .yes
-        textField.becomeFirstResponder()
-    }
-    
     func firstResponder(textField: UITextField){
         textField.becomeFirstResponder()
     }
@@ -110,5 +85,33 @@ extension TaskDetailViewController: UITextFieldDelegate {
 extension TaskDetailViewController {
     func updateSaveChangesButtonState(state: Bool) {
         saveChangesButton.isHidden = state
+    }
+}
+
+// MARK: - SETUP FUNC
+
+extension TaskDetailViewController {
+    func setupEditMode(task: Task?) {
+        saveChangesButton.setTitle("Update Task", for: .normal)
+        title = EditAddTaskSetup.editTask.rawValue
+        taskNameTextField.text = task?.name
+        taskDescriptionTextField.text = task?.description
+        saveChangesButton.isHidden = false
+    }
+    
+    func setupAddMode() {
+        saveChangesButton.setTitle("Create Task", for: .normal)
+        title = EditAddTaskSetup.addTask.rawValue
+        taskNameTextField.placeholder = "Enter your title..."
+        taskDescriptionTextField.placeholder = "Enter an optinal subtitle..."
+        saveChangesButton.isHidden = true
+    }
+    
+    func setupTextField(textField: UITextField) {
+        textField.returnKeyType = .done
+        textField.textColor = .label
+        textField.autocapitalizationType = .sentences
+        textField.autocorrectionType = .yes
+        textField.becomeFirstResponder()
     }
 }

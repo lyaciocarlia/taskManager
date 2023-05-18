@@ -21,7 +21,7 @@ class TaskDetailPresenterImp: TaskDetailPresenter {
         self.task = task
     }
     
-    func addTask(name: String, description: String) {
+    private func addTask(name: String, description: String) {
         let task = Task(id: UUID().uuidString,
                         name: name ,
                         description: description ,
@@ -34,7 +34,7 @@ class TaskDetailPresenterImp: TaskDetailPresenter {
         self.view.updateSaveChangesButtonState(state: newText.isEmpty)
     }
     
-    func editTask(task: Task, newName: String, newDescription: String) {
+    private func editTask(task: Task, newName: String, newDescription: String) {
         taskServiceImp.editTask(task: task, newName: newName, newDescription: newDescription)
     }
     
@@ -49,6 +49,13 @@ class TaskDetailPresenterImp: TaskDetailPresenter {
         switch mode{
         case .addTask: addTask(name: name ?? "", description: description ?? "")
         case .editTask: editTask(task: task!, newName: name ?? "", newDescription: description ?? "")
+        }
+    }
+    
+    func viewWasLoaded(mode: EditAddTaskSetup, task: Task?) {
+        switch mode {
+        case .addTask :  view.setupAddMode()
+        case .editTask : view.setupEditMode(task: task)
         }
     }
 }
