@@ -47,8 +47,8 @@ class Constants {
 }
 
 public enum EditAddTaskSetup: String {
-    case addTask = "AddTask"
-    case editTask = "EditTask"
+    case addTask = "AddTaskScreenTitle"
+    case editTask = "EditTaskScreenTitle"
 }
 
 extension UIColor {
