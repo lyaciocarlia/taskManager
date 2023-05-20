@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		190375BC2A0FAE390050AB1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 190375BE2A0FAE390050AB1B /* Localizable.strings */; };
 		198C53612A0639170073A346 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198C53602A0639170073A346 /* TaskListView.swift */; };
 		198C53652A06615F0073A346 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198C53632A06615F0073A346 /* TaskDetailViewController.swift */; };
 		198C53662A06615F0073A346 /* TaskDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 198C53642A06615F0073A346 /* TaskDetailViewController.xib */; };
@@ -35,6 +36,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		190375BD2A0FAE390050AB1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		190375BF2A0FAE5A0050AB1B /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/Localizable.strings; sourceTree = "<group>"; };
+		190375C02A0FAE9A0050AB1B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		198C53602A0639170073A346 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		198C53632A06615F0073A346 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		198C53642A06615F0073A346 /* TaskDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskDetailViewController.xib; sourceTree = "<group>"; };
@@ -89,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				199A4E142A04DDA6001AA9AF /* Constants.swift */,
+				190375BE2A0FAE390050AB1B /* Localizable.strings */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -302,6 +307,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ro,
+				ru,
 			);
 			mainGroup = 19FA761829FFE1470007D18E;
 			productRefGroup = 19FA762229FFE1470007D18E /* Products */;
@@ -321,6 +328,7 @@
 				19FA76612A0389000007D18E /* CompletedTaskListTableViewCell.xib in Resources */,
 				199A4E182A04F0A2001AA9AF /* TaskListTableViewCell.xib in Resources */,
 				198C53662A06615F0073A346 /* TaskDetailViewController.xib in Resources */,
+				190375BC2A0FAE390050AB1B /* Localizable.strings in Resources */,
 				19FA763429FFE14A0007D18E /* LaunchScreen.storyboard in Resources */,
 				19FA763129FFE14A0007D18E /* Assets.xcassets in Resources */,
 				19FA764129FFE1B40007D18E /* TaskListViewController.xib in Resources */,
@@ -359,6 +367,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		190375BE2A0FAE390050AB1B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				190375BD2A0FAE390050AB1B /* en */,
+				190375BF2A0FAE5A0050AB1B /* ro */,
+				190375C02A0FAE9A0050AB1B /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		19FA763229FFE14A0007D18E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -374,6 +392,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -434,6 +453,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

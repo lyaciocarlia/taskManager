@@ -1,0 +1,15 @@
+"ApplicationTitle" = "Manager de taskuri";
+"AddTaskScreenTitle" = "Adaugă un task" ;
+"EditTaskScreenTitle" = "Editează taskul";
+"ActiveHeaderTitle" = "Taskuri active" ;
+"CompletedHeaderTitle" = "Taskuri completate" ;
+"CreateTaskButtonTitle" = "Crează un task";
+"TextNameTextFieldPlaceholder" = "Introdu titlul...";
+"TextDescTextFieldPlaceholder" = "Introdu o descriere a taskului...";
+"UpdateTaskButtonTitle" = "Actualizaeză taskul";
+"DeleteAlertConfirmation" = "Confirmare";
+"DeleteAlertConfirmationQUestion" = "Ești sigur că vrei să continui?";
+"Yes" = "Da";
+"No" = "Nu";
+"EditButtonTitle" = "Editează";
+"DoneButtonTitle" = "Salvează";

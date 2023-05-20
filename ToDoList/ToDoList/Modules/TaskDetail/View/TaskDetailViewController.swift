@@ -89,18 +89,18 @@ extension TaskDetailViewController {
 
 extension TaskDetailViewController {
     func setupEditMode(task: Task?) {
-        saveChangesButton.setTitle("Update Task", for: .normal)
-        title = EditAddTaskSetup.editTask.rawValue
+        saveChangesButton.setTitle("UpdateTaskButtonTitle".localized(), for: .normal)
+        title = EditAddTaskSetup.editTask.rawValue.localized()
         taskNameTextField.text = task?.name
         taskDescriptionTextField.text = task?.description
         saveChangesButton.isHidden = false
     }
     
     func setupAddMode() {
-        saveChangesButton.setTitle("Create Task", for: .normal)
-        title = EditAddTaskSetup.addTask.rawValue
-        taskNameTextField.placeholder = "Enter your title..."
-        taskDescriptionTextField.placeholder = "Enter an optinal subtitle..."
+        saveChangesButton.setTitle("CreateTaskButtonTitle".localized(), for: .normal)
+        title = EditAddTaskSetup.addTask.rawValue.localized()
+        taskNameTextField.placeholder = "TextNameTextFieldPlaceholder".localized()
+        taskDescriptionTextField.placeholder = "TextDescTextFieldPlaceholder".localized()
         saveChangesButton.isHidden = true
     }
     

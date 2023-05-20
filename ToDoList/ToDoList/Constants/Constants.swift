@@ -40,15 +40,15 @@ class Constants {
     
     static var deleteButtonColor = UIColor(named: "AccentColor")
     
-    static var navBarButtonSize = CGSize(width: 70, height: 19)
+    static var navBarButtonSize = CGSize(width: 150, height: 19)
 
     static var markAsCompleteColor = UIColor(named: "MarkAsCompleteColor")
     
 }
 
 public enum EditAddTaskSetup: String {
-    case addTask = "AddTask"
-    case editTask = "EditTask"
+    case addTask = "AddTaskScreenTitle"
+    case editTask = "EditTaskScreenTitle"
 }
 
 extension UIColor {
@@ -77,3 +77,10 @@ extension UIColor {
         return nil
     }
 }
+
+extension String {
+    func localized() -> String {
+        return NSLocalizedString(self, tableName: "Localizable", bundle: .main, value: self, comment: self)
+    }
+}
+

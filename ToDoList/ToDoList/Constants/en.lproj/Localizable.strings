@@ -1,0 +1,15 @@
+"ApplicationTitle" = "TaksManager" ;
+"AddTaskScreenTitle" = "Add task" ;
+"EditTaskScreenTitle" = " Edit task";
+"ActiveHeaderTitle" = "Active";
+"CompletedHeaderTitle" = "Completed";
+"CreateTaskButtonTitle" = "Create Task";
+"TextNameTextFieldPlaceholder" = "Enter your title...";
+"TextDescTextFieldPlaceholder" = "Enter an optinal subtitle...";
+"UpdateTaskButtonTitle" = "Update Task";
+"DeleteAlertConfirmation" = "Confirmation";
+"DeleteAlertConfirmationQUestion" = "Are you sure you want to proceed?";
+"Yes" = "Yes";
+"No" = "No";
+"EditButtonTitle" = "Edit";
+"DoneButtonTitle" = "Done";

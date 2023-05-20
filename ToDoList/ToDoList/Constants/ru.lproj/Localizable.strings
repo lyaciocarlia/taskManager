@@ -1,0 +1,15 @@
+"ApplicationTitle" = "Диспетчер задач" ;
+"AddTaskScreenTitle" = "Добавить задачу" ;
+"EditTaskScreenTitle" = "Изменить задачу";
+"ActiveHeaderTitle" = "Активные задачи" ;
+"CompletedHeaderTitle" = "Bыполненыe задачи" ;
+"CreateTaskButtonTitle" = "Создать задачу";
+"TextNameTextFieldPlaceholder" = "Введите название...";
+"TextDescTextFieldPlaceholder" = "Введите описание задачи...";
+"UpdateTaskButtonTitle" = "Обновить задачу";
+"DeleteAlertConfirmation" = "Подтверждение";
+"DeleteAlertConfirmationQUestion" = "Вы уверены что хотите продолжить?";
+"Yes" = "Да";
+"No" = "Нет";
+"EditButtonTitle" = "Редактировать";
+"DoneButtonTitle" = "Готовo";

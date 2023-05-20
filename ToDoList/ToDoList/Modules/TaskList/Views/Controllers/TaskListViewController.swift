@@ -15,7 +15,7 @@ class TaskListViewController: UIViewController, TaskListView {
     
     var presenter: TaskListPresenter!
     var coordinator: MainCoordinator
-    let headerTitle = ["Active", "Completed"]
+    let headerTitle = ["ActiveHeaderTitle".localized(), "CompletedHeaderTitle".localized()]
     
     init(coordinator: MainCoordinator) {
         self.coordinator = coordinator
@@ -46,12 +46,13 @@ extension TaskListViewController {
         let button = UIButton(type: .system)
         button.frame = customView.bounds
         if taskListTableView.isEditing {
-            button.setTitle("Done", for: .normal)
+            button.setTitle("DoneButtonTitle".localized(), for: .normal)
         } else {
-            button.setTitle("Edit", for: .normal)
+            button.setTitle("EditButtonTitle".localized(), for: .normal)
         }
         button.setImage(UIImage(systemName: "list.bullet"), for: .normal)
         button.addTarget(self, action: #selector(editTaskList), for: .touchUpInside)
+        button.contentHorizontalAlignment = .right
         customView.addSubview(button)
         let barButtonItem = UIBarButtonItem(customView: customView)
         return barButtonItem
@@ -105,7 +106,7 @@ extension TaskListViewController {
         setupTaskListTableView()
         emptyListImage.isHidden = true
         setupAddTaskButton()
-        title = "TaskManager"
+        title = "ApplicationTitle".localized()
         let barButtonItem = navBarButtonSetup()
         navigationItem.rightBarButtonItem = barButtonItem
     }
@@ -157,9 +158,9 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, Ce
             sectionHeaderLabel.text = headerTitle[section]
         } else {
             if presenter.activeTasksCount() != Constants.zeroTasks {
-                sectionHeaderLabel.text = "Active"
+                sectionHeaderLabel.text = "ActiveHeaderTitle".localized()
             } else {
-                sectionHeaderLabel.text = "Completed"
+                sectionHeaderLabel.text = "CompletedHeaderTitle".localized()
             }
         }
         
@@ -233,15 +234,15 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, Ce
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "") { (action, view, completionHandler) in
             
-            let alertController = UIAlertController(title: "Confirmation", message: "Are you sure you want to proceed?", preferredStyle: .alert)
-            
-            let yesAction = UIAlertAction(title: "Yes", style: .default) { (_) in
+            let alertController = UIAlertController(title: "DeleteAlertConfirmation".localized(), message: "DeleteAlertConfirmationQUestion".localized(), preferredStyle: .alert)
+                    
+            let yesAction = UIAlertAction(title: "Yes".localized(), style: .default) { (_) in
                 self.presenter.deleteTask(at: indexPath.row, in: indexPath.section)
                 completionHandler(true)
                 self.taskListTableView.reloadData()
             }
             
-            let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in }
+            let noAction = UIAlertAction(title: "No".localized(), style: .cancel) { (_) in }
             
             alertController.addAction(yesAction)
             alertController.addAction(noAction)
