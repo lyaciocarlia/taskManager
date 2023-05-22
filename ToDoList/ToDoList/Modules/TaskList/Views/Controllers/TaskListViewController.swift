@@ -178,7 +178,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, Ce
             cell.selectionStyle = .none
             
             cell.delegate = self
-            cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false), index: indexPath)
+            cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false, actionDate: Date()), index: indexPath)
             return cell
         } else {
             if presenter.completedTasksCount() != Constants.zeroTasks {
@@ -186,7 +186,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, Ce
                 cell.selectionStyle = .none
                 let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
                 cell.delegate = self
-                cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false), index: indexPath)
+                cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false, actionDate: Date()), index: indexPath)
                 return cell
             }
             return UITableViewCell()

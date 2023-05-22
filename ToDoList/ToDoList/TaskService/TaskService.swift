@@ -8,8 +8,6 @@
 import Foundation
 
 protocol TaskService {
-    var tasks: [Task] { get set }
-    
     func editTask(task: Task, newName: String, newDescription: String)
     func numberOfTasks() -> Int
     func getTask(at index: Int, taskList: [Task]) -> Task?
