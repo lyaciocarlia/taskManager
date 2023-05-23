@@ -25,7 +25,8 @@ class TaskDetailPresenterImp: TaskDetailPresenter {
         let task = Task(id: UUID().uuidString,
                         name: name ,
                         description: description ,
-                        isCompleted: false)
+                        isCompleted: false,
+                        actionDate: Date())
         taskServiceImp.addTask(task: task)
     }
     

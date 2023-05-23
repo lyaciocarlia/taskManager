@@ -13,5 +13,6 @@ struct Task: Equatable {
     var name: String
     var description: String
     var isCompleted: Bool
+    var actionDate: Date
     
 }
