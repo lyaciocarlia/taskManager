@@ -58,7 +58,6 @@ class TaskServiceImp: TaskService {
     }
     
     func numberOfTasks() -> Int {
-        print(getTasksFromDB()?.count)
         return getTasksFromDB()?.count ?? Constants.zeroTasks
     }
     
@@ -121,7 +120,6 @@ class TaskServiceImp: TaskService {
         refreshTasks()
         
         guard let taskToBeMoved = getTask(at: sourceIndex.row, taskList: parseTaskList(section: sourceIndex.section)) else { return }
-        print(taskToBeMoved.actionDate)
         let taskMovedIndex = tasks.firstIndex(where: { task in
             task.actionDate == taskToBeMoved.actionDate
         })
