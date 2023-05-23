@@ -40,7 +40,7 @@ class TaskListPresenterImp: TaskListPresenter {
     }
     
     func getTasksCount(in section: Int) -> Int {
-        return taskServiceImp.getTasksCount(in: section)
+        return section == Constants.firstSection ? taskServiceImp.nrOfActiveTasks() : taskServiceImp.nrOfCompletedTasks()
     }
     
     func viewWillAppear() {

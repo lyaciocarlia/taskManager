@@ -149,9 +149,4 @@ class TaskServiceImp: TaskService {
         context.delete(self.tasks[taskToRemoveIndex])
         saveContext()
     }
-    
-    func getTasksCount(in section: Int) -> Int {
-        let tasks = parseTaskList(section: section)
-        return tasks.count
-    }
 }
