@@ -44,11 +44,7 @@ class TaskListPresenterImp: TaskListPresenter {
     }
     
     func viewWillAppear() {
-        if taskServiceImp.numberOfTasks() == Constants.zeroTasks {
-            view?.updateEmptyListImage(isHidden: true)
-        } else {
-            view?.updateEmptyListImage(isHidden: false)
-        }
+        view?.updateEmptyListImage(isHidden: taskServiceImp.numberOfTasks() == Constants.zeroTasks)
     }
     
     func moveTask(from sourceIndex: IndexPath, to destinationIndex: IndexPath) {

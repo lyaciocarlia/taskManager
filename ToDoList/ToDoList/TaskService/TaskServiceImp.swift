@@ -58,7 +58,6 @@ class TaskServiceImp: TaskService {
     }
     
     func numberOfTasks() -> Int {
-        print(getTasksFromDB()?.count)
         return getTasksFromDB()?.count ?? Constants.zeroTasks
     }
     
