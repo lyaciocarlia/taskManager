@@ -29,15 +29,14 @@ class TaskServiceImp: TaskService {
     
     private func refreshTasks() {
         guard let tasks = getTasksFromDB() else { return }
-        self.tasks = tasks
+        self.tasks = tasks.sorted {
+            $0.actionDate < $1.actionDate
+        }
     }
     
     func getTasksFromDB() -> [TaskEntity]? {
         do {
-            let tasks = try context.fetch(TaskEntity.fetchRequest())
-            return tasks.sorted {
-                $0.actionDate < $1.actionDate
-            }
+            return try context.fetch(TaskEntity.fetchRequest())
         } catch let error as NSError {
             print(error.localizedDescription)
             return nil
@@ -59,6 +58,7 @@ class TaskServiceImp: TaskService {
     }
     
     func numberOfTasks() -> Int {
+        print(getTasksFromDB()?.count)
         return getTasksFromDB()?.count ?? Constants.zeroTasks
     }
     
@@ -140,6 +140,7 @@ class TaskServiceImp: TaskService {
         taskToAdd.isCompleted = false
         taskToAdd.actionDate = task.actionDate
         saveContext()
+        refreshTasks()
     }
     
     func deleteTask(at index: Int, in section: Int) {

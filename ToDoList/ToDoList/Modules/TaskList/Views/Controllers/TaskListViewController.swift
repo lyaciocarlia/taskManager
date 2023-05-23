@@ -239,6 +239,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, Ce
             let yesAction = UIAlertAction(title: "Yes".localized(), style: .default) { (_) in
                 self.presenter.deleteTask(at: indexPath.row, in: indexPath.section)
                 completionHandler(true)
+                self.presenter.viewWillAppear()
                 self.taskListTableView.reloadData()
             }
             

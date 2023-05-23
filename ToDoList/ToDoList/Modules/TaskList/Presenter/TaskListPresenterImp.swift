@@ -44,8 +44,10 @@ class TaskListPresenterImp: TaskListPresenter {
     }
     
     func viewWillAppear() {
-        if taskServiceImp.numberOfTasks() == 0 {
+        if taskServiceImp.numberOfTasks() == Constants.zeroTasks {
             view?.updateEmptyListImage(isHidden: true)
+        } else {
+            view?.updateEmptyListImage(isHidden: false)
         }
     }
     
