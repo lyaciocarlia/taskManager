@@ -9,7 +9,7 @@ import Foundation
 
 struct Task: Equatable {
     
-    let id: String
+    let id: UUID
     var name: String
     var description: String
     var isCompleted: Bool

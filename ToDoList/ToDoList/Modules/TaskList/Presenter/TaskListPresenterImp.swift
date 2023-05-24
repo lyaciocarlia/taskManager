@@ -40,13 +40,11 @@ class TaskListPresenterImp: TaskListPresenter {
     }
     
     func getTasksCount(in section: Int) -> Int {
-        return taskServiceImp.getTasksCount(in: section)
+        return section == Constants.firstSection ? taskServiceImp.nrOfActiveTasks() : taskServiceImp.nrOfCompletedTasks()
     }
     
     func viewWillAppear() {
-        if taskServiceImp.numberOfTasks() == 0 {
-            view?.updateEmptyListImage(isHidden: true)
-        }
+        view?.updateEmptyListImage(isHidden: taskServiceImp.numberOfTasks() == Constants.zeroTasks)
     }
     
     func moveTask(from sourceIndex: IndexPath, to destinationIndex: IndexPath) {

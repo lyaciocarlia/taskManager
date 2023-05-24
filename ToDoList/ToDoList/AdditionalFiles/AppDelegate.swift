@@ -16,7 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        let taskService = TaskServiceImp()
+        var coreDataStack = CoreDataStack()
+        let taskService = TaskServiceImp(managedObjectContext: coreDataStack.mainContext,
+                                         coreDataStack: coreDataStack)
         let mainCoordinator = MainCoordinator(with: taskService)
         
         window?.rootViewController = mainCoordinator.rootVC()
@@ -24,8 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-    
-    static let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     // MARK: - Core Data stack
     lazy var persistentContainer: NSPersistentContainer = {

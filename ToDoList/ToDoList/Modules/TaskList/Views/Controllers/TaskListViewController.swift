@@ -178,7 +178,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, Ce
             cell.selectionStyle = .none
             
             cell.delegate = self
-            cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false, actionDate: Date()), index: indexPath)
+            cell.configure(with: task ?? Task(id: UUID(), name: "", description: "", isCompleted: false, actionDate: Date()), index: indexPath)
             return cell
         } else {
             if presenter.completedTasksCount() != Constants.zeroTasks {
@@ -186,7 +186,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, Ce
                 cell.selectionStyle = .none
                 let task = presenter?.getTask(at: indexPath.row, section: indexPath.section)
                 cell.delegate = self
-                cell.configure(with: task ?? Task(id: "", name: "", description: "", isCompleted: false, actionDate: Date()), index: indexPath)
+                cell.configure(with: task ?? Task(id: UUID(), name: "", description: "", isCompleted: false, actionDate: Date()), index: indexPath)
                 return cell
             }
             return UITableViewCell()
@@ -239,6 +239,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, Ce
             let yesAction = UIAlertAction(title: "Yes".localized(), style: .default) { (_) in
                 self.presenter.deleteTask(at: indexPath.row, in: indexPath.section)
                 completionHandler(true)
+                self.presenter.viewWillAppear()
                 self.taskListTableView.reloadData()
             }
             
@@ -262,5 +263,4 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate, Ce
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
         return configuration
     }
-    
 }
