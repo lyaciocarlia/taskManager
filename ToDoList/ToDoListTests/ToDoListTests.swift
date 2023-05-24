@@ -45,18 +45,19 @@ final class ToDoListTests: XCTestCase {
             completedTasks[0],
             completedTasks[1]
         ]
-    
-        tasks.forEach {reportService.addTask(task: $0) }
+        
+        tasks.forEach { reportService.addTask(task: $0) }
         
         let result = reportService.nrOfCompletedTasks()
         
-        XCTAssertEqual(result, completedTasks.count, "Did not count the active tasks correct")
+        XCTAssertEqual(result, completedTasks.count, "Did not count the completed tasks correct")
         
-        print("Test for number of active tasks passed successfully ✅")
+        print("Test for number of completed tasks passed successfully ✅")
         
     }
     
     func testNrOfActiveTasks() {
+        
         let activeTasks = [
             Task(id: UUID(), name: "3", description: "De citit", isCompleted: false, actionDate: Date()),
             Task(id: UUID(), name: "4", description: "De citit", isCompleted: false, actionDate: Date())
@@ -68,8 +69,8 @@ final class ToDoListTests: XCTestCase {
             activeTasks[0],
             activeTasks[1]
         ]
-    
-        tasks.forEach {reportService.addTask(task: $0) }
+        
+        tasks.forEach { reportService.addTask(task: $0) }
         
         let result = reportService.nrOfActiveTasks()
         
@@ -92,8 +93,8 @@ final class ToDoListTests: XCTestCase {
             activeTasks[0],
             activeTasks[1]
         ]
-    
-        tasks.forEach {reportService.addTask(task: $0) }
+        
+        tasks.forEach { reportService.addTask(task: $0) }
         
         let result = reportService.parseTaskList(section: 0)
         
@@ -113,7 +114,7 @@ final class ToDoListTests: XCTestCase {
             Task(id: UUID(), name: "Citeste carti", description: "De citit", isCompleted: false, actionDate: Date())
         ]
         
-        tasks.forEach {reportService.addTask(task: $0)}
+        tasks.forEach { reportService.addTask(task: $0) }
         
         let result = reportService.numberOfTasks()
         XCTAssertEqual(result, 2, "Did not count correct")
@@ -132,8 +133,8 @@ final class ToDoListTests: XCTestCase {
         
         XCTAssertNotNil(afterTasks, "Task wasnt add")
         XCTAssertEqual(afterTasks!.count, 1, "Task dublicated")
-        
         XCTAssertEqual(afterTasks!.first!.id, taskToAdd.id, "Task didnt add correct")
+        
         print("Test for add task passed successfully ✅")
     }
     
@@ -144,7 +145,7 @@ final class ToDoListTests: XCTestCase {
             Task(id: UUID(), name: "Citeste carti", description: "De citit", isCompleted: false, actionDate: Date())
         ]
         
-        tasks.forEach {reportService.addTask(task: $0)}
+        tasks.forEach { reportService.addTask(task: $0) }
         
         XCTAssertNotNil(reportService.getTasksFromDB(), "Cant get tasks")
         XCTAssertEqual(reportService.getTasksFromDB()?.count, tasks.count, "Are not extracted correctly")
@@ -187,6 +188,8 @@ final class ToDoListTests: XCTestCase {
         XCTAssertNotNil(result, "Is nill")
         XCTAssertEqual(result?.count, 2, "Count is wrong")
         XCTAssertEqual(result?.first!.id, secondTask.id, "Does not equal" )
+        
+        print("Test for get task form DB passed successfully ✅")
         
     }
     
