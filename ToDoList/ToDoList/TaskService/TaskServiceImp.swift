@@ -36,7 +36,9 @@ class TaskServiceImp: TaskService {
     
     private func refreshTasks() {
         guard let tasks = getTasksFromDB() else { return }
-        self.tasks = tasks
+        self.tasks = tasks.sorted {
+            $0.actionDate < $1.actionDate
+        }
     }
     
     func getTasksFromDB() -> [TaskEntity]? {
@@ -126,7 +128,7 @@ class TaskServiceImp: TaskService {
         refreshTasks()
         
         guard let taskToBeMoved = getTask(at: sourceIndex.row, taskList: parseTaskList(section: sourceIndex.section)) else { return }
-        
+
         let taskMovedIndex = tasks.firstIndex(where: { task in
             task.actionDate == taskToBeMoved.actionDate
         })
@@ -145,6 +147,7 @@ class TaskServiceImp: TaskService {
         taskToAdd.isCompleted = task.isCompleted 
         taskToAdd.actionDate = task.actionDate
         saveContext()
+        refreshTasks()
     }
     
     func deleteTask(at index: Int, in section: Int) {
