@@ -12,7 +12,7 @@
 		1919240A2A1BADFD000BB3A7 /* TaskEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191924082A1BADFD000BB3A7 /* TaskEntity+CoreDataClass.swift */; };
 		1919240B2A1BADFD000BB3A7 /* TaskEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191924092A1BADFD000BB3A7 /* TaskEntity+CoreDataProperties.swift */; };
 		191924352A1D098B000BB3A7 /* ToDoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191924342A1D098B000BB3A7 /* ToDoListTests.swift */; };
-		1919243C2A1D09AD000BB3A7 /* TestCoreDataStacK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1919243B2A1D09AD000BB3A7 /* TestCoreDataStacK.swift */; };
+		1919243C2A1D09AD000BB3A7 /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1919243B2A1D09AD000BB3A7 /* TestCoreDataStack.swift */; };
 		1919243E2A1D0A0A000BB3A7 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1919243D2A1D0A0A000BB3A7 /* CoreDataStack.swift */; };
 		198C53612A0639170073A346 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198C53602A0639170073A346 /* TaskListView.swift */; };
 		198C53652A06615F0073A346 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198C53632A06615F0073A346 /* TaskDetailViewController.swift */; };
@@ -60,8 +60,9 @@
 		191924092A1BADFD000BB3A7 /* TaskEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		191924322A1D098A000BB3A7 /* ToDoListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		191924342A1D098B000BB3A7 /* ToDoListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListTests.swift; sourceTree = "<group>"; };
-		1919243B2A1D09AD000BB3A7 /* TestCoreDataStacK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataStacK.swift; sourceTree = "<group>"; };
+		1919243B2A1D09AD000BB3A7 /* TestCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
 		1919243D2A1D0A0A000BB3A7 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		191924412A1E6141000BB3A7 /* ToDoList.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; name = ToDoList.xctestplan; path = ToDoList/ToDoList.xctestplan; sourceTree = SOURCE_ROOT; };
 		198C53602A0639170073A346 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		198C53632A06615F0073A346 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		198C53642A06615F0073A346 /* TaskDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskDetailViewController.xib; sourceTree = "<group>"; };
@@ -113,7 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				191924342A1D098B000BB3A7 /* ToDoListTests.swift */,
-				1919243B2A1D09AD000BB3A7 /* TestCoreDataStacK.swift */,
+				1919243B2A1D09AD000BB3A7 /* TestCoreDataStack.swift */,
 			);
 			path = ToDoListTests;
 			sourceTree = "<group>";
@@ -144,6 +145,7 @@
 				191924052A1BAD89000BB3A7 /* ToDoList.xcdatamodeld */,
 				199C786B2A0BAA2C0085B510 /* TaskService.swift */,
 				199C786D2A0BAA650085B510 /* TaskServiceImp.swift */,
+				191924412A1E6141000BB3A7 /* ToDoList.xctestplan */,
 				1919243D2A1D0A0A000BB3A7 /* CoreDataStack.swift */,
 			);
 			path = TaskService;
@@ -418,7 +420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				191924352A1D098B000BB3A7 /* ToDoListTests.swift in Sources */,
-				1919243C2A1D09AD000BB3A7 /* TestCoreDataStacK.swift in Sources */,
+				1919243C2A1D09AD000BB3A7 /* TestCoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,9 +21,6 @@ final class ToDoListTests: XCTestCase {
         reportService = TaskServiceImp (
             managedObjectContext: coreDataStack.mainContext,
             coreDataStack: coreDataStack)
-        
-        continueAfterFailure = false
-        
     }
     
     override func tearDown() {
@@ -52,8 +49,6 @@ final class ToDoListTests: XCTestCase {
         
         XCTAssertEqual(result, completedTasks.count, "Did not count the completed tasks correct")
         
-        print("Test for number of completed tasks passed successfully ✅")
-        
     }
     
     func testNrOfActiveTasks() {
@@ -75,8 +70,6 @@ final class ToDoListTests: XCTestCase {
         let result = reportService.nrOfActiveTasks()
         
         XCTAssertEqual(result, activeTasks.count, "Did not count the active tasks correct")
-        
-        print("Test for number of active tasks passed successfully ✅")
         
     }
     
@@ -100,7 +93,6 @@ final class ToDoListTests: XCTestCase {
         
         XCTAssertEqual(result, activeTasks.reversed(), "Did not parse correct")
         
-        print("Test for parse tasks passed successfully ✅")
     }
     
     func testNumberOfTasks() {
@@ -119,7 +111,6 @@ final class ToDoListTests: XCTestCase {
         let result = reportService.numberOfTasks()
         XCTAssertEqual(result, 2, "Did not count correct")
         
-        print("Test for number of tasks passed successfully ✅")
     }
     
     func testAddTask() {
@@ -135,7 +126,6 @@ final class ToDoListTests: XCTestCase {
         XCTAssertEqual(afterTasks!.count, 1, "Task dublicated")
         XCTAssertEqual(afterTasks!.first!.id, taskToAdd.id, "Task didnt add correct")
         
-        print("Test for add task passed successfully ✅")
     }
     
     func testGetTask() {
@@ -150,7 +140,6 @@ final class ToDoListTests: XCTestCase {
         XCTAssertNotNil(reportService.getTasksFromDB(), "Cant get tasks")
         XCTAssertEqual(reportService.getTasksFromDB()?.count, tasks.count, "Are not extracted correctly")
         
-        print("Test for get task passed successfully ✅")
     }
     
     func testDeleteTask() {
@@ -172,7 +161,6 @@ final class ToDoListTests: XCTestCase {
         XCTAssertEqual(tasksAfter?.count, tasks.count - 1, "Task was not deleted")
         XCTAssertFalse(tasksAfter!.contains(deletedTask), "Wrong task deleted")
         
-        print("Test for delete task passed successfully ✅")
     }
     
     func testGetTaskFromDB() {
@@ -189,8 +177,6 @@ final class ToDoListTests: XCTestCase {
         XCTAssertEqual(result?.count, 2, "Count is wrong")
         XCTAssertEqual(result?.first!.id, secondTask.id, "Does not equal" )
         
-        print("Test for get task form DB passed successfully ✅")
-        
     }
     
     func testToggleCompleted() {
@@ -205,8 +191,7 @@ final class ToDoListTests: XCTestCase {
         XCTAssertNotNil(tasksAfter, "Wrong operation")
         XCTAssertEqual(task.id, tasksAfter!.first!.id, "Wrong task selected")
         XCTAssertNotEqual(task.isCompleted, tasksAfter!.first!.isCompleted, "Task didnt switched status")
-        
-        print("Test for toggle completed task passed successfully ✅")
+
     }
     
     func testEditTask() {
@@ -222,7 +207,6 @@ final class ToDoListTests: XCTestCase {
         XCTAssertEqual(task.id, tasksAfter!.first!.id, "Wrong task selected")
         XCTAssertNotEqual(task.name, tasksAfter!.first!.name, "Did not edit")
         
-        print("Test for edit task passed successfully ✅")
     }
     
     
@@ -242,8 +226,6 @@ final class ToDoListTests: XCTestCase {
         let tasksAfter = reportService.getTasksFromDB()
         
         XCTAssertNotEqual(tasksBefore, tasksAfter, "Did not rearrange")
-        
-        print("Test for rearrange tasks passed successfully ✅")
         
     }
 }
