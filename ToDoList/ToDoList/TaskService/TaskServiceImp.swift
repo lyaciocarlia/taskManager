@@ -10,7 +10,9 @@ import CoreData
 
 class TaskServiceImp: TaskService {
     
-    private let context = AppDelegate.context
+    let context: NSManagedObjectContext
+    let coreDataStack: CoreDataStack
+    
     private var tasks: [TaskEntity] = []
     
     var activeTasks: [Task] {
@@ -27,6 +29,11 @@ class TaskServiceImp: TaskService {
         }
     }
     
+    public init(managedObjectContext: NSManagedObjectContext, coreDataStack: CoreDataStack) {
+      self.context = managedObjectContext
+      self.coreDataStack = coreDataStack
+    }
+    
     private func refreshTasks() {
         guard let tasks = getTasksFromDB() else { return }
         self.tasks = tasks.sorted {
@@ -36,7 +43,10 @@ class TaskServiceImp: TaskService {
     
     func getTasksFromDB() -> [TaskEntity]? {
         do {
-            return try context.fetch(TaskEntity.fetchRequest())
+            let tasks = try context.fetch(TaskEntity.fetchRequest())
+            return tasks.isEmpty ? nil :  tasks.sorted {
+                $0.actionDate > $1.actionDate
+            }
         } catch let error as NSError {
             print(error.localizedDescription)
             return nil
@@ -46,7 +56,7 @@ class TaskServiceImp: TaskService {
     private func convertTaskEntityToTask() -> [Task]? {
         guard let coreTasks = getTasksFromDB() else { return nil }
         let tasks = coreTasks.map { coreTask in
-            let id = coreTask.id?.uuidString ?? ""
+            let id = coreTask.id
             let name = coreTask.name ?? ""
             let description = coreTask.detail  ?? ""
             let isCompleted = coreTask.isCompleted
@@ -82,23 +92,21 @@ class TaskServiceImp: TaskService {
     }
     
     private func saveContext() {
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print(error)
-        }
+        coreDataStack.saveContext(context)
     }
     
     private func getDBTaskIndex(task: Task) -> Int? {
         refreshTasks()
-        guard let index = (tasks.firstIndex { $0.id?.uuidString == task.id }) else { return nil }
+        guard let index = (tasks.firstIndex { $0.actionDate == task.actionDate }) else { return nil }
         return index
     }
     
     func editTask(task:Task, newName: String, newDescription: String) {
+        refreshTasks()
         guard let taskIndex = getDBTaskIndex(task: task) else { return }
         tasks[taskIndex].name = newName
         tasks[taskIndex].detail = newDescription
+        
         saveContext()
     }
     
@@ -110,7 +118,7 @@ class TaskServiceImp: TaskService {
     }
     
     private func reasignDate() {
-        for task in tasks {
+        for task in tasks.reversed() {
             task.actionDate = Date()
         }
         saveContext()
@@ -120,6 +128,7 @@ class TaskServiceImp: TaskService {
         refreshTasks()
         
         guard let taskToBeMoved = getTask(at: sourceIndex.row, taskList: parseTaskList(section: sourceIndex.section)) else { return }
+
         let taskMovedIndex = tasks.firstIndex(where: { task in
             task.actionDate == taskToBeMoved.actionDate
         })
@@ -132,10 +141,10 @@ class TaskServiceImp: TaskService {
     
     func addTask(task: Task) {
         let taskToAdd = TaskEntity(context: context)
-        taskToAdd.id = UUID()
+        taskToAdd.id = task.id
         taskToAdd.name = task.name
         taskToAdd.detail = task.description
-        taskToAdd.isCompleted = false
+        taskToAdd.isCompleted = task.isCompleted 
         taskToAdd.actionDate = task.actionDate
         saveContext()
         refreshTasks()

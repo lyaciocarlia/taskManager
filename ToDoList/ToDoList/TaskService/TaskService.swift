@@ -8,6 +8,7 @@
 import Foundation
 
 protocol TaskService {
+    
     func editTask(task: Task, newName: String, newDescription: String)
     func numberOfTasks() -> Int
     func getTask(at index: Int, taskList: [Task]) -> Task?
@@ -18,4 +19,6 @@ protocol TaskService {
     func parseTaskList(section: Int) -> [Task]
     func moveTask(from sourceIndex: IndexPath, to destinationIndex: IndexPath)
     func changeTaskState(at index: IndexPath)
+    func getTasksFromDB() -> [TaskEntity]?
+    
 }

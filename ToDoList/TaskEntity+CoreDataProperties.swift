@@ -16,7 +16,7 @@ extension TaskEntity {
         return NSFetchRequest<TaskEntity>(entityName: "TaskEntity")
     }
 
-    @NSManaged public var id: UUID?
+    @NSManaged public var id: UUID
     @NSManaged public var name: String?
     @NSManaged public var detail: String?
     @NSManaged public var isCompleted: Bool

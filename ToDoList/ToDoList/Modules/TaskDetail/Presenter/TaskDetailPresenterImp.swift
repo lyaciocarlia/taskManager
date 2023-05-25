@@ -22,7 +22,7 @@ class TaskDetailPresenterImp: TaskDetailPresenter {
     }
     
     private func addTask(name: String, description: String) {
-        let task = Task(id: UUID().uuidString,
+        let task = Task(id: UUID(),
                         name: name ,
                         description: description ,
                         isCompleted: false,
