@@ -3,6 +3,7 @@
 ## Overview
 
 Welcome to the Task Manager App! This app is designed to help you stay organized and manage your tasks efficiently. It follows the MVP (Model-View-Presenter) architecture pattern and utilizes Core Data for persistent storage of tasks.
+![Simulator Screenshot - iPhone 15 Pro Max - 2024-07-26 at 17 07 31](https://github.com/user-attachments/assets/aa567726-e348-4d21-8994-396e03f87c01)
 
 ## Features
 
